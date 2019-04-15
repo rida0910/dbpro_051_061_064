@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB66Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Attachment">
+    <Key>
+      <PropertyRef Name="AttachmentId" />
+    </Key>
+    <Property Name="AttachmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bid">
+    <Key>
+      <PropertyRef Name="BidId" />
+      <PropertyRef Name="FreelancerID" />
+      <PropertyRef Name="JobID" />
+    </Key>
+    <Property Name="BidId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="FreelancerID" Type="int" Nullable="false" />
+    <Property Name="JobID" Type="int" Nullable="false" />
+    <Property Name="BidTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employer">
+    <Key>
+      <PropertyRef Name="EmployerId" />
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="EmployerId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Freelancer">
+    <Key>
+      <PropertyRef Name="FreelancerId" />
+      <PropertyRef Name="CategoryId" />
+      <PropertyRef Name="ExperienceInCategory" />
+      <PropertyRef Name="JobType" />
+    </Key>
+    <Property Name="FreelancerId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="ExperienceInCategory" Type="int" Nullable="false" />
+    <Property Name="ProfessionalTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProfessionalOverview" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JobType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Freelancerlanguage">
+    <Key>
+      <PropertyRef Name="FreelancerId" />
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="FreelancerId" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FreelancerService">
+    <Key>
+      <PropertyRef Name="ServiceId" />
+      <PropertyRef Name="CategoryId" />
+      <PropertyRef Name="SkillId" />
+    </Key>
+    <Property Name="ServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="SkillId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fee" Type="int" Nullable="false" />
+    <Property Name="PicturePath" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="FreelancerSkill">
+    <Key>
+      <PropertyRef Name="SkillId" />
+      <PropertyRef Name="FreelancerId" />
+    </Key>
+    <Property Name="SkillId" Type="int" Nullable="false" />
+    <Property Name="FreelancerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="JobId" />
+      <PropertyRef Name="SkillID" />
+      <PropertyRef Name="EmployerID" />
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PaymentAmount" Type="int" Nullable="false" />
+    <Property Name="AttachmentID" Type="int" />
+    <Property Name="Expiry" Type="datetime" Nullable="false" />
+    <Property Name="SkillID" Type="int" Nullable="false" />
+    <Property Name="EmployerID" Type="int" Nullable="false" />
+    <Property Name="TimePosted" Type="datetime" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Deadline" Type="datetime" />
+  </EntityType>
+  <EntityType Name="JobDone">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="int" Nullable="false" />
+    <Property Name="FilesReceived" Type="bit" Nullable="false" />
+    <Property Name="PaymentReceived" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobSkill">
+    <Key>
+      <PropertyRef Name="JobId" />
+      <PropertyRef Name="SkillId" />
+    </Key>
+    <Property Name="JobId" Type="int" Nullable="false" />
+    <Property Name="SkillId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="LanguageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Lookup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="value" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="category" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageId" />
+      <PropertyRef Name="JobId" />
+      <PropertyRef Name="EmployerId" />
+      <PropertyRef Name="FreelancerId" />
+    </Key>
+    <Property Name="MessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AttachmentId" Type="int" />
+    <Property Name="JobId" Type="int" Nullable="false" />
+    <Property Name="EmployerId" Type="int" Nullable="false" />
+    <Property Name="FreelancerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonId" />
+      <PropertyRef Name="User_AccountID" />
+    </Key>
+    <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_AccountID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="100" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="city" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="country" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Approved" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Skill">
+    <Key>
+      <PropertyRef Name="SkillId" />
+    </Key>
+    <Property Name="SkillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SkillName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__Employer__Compan__2739D489">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="Employer">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employer__Compan__3E1D39E1">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="Employer">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Employer__Employ__3F115E1A' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Employer__Employ__3F115E1A" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Employer__Employ__7F2BE32F' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Employer__Employ__7F2BE32F" />-->
+  <Association Name="FK__Person__Gender__40F9A68C">
+    <End Role="Lookup" Type="Self.Lookup" Multiplicity="0..1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lookup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="Gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Person__User_Acc__40058253">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="User_AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Person__User_Acc__7C4F7684">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="User_AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Bid_Freelancer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Bid_Freelancer" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Bid_Job' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Bid_Job" />-->
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Employer_Person' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Employer_Person" />-->
+  <Association Name="FK_Freelancer_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Freelancer">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Freelancer_ExperienceLookup">
+    <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+    <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lookup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Freelancer">
+        <PropertyRef Name="ExperienceInCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Freelancer_JobTypeLookup">
+    <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+    <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lookup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Freelancer">
+        <PropertyRef Name="JobType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Freelancer_Person' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Freelancer_Person" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Freelancerlanguage_Freelancr' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Freelancerlanguage_Freelancr" />-->
+  <Association Name="FK_Freelancerlanguage_Language">
+    <End Role="Language" Type="Self.Language" Multiplicity="1" />
+    <End Role="Freelancerlanguage" Type="Self.Freelancerlanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="LanguageId" />
+      </Principal>
+      <Dependent Role="Freelancerlanguage">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FreelancerService_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="FreelancerService" Type="Self.FreelancerService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="FreelancerService">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FreelancerService_Skill">
+    <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+    <End Role="FreelancerService" Type="Self.FreelancerService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skill">
+        <PropertyRef Name="SkillId" />
+      </Principal>
+      <Dependent Role="FreelancerService">
+        <PropertyRef Name="SkillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_FreelancerSkill_Freelancer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_FreelancerSkill_Freelancer" />-->
+  <Association Name="FK_FreelancerSkill_Skill">
+    <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+    <End Role="FreelancerSkill" Type="Self.FreelancerSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skill">
+        <PropertyRef Name="SkillId" />
+      </Principal>
+      <Dependent Role="FreelancerSkill">
+        <PropertyRef Name="SkillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_Attachment">
+    <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+    <End Role="Job" Type="Self.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attachment">
+        <PropertyRef Name="AttachmentId" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="AttachmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Job" Type="Self.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Job_Employer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Job_Employer" />-->
+  <Association Name="FK_Job_skill">
+    <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+    <End Role="Job" Type="Self.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skill">
+        <PropertyRef Name="SkillId" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="SkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_JobDone_Job' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_JobDone_Job" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_JobSkill_Job' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_JobSkill_Job" />-->
+  <Association Name="FK_JobSkill_Skill">
+    <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+    <End Role="JobSkill" Type="Self.JobSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skill">
+        <PropertyRef Name="SkillId" />
+      </Principal>
+      <Dependent Role="JobSkill">
+        <PropertyRef Name="SkillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Message_Attachment">
+    <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attachment">
+        <PropertyRef Name="AttachmentId" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="AttachmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Message_Employer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Message_Employer" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Message_Freelancer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Message_Freelancer" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Message_Job' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Message_Job" />-->
+  <EntityContainer Name="DB66ModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Attachment" EntityType="Self.Attachment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bid" EntityType="Self.Bid" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Freelancer" EntityType="Self.Freelancer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Freelancerlanguage" EntityType="Self.Freelancerlanguage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FreelancerService" EntityType="Self.FreelancerService" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FreelancerSkill" EntityType="Self.FreelancerSkill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobDone" EntityType="Self.JobDone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobSkill" EntityType="Self.JobSkill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Employer__Compan__2739D489" Association="Self.FK__Employer__Compan__2739D489">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Employer" EntitySet="Employer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employer__Compan__3E1D39E1" Association="Self.FK__Employer__Compan__3E1D39E1">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Employer" EntitySet="Employer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Person__Gender__40F9A68C" Association="Self.FK__Person__Gender__40F9A68C">
+      <End Role="Lookup" EntitySet="Lookup" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Person__User_Acc__40058253" Association="Self.FK__Person__User_Acc__40058253">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Person__User_Acc__7C4F7684" Association="Self.FK__Person__User_Acc__7C4F7684">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Freelancer_Category" Association="Self.FK_Freelancer_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Freelancer" EntitySet="Freelancer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Freelancer_ExperienceLookup" Association="Self.FK_Freelancer_ExperienceLookup">
+      <End Role="Lookup" EntitySet="Lookup" />
+      <End Role="Freelancer" EntitySet="Freelancer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Freelancer_JobTypeLookup" Association="Self.FK_Freelancer_JobTypeLookup">
+      <End Role="Lookup" EntitySet="Lookup" />
+      <End Role="Freelancer" EntitySet="Freelancer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Freelancerlanguage_Language" Association="Self.FK_Freelancerlanguage_Language">
+      <End Role="Language" EntitySet="Language" />
+      <End Role="Freelancerlanguage" EntitySet="Freelancerlanguage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FreelancerService_Category" Association="Self.FK_FreelancerService_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="FreelancerService" EntitySet="FreelancerService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FreelancerService_Skill" Association="Self.FK_FreelancerService_Skill">
+      <End Role="Skill" EntitySet="Skill" />
+      <End Role="FreelancerService" EntitySet="FreelancerService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FreelancerSkill_Skill" Association="Self.FK_FreelancerSkill_Skill">
+      <End Role="Skill" EntitySet="Skill" />
+      <End Role="FreelancerSkill" EntitySet="FreelancerSkill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_Attachment" Association="Self.FK_Job_Attachment">
+      <End Role="Attachment" EntitySet="Attachment" />
+      <End Role="Job" EntitySet="Job" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_Category" Association="Self.FK_Job_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Job" EntitySet="Job" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_skill" Association="Self.FK_Job_skill">
+      <End Role="Skill" EntitySet="Skill" />
+      <End Role="Job" EntitySet="Job" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobSkill_Skill" Association="Self.FK_JobSkill_Skill">
+      <End Role="Skill" EntitySet="Skill" />
+      <End Role="JobSkill" EntitySet="JobSkill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Message_Attachment" Association="Self.FK_Message_Attachment">
+      <End Role="Attachment" EntitySet="Attachment" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

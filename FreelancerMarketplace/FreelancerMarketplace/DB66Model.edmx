@@ -1,0 +1,1554 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB66Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="AttachmentId" />
+          </Key>
+          <Property Name="AttachmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bid">
+          <Key>
+            <PropertyRef Name="BidId" />
+            <PropertyRef Name="FreelancerID" />
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="BidId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="FreelancerID" Type="int" Nullable="false" />
+          <Property Name="JobID" Type="int" Nullable="false" />
+          <Property Name="BidTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="EmployerId" />
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="EmployerId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Freelancer">
+          <Key>
+            <PropertyRef Name="FreelancerId" />
+            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="ExperienceInCategory" />
+            <PropertyRef Name="JobType" />
+          </Key>
+          <Property Name="FreelancerId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="ExperienceInCategory" Type="int" Nullable="false" />
+          <Property Name="ProfessionalTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProfessionalOverview" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="JobType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Freelancerlanguage">
+          <Key>
+            <PropertyRef Name="FreelancerId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="FreelancerId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FreelancerService">
+          <Key>
+            <PropertyRef Name="ServiceId" />
+            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="SkillId" />
+          </Key>
+          <Property Name="ServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="SkillId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Fee" Type="int" Nullable="false" />
+          <Property Name="PicturePath" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FreelancerSkill">
+          <Key>
+            <PropertyRef Name="SkillId" />
+            <PropertyRef Name="FreelancerId" />
+          </Key>
+          <Property Name="SkillId" Type="int" Nullable="false" />
+          <Property Name="FreelancerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobId" />
+            <PropertyRef Name="SkillID" />
+            <PropertyRef Name="EmployerID" />
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PaymentAmount" Type="int" Nullable="false" />
+          <Property Name="AttachmentID" Type="int" />
+          <Property Name="Expiry" Type="datetime" Nullable="false" />
+          <Property Name="SkillID" Type="int" Nullable="false" />
+          <Property Name="EmployerID" Type="int" Nullable="false" />
+          <Property Name="TimePosted" Type="datetime" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="Deadline" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobDone">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="int" Nullable="false" />
+          <Property Name="FilesReceived" Type="bit" Nullable="false" />
+          <Property Name="PaymentReceived" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobSkill">
+          <Key>
+            <PropertyRef Name="JobId" />
+            <PropertyRef Name="SkillId" />
+          </Key>
+          <Property Name="JobId" Type="int" Nullable="false" />
+          <Property Name="SkillId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="LanguageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageId" />
+            <PropertyRef Name="JobId" />
+            <PropertyRef Name="EmployerId" />
+            <PropertyRef Name="FreelancerId" />
+          </Key>
+          <Property Name="MessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AttachmentId" Type="int" />
+          <Property Name="JobId" Type="int" Nullable="false" />
+          <Property Name="EmployerId" Type="int" Nullable="false" />
+          <Property Name="FreelancerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="User_AccountID" />
+          </Key>
+          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_AccountID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="SkillId" />
+          </Key>
+          <Property Name="SkillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__Employer__Compan__2739D489">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employer__Compan__3E1D39E1">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Employer__Employ__3F115E1A' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Employer__Employ__3F115E1A" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Employer__Employ__7F2BE32F' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Employer__Employ__7F2BE32F" />-->
+        <Association Name="FK__Person__Gender__40F9A68C">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="0..1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Person__User_Acc__40058253">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="User_AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Person__User_Acc__7C4F7684">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="User_AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Bid_Freelancer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Bid_Freelancer" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Bid_Job' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Bid_Job" />-->
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Employer_Person' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Employer_Person" />-->
+        <Association Name="FK_Freelancer_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Freelancer">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Freelancer_ExperienceLookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Freelancer">
+              <PropertyRef Name="ExperienceInCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Freelancer_JobTypeLookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Freelancer">
+              <PropertyRef Name="JobType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Freelancer_Person' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Freelancer_Person" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Freelancerlanguage_Freelancr' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Freelancerlanguage_Freelancr" />-->
+        <Association Name="FK_Freelancerlanguage_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="Freelancerlanguage" Type="Self.Freelancerlanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="Freelancerlanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FreelancerService_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="FreelancerService" Type="Self.FreelancerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="FreelancerService">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FreelancerService_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="FreelancerService" Type="Self.FreelancerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillId" />
+            </Principal>
+            <Dependent Role="FreelancerService">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_FreelancerSkill_Freelancer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_FreelancerSkill_Freelancer" />-->
+        <Association Name="FK_FreelancerSkill_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="FreelancerSkill" Type="Self.FreelancerSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillId" />
+            </Principal>
+            <Dependent Role="FreelancerSkill">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Attachment">
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attachment">
+              <PropertyRef Name="AttachmentId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="AttachmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Job_Employer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Job_Employer" />-->
+        <Association Name="FK_Job_skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="SkillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_JobDone_Job' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_JobDone_Job" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_JobSkill_Job' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_JobSkill_Job" />-->
+        <Association Name="FK_JobSkill_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="JobSkill" Type="Self.JobSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillId" />
+            </Principal>
+            <Dependent Role="JobSkill">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Attachment">
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attachment">
+              <PropertyRef Name="AttachmentId" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="AttachmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Message_Employer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Message_Employer" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Message_Freelancer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Message_Freelancer" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Message_Job' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Message_Job" />-->
+        <EntityContainer Name="DB66ModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachment" EntityType="Self.Attachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bid" EntityType="Self.Bid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Freelancer" EntityType="Self.Freelancer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Freelancerlanguage" EntityType="Self.Freelancerlanguage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FreelancerService" EntityType="Self.FreelancerService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FreelancerSkill" EntityType="Self.FreelancerSkill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobDone" EntityType="Self.JobDone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobSkill" EntityType="Self.JobSkill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Employer__Compan__2739D489" Association="Self.FK__Employer__Compan__2739D489">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Employer" EntitySet="Employer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employer__Compan__3E1D39E1" Association="Self.FK__Employer__Compan__3E1D39E1">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Employer" EntitySet="Employer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Person__Gender__40F9A68C" Association="Self.FK__Person__Gender__40F9A68C">
+            <End Role="Lookup" EntitySet="Lookup" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Person__User_Acc__40058253" Association="Self.FK__Person__User_Acc__40058253">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Person__User_Acc__7C4F7684" Association="Self.FK__Person__User_Acc__7C4F7684">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Freelancer_Category" Association="Self.FK_Freelancer_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Freelancer" EntitySet="Freelancer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Freelancer_ExperienceLookup" Association="Self.FK_Freelancer_ExperienceLookup">
+            <End Role="Lookup" EntitySet="Lookup" />
+            <End Role="Freelancer" EntitySet="Freelancer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Freelancer_JobTypeLookup" Association="Self.FK_Freelancer_JobTypeLookup">
+            <End Role="Lookup" EntitySet="Lookup" />
+            <End Role="Freelancer" EntitySet="Freelancer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Freelancerlanguage_Language" Association="Self.FK_Freelancerlanguage_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="Freelancerlanguage" EntitySet="Freelancerlanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FreelancerService_Category" Association="Self.FK_FreelancerService_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="FreelancerService" EntitySet="FreelancerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FreelancerService_Skill" Association="Self.FK_FreelancerService_Skill">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="FreelancerService" EntitySet="FreelancerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FreelancerSkill_Skill" Association="Self.FK_FreelancerSkill_Skill">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="FreelancerSkill" EntitySet="FreelancerSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Attachment" Association="Self.FK_Job_Attachment">
+            <End Role="Attachment" EntitySet="Attachment" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Category" Association="Self.FK_Job_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_skill" Association="Self.FK_Job_skill">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSkill_Skill" Association="Self.FK_JobSkill_Skill">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="JobSkill" EntitySet="JobSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Attachment" Association="Self.FK_Message_Attachment">
+            <End Role="Attachment" EntitySet="Attachment" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB66Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="People" Relationship="Self.FK__Person__User_Acc__40058253" FromRole="AspNetUsers" ToRole="Person" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="AttachmentId" />
+          </Key>
+          <Property Name="AttachmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Attachment" FromRole="Attachment" ToRole="Job" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_Message_Attachment" FromRole="Attachment" ToRole="Message" />
+        </EntityType>
+        <EntityType Name="Bid">
+          <Key>
+            <PropertyRef Name="BidId" />
+            <PropertyRef Name="FreelancerID" />
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="BidId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="FreelancerID" Type="Int32" Nullable="false" />
+          <Property Name="JobID" Type="Int32" Nullable="false" />
+          <Property Name="BidTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Freelancers" Relationship="Self.FK_Freelancer_Category" FromRole="Category" ToRole="Freelancer" />
+          <NavigationProperty Name="FreelancerServices" Relationship="Self.FK_FreelancerService_Category" FromRole="Category" ToRole="FreelancerService" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Category" FromRole="Category" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employers" Relationship="Self.FK__Employer__Compan__2739D489" FromRole="Company" ToRole="Employer" />
+          <NavigationProperty Name="Employers1" Relationship="Self.FK__Employer__Compan__3E1D39E1" FromRole="Company" ToRole="Employer" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="EmployerId" />
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="EmployerId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Employer__Compan__2739D489" FromRole="Employer" ToRole="Company" />
+          <NavigationProperty Name="Company1" Relationship="Self.FK__Employer__Compan__3E1D39E1" FromRole="Employer" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Freelancer">
+          <Key>
+            <PropertyRef Name="FreelancerId" />
+            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="ExperienceInCategory" />
+            <PropertyRef Name="JobType" />
+          </Key>
+          <Property Name="FreelancerId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="ExperienceInCategory" Type="Int32" Nullable="false" />
+          <Property Name="ProfessionalTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfessionalOverview" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Freelancer_Category" FromRole="Freelancer" ToRole="Category" />
+          <NavigationProperty Name="Lookup" Relationship="Self.FK_Freelancer_ExperienceLookup" FromRole="Freelancer" ToRole="Lookup" />
+          <NavigationProperty Name="Lookup1" Relationship="Self.FK_Freelancer_JobTypeLookup" FromRole="Freelancer" ToRole="Lookup" />
+        </EntityType>
+        <EntityType Name="Freelancerlanguage">
+          <Key>
+            <PropertyRef Name="FreelancerId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="FreelancerId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_Freelancerlanguage_Language" FromRole="Freelancerlanguage" ToRole="Language" />
+        </EntityType>
+        <EntityType Name="FreelancerService">
+          <Key>
+            <PropertyRef Name="ServiceId" />
+            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="SkillId" />
+          </Key>
+          <Property Name="ServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="SkillId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fee" Type="Int32" Nullable="false" />
+          <Property Name="PicturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_FreelancerService_Category" FromRole="FreelancerService" ToRole="Category" />
+          <NavigationProperty Name="Skill" Relationship="Self.FK_FreelancerService_Skill" FromRole="FreelancerService" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="FreelancerSkill">
+          <Key>
+            <PropertyRef Name="SkillId" />
+            <PropertyRef Name="FreelancerId" />
+          </Key>
+          <Property Name="SkillId" Type="Int32" Nullable="false" />
+          <Property Name="FreelancerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Skill" Relationship="Self.FK_FreelancerSkill_Skill" FromRole="FreelancerSkill" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobId" />
+            <PropertyRef Name="SkillID" />
+            <PropertyRef Name="EmployerID" />
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaymentAmount" Type="Int32" Nullable="false" />
+          <Property Name="AttachmentID" Type="Int32" />
+          <Property Name="Expiry" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SkillID" Type="Int32" Nullable="false" />
+          <Property Name="EmployerID" Type="Int32" Nullable="false" />
+          <Property Name="TimePosted" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Deadline" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Attachment" Relationship="Self.FK_Job_Attachment" FromRole="Job" ToRole="Attachment" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Job_Category" FromRole="Job" ToRole="Category" />
+          <NavigationProperty Name="Skill" Relationship="Self.FK_Job_skill" FromRole="Job" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="JobDone">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="FilesReceived" Type="Boolean" Nullable="false" />
+          <Property Name="PaymentReceived" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobSkill">
+          <Key>
+            <PropertyRef Name="JobId" />
+            <PropertyRef Name="SkillId" />
+          </Key>
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="SkillId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Skill" Relationship="Self.FK_JobSkill_Skill" FromRole="JobSkill" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="LanguageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Freelancerlanguages" Relationship="Self.FK_Freelancerlanguage_Language" FromRole="Language" ToRole="Freelancerlanguage" />
+        </EntityType>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Freelancers" Relationship="Self.FK_Freelancer_ExperienceLookup" FromRole="Lookup" ToRole="Freelancer" />
+          <NavigationProperty Name="Freelancers1" Relationship="Self.FK_Freelancer_JobTypeLookup" FromRole="Lookup" ToRole="Freelancer" />
+          <NavigationProperty Name="People" Relationship="Self.FK__Person__Gender__40F9A68C" FromRole="Lookup" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageId" />
+            <PropertyRef Name="JobId" />
+            <PropertyRef Name="EmployerId" />
+            <PropertyRef Name="FreelancerId" />
+          </Key>
+          <Property Name="MessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AttachmentId" Type="Int32" />
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="EmployerId" Type="Int32" Nullable="false" />
+          <Property Name="FreelancerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attachment" Relationship="Self.FK_Message_Attachment" FromRole="Message" ToRole="Attachment" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="User_AccountID" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_AccountID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Person__User_Acc__40058253" FromRole="Person" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser1" Relationship="Self.FK__Person__User_Acc__7C4F7684" FromRole="Person" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Lookup" Relationship="Self.FK__Person__Gender__40F9A68C" FromRole="Person" ToRole="Lookup" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="SkillId" />
+          </Key>
+          <Property Name="SkillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FreelancerServices" Relationship="Self.FK_FreelancerService_Skill" FromRole="Skill" ToRole="FreelancerService" />
+          <NavigationProperty Name="FreelancerSkills" Relationship="Self.FK_FreelancerSkill_Skill" FromRole="Skill" ToRole="FreelancerSkill" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_skill" FromRole="Skill" ToRole="Job" />
+          <NavigationProperty Name="JobSkills" Relationship="Self.FK_JobSkill_Skill" FromRole="Skill" ToRole="JobSkill" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Person__User_Acc__40058253">
+          <End Type="Self.AspNetUser" Multiplicity="1" Role="AspNetUsers" />
+          <End Type="Self.Person" Multiplicity="*" Role="Person" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="User_AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Person__User_Acc__7C4F7684">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="User_AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Attachment">
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attachment">
+              <PropertyRef Name="AttachmentId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="AttachmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Attachment">
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attachment">
+              <PropertyRef Name="AttachmentId" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="AttachmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Freelancer_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Freelancer">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FreelancerService_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="FreelancerService" Type="Self.FreelancerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="FreelancerService">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employer__Compan__2739D489">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employer__Compan__3E1D39E1">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Freelancer_ExperienceLookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Freelancer">
+              <PropertyRef Name="ExperienceInCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Freelancer_JobTypeLookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Freelancer">
+              <PropertyRef Name="JobType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Freelancerlanguage_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="Freelancerlanguage" Type="Self.Freelancerlanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="Freelancerlanguage">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FreelancerService_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="FreelancerService" Type="Self.FreelancerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillId" />
+            </Principal>
+            <Dependent Role="FreelancerService">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FreelancerSkill_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="FreelancerSkill" Type="Self.FreelancerSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillId" />
+            </Principal>
+            <Dependent Role="FreelancerSkill">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="SkillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobSkill_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="JobSkill" Type="Self.JobSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillId" />
+            </Principal>
+            <Dependent Role="JobSkill">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Person__Gender__40F9A68C">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="0..1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DB66Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachment" />
+          <EntitySet Name="Bids" EntityType="Self.Bid" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Employers" EntityType="Self.Employer" />
+          <EntitySet Name="Freelancers" EntityType="Self.Freelancer" />
+          <EntitySet Name="Freelancerlanguages" EntityType="Self.Freelancerlanguage" />
+          <EntitySet Name="FreelancerServices" EntityType="Self.FreelancerService" />
+          <EntitySet Name="FreelancerSkills" EntityType="Self.FreelancerSkill" />
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="JobDones" EntityType="Self.JobDone" />
+          <EntitySet Name="JobSkills" EntityType="Self.JobSkill" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="Lookups" EntityType="Self.Lookup" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="Skills" EntityType="Self.Skill" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Person__User_Acc__40058253" Association="Self.FK__Person__User_Acc__40058253">
+            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
+            <End EntitySet="People" Role="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Person__User_Acc__7C4F7684" Association="Self.FK__Person__User_Acc__7C4F7684">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Attachment" Association="Self.FK_Job_Attachment">
+            <End Role="Attachment" EntitySet="Attachments" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Attachment" Association="Self.FK_Message_Attachment">
+            <End Role="Attachment" EntitySet="Attachments" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Freelancer_Category" Association="Self.FK_Freelancer_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Freelancer" EntitySet="Freelancers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FreelancerService_Category" Association="Self.FK_FreelancerService_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="FreelancerService" EntitySet="FreelancerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Category" Association="Self.FK_Job_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employer__Compan__2739D489" Association="Self.FK__Employer__Compan__2739D489">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Employer" EntitySet="Employers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employer__Compan__3E1D39E1" Association="Self.FK__Employer__Compan__3E1D39E1">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Employer" EntitySet="Employers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Freelancer_ExperienceLookup" Association="Self.FK_Freelancer_ExperienceLookup">
+            <End Role="Lookup" EntitySet="Lookups" />
+            <End Role="Freelancer" EntitySet="Freelancers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Freelancer_JobTypeLookup" Association="Self.FK_Freelancer_JobTypeLookup">
+            <End Role="Lookup" EntitySet="Lookups" />
+            <End Role="Freelancer" EntitySet="Freelancers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Freelancerlanguage_Language" Association="Self.FK_Freelancerlanguage_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="Freelancerlanguage" EntitySet="Freelancerlanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FreelancerService_Skill" Association="Self.FK_FreelancerService_Skill">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="FreelancerService" EntitySet="FreelancerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FreelancerSkill_Skill" Association="Self.FK_FreelancerSkill_Skill">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="FreelancerSkill" EntitySet="FreelancerSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_skill" Association="Self.FK_Job_skill">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSkill_Skill" Association="Self.FK_JobSkill_Skill">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="JobSkill" EntitySet="JobSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Person__Gender__40F9A68C" Association="Self.FK__Person__Gender__40F9A68C">
+            <End Role="Lookup" EntitySet="Lookups" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB66ModelStoreContainer" CdmEntityContainer="DB66Entities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="DB66Model.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="DB66Model.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="DB66Model.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="DB66Model.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DB66Model.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="DB66Model.Attachment">
+              <MappingFragment StoreEntitySet="Attachment">
+                <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bids">
+            <EntityTypeMapping TypeName="DB66Model.Bid">
+              <MappingFragment StoreEntitySet="Bid">
+                <ScalarProperty Name="BidId" ColumnName="BidId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FreelancerID" ColumnName="FreelancerID" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="BidTime" ColumnName="BidTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DB66Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="DB66Model.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employers">
+            <EntityTypeMapping TypeName="DB66Model.Employer">
+              <MappingFragment StoreEntitySet="Employer">
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Freelancers">
+            <EntityTypeMapping TypeName="DB66Model.Freelancer">
+              <MappingFragment StoreEntitySet="Freelancer">
+                <ScalarProperty Name="FreelancerId" ColumnName="FreelancerId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ExperienceInCategory" ColumnName="ExperienceInCategory" />
+                <ScalarProperty Name="ProfessionalTitle" ColumnName="ProfessionalTitle" />
+                <ScalarProperty Name="ProfessionalOverview" ColumnName="ProfessionalOverview" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Freelancerlanguages">
+            <EntityTypeMapping TypeName="DB66Model.Freelancerlanguage">
+              <MappingFragment StoreEntitySet="Freelancerlanguage">
+                <ScalarProperty Name="FreelancerId" ColumnName="FreelancerId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FreelancerServices">
+            <EntityTypeMapping TypeName="DB66Model.FreelancerService">
+              <MappingFragment StoreEntitySet="FreelancerService">
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FreelancerSkills">
+            <EntityTypeMapping TypeName="DB66Model.FreelancerSkill">
+              <MappingFragment StoreEntitySet="FreelancerSkill">
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="FreelancerId" ColumnName="FreelancerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="DB66Model.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+                <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
+                <ScalarProperty Name="Expiry" ColumnName="Expiry" />
+                <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+                <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
+                <ScalarProperty Name="TimePosted" ColumnName="TimePosted" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobDones">
+            <EntityTypeMapping TypeName="DB66Model.JobDone">
+              <MappingFragment StoreEntitySet="JobDone">
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="FilesReceived" ColumnName="FilesReceived" />
+                <ScalarProperty Name="PaymentReceived" ColumnName="PaymentReceived" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobSkills">
+            <EntityTypeMapping TypeName="DB66Model.JobSkill">
+              <MappingFragment StoreEntitySet="JobSkill">
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="DB66Model.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lookups">
+            <EntityTypeMapping TypeName="DB66Model.Lookup">
+              <MappingFragment StoreEntitySet="Lookup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="category" ColumnName="category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="DB66Model.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="FreelancerId" ColumnName="FreelancerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="DB66Model.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="User_AccountID" ColumnName="User_AccountID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="DB66Model.Skill">
+              <MappingFragment StoreEntitySet="Skill">
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DB66Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DB66Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

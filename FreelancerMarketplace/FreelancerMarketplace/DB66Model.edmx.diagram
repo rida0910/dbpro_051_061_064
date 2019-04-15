@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6b5aa9780021409a9c3a8df637455049" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="DB66Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.AspNetRole" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.AspNetUser" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Attachment" Width="1.5" PointX="3.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Bid" Width="1.5" PointX="10.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Category" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Company" Width="1.5" PointX="8.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Employer" Width="1.5" PointX="11" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Freelancer" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Freelancerlanguage" Width="1.5" PointX="13" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.FreelancerService" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.FreelancerSkill" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Job" Width="1.5" PointX="6" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.JobDone" Width="1.5" PointX="2.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.JobSkill" Width="1.5" PointX="3" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Language" Width="1.5" PointX="10.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Lookup" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Message" Width="1.5" PointX="6" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Person" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.Skill" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB66Model.sysdiagram" Width="1.5" PointX="10.75" PointY="11" IsExpanded="true" />
+        <AssociationConnector Association="DB66Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="DB66Model.FK__Person__User_Acc__40058253" />
+        <AssociationConnector Association="DB66Model.FK__Person__User_Acc__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_Job_Attachment" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_Message_Attachment" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_Freelancer_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_FreelancerService_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_Job_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK__Employer__Compan__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK__Employer__Compan__3E1D39E1" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_Freelancer_ExperienceLookup" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_Freelancer_JobTypeLookup" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_Freelancerlanguage_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_FreelancerService_Skill" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_FreelancerSkill_Skill" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_Job_skill" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK_JobSkill_Skill" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.FK__Person__Gender__40F9A68C" ManuallyRouted="false" />
+        <AssociationConnector Association="DB66Model.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
