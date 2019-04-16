@@ -20,7 +20,7 @@
     <div id="wrapper">
 
         <!-- Header Container
-        ================================================== -->
+    ================================================== -->
         <header id="header-container" class="fullwidth transparent">
 
             <!-- Header -->
@@ -40,28 +40,8 @@
                             <ul id="responsive">
 
                                 <li>
-                                    <a href="#" class="current">Home</a>
-                                    <ul class="dropdown-nav">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a href="#">Find Work</a>
-                                    <ul class="dropdown-nav">
-                                        <li>
-                                            <a href="#">Browse Jobs</a>
-                                            <ul class="dropdown-nav">
-                                                <li><a href="jobs-list-layout-full-page-map.html">Full Page List + Map</a></li>
-                                                <li><a href="jobs-grid-layout-full-page-map.html">Full Page Grid + Map</a></li>
-                                                <li><a href="jobs-grid-layout-full-page.html">Full Page Grid</a></li>
-                                                <li><a href="jobs-list-layout-1.html">List Layout 1</a></li>
-                                                <li><a href="jobs-list-layout-2.html">List Layout 2</a></li>
-                                                <li><a href="jobs-grid-layout.html">Grid Layout</a></li>
-                                            </ul>
-                                        </li>
+                                    <a href="#">Find Job</a>
+                                    
                                         <li>
                                             <a href="#">Browse Tasks</a>
                                             <ul class="dropdown-nav">
@@ -148,10 +128,8 @@
                     <!-- Left Side Content / End -->
                     <!-- Right Side Content / End -->
                     <div class="right-side">
+                        @Html.Partial("_LoginPartial")
 
-                        <div class="header-widget">
-                            <a href="#sign-in-dialog" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
-                        </div>
 
                         <!-- Mobile Navigation Button -->
                         <span class="mmenu-trigger">
@@ -187,5 +165,19 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/jquery-migrate-3.0.0.min.js"></script>
+        <script src="js/mmenu.min.js"></script>
+        <script src="js/tippy.all.min.js"></script>
+        <script src="js/simplebar.min.js"></script>
+        <script src="js/bootstrap-slider.min.js"></script>
+        <script src="js/bootstrap-select.min.js"></script>
+        <script src="js/snackbar.js"></script>
+        <script src="js/clipboard.min.js"></script>
+        <script src="js/counterup.min.js"></script>
+        <script src="js/magnific-popup.min.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="js/custom.js"></script>
+
 </body>
 </html>
