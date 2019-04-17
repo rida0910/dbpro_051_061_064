@@ -1,10 +1,24 @@
-﻿@using FreelancerMarketplace.Models
+﻿<!-- Basic Page Needs
+================================================== -->
+<title>Hireo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/colors/blue.css">
+
+@using FreelancerMarketplace.Models
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title.</h2>
+<div class="welcome-text">
+    <h3>We're glad to see you again!</h3>
+    <span>Don't have an account? @Html.ActionLink("Sign Up!", "Register")</span>
+</div>
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
@@ -51,11 +65,7 @@
             }
         </section>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+    
 </div>
 
 @section Scripts {

@@ -15,13 +15,14 @@
 }
 else
 {
-    
+    <div class="header-widget">
+        <button onclick="location.href='@Url.Action("Login", "Account")'"> Sign In </button>
+    </div>
 
-        <div class="header-widget">
-            <span>
-                @Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink"}) |
-                @Html.ActionLink("SIGN UP", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
-            </span>
-            </div>
-        
+    <div class="header-widget">
+        <span>
+            <input type="button" value="Join" onclick="location.href='@Url.Action("Register", "Account")'" />
+        </span>
+    </div>
+
 }
