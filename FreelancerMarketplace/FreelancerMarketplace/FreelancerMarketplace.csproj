@@ -216,6 +216,7 @@
       <DependentUpon>DB66Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="C__MigrationHistory.cs">
@@ -617,6 +618,7 @@
     <Content Include="images\logo-carousel-06.png" />
     <Content Include="images\logo.png" />
     <Content Include="images\logo2.png" />
+    <Content Include="images\myimage.jpg" />
     <Content Include="images\section-background.jpg" />
     <Content Include="images\single-company.jpg" />
     <Content Include="images\single-freelancer.jpg" />
@@ -646,6 +648,7 @@
     <Content Include="js\slick.min.js" />
     <Content Include="js\snackbar.js" />
     <Content Include="js\tippy.all.min.js" />
+    <Content Include="home.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -796,6 +799,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Employer\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
