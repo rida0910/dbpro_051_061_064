@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 
@@ -48,7 +48,6 @@
 						
 
 						<li><a href="manage-bidders.html">Manage Bidders</a></li>
-
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -178,10 +177,10 @@
 										<!-- Notification -->
 										<li class="notifications-not-read">
 											<a href="employer-messages-dashboard.html">
-												<span class="notification-avatar status-offline"><img src="images/user-avatar-small-02.jpg" alt=""></span>
+												<span class="notification-avatar status-online"><img src="images/user-avatar-placeholder.png" alt=""></span>
 												<div class="notification-text">
-													<strong>Sindy Forest</strong>
-													<p class="notification-msg-text">Hi Tom! Hate to break it to you, but I'm actually on vacation until...</p>
+													<strong>Marcin Kowalski</strong>
+													<p class="notification-msg-text">I received payment. Thanks for cooperation!</p>
 													<span class="color">Yesterday</span>
 												</div>
 											</a>
@@ -267,6 +266,7 @@
 
 	
 
+
 	<!-- Dashboard Content
 	================================================== -->
 	<div class="dashboard-content-container" data-simplebar>
@@ -274,14 +274,14 @@
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
-				<h3>Post a Job</h3>
+				<h3>Settings</h3>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs" class="dark">
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Dashboard</a></li>
-						<li>Post a Job</li>
+						<li>Settings</li>
 					</ul>
 				</nav>
 			</div>
@@ -295,117 +295,295 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3><i class="icon-feather-folder-plus"></i> Job Submission Form</h3>
+							<h3><i class="icon-material-outline-account-circle"></i> My Account</h3>
 						</div>
 
-						<div class="content with-padding padding-bottom-10">
+						<div class="content with-padding padding-bottom-0">
+
 							<div class="row">
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Job Title</h5>
-										<input type="text" class="with-border">
+								<div class="col-auto">
+									<div class="avatar-wrapper" data-tippy-placement="bottom" title="Change Avatar">
+										<img class="profile-pic" src="images/user-avatar-placeholder.png" alt="" />
+										<div class="upload-button"></div>
+										<input class="file-upload" type="file" accept="image/*"/>
 									</div>
 								</div>
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Job Type</h5>
-										<select class="selectpicker with-border" data-size="7" title="Select Job Type">
-											<option>Full Time</option>
-											<option>Freelance</option>
-											<option>Part Time</option>
-											<option>Internship</option>
-											<option>Temporary</option>
-										</select>
-									</div>
-								</div>
+								<div class="col">
+									<div class="row">
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Job Category</h5>
-										<select class="selectpicker with-border" data-size="7" title="Select Category">
-											<option>Accounting and Finance</option>
-											<option>Clerical & Data Entry</option>
-											<option>Counseling</option>
-											<option>Court Administration</option>
-											<option>Human Resources</option>
-											<option>Investigative</option>
-											<option>IT and Computers</option>
-											<option>Law Enforcement</option>
-											<option>Management</option>
-											<option>Miscellaneous</option>
-											<option>Public Relations</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Location</h5>
-										<div class="input-with-icon">
-											<div id="autocomplete-container">
-												<input id="autocomplete-input" class="with-border" type="text" placeholder="Type Address">
+										<div class="col-xl-6">
+											<div class="submit-field">
+												<h5>First Name</h5>
+												<input type="text" class="with-border" value="Tom">
 											</div>
-											<i class="icon-material-outline-location-on"></i>
 										</div>
-									</div>
-								</div>
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Salary</h5>
-										<div class="row">
-											<div class="col-xl-6">
-												<div class="input-with-icon">
-													<input class="with-border" type="text" placeholder="Min">
-													<i class="currency">USD</i>
-												</div>
+										<div class="col-xl-6">
+											<div class="submit-field">
+												<h5>Last Name</h5>
+												<input type="text" class="with-border" value="Smith">
 											</div>
-											<div class="col-xl-6">
-												<div class="input-with-icon">
-													<input class="with-border" type="text" placeholder="Max">
-													<i class="currency">USD</i>
+										</div>
+
+										<div class="col-xl-6">
+											<!-- Account Type -->
+											<div class="submit-field">
+												<h5>Account Type</h5>
+												<div class="account-type">
+													<div>
+														<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked/>
+														<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
+													</div>
+
+													<div>
+														<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio"/>
+														<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								</div>
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Tags <span>(optional)</span>  <i class="help-icon" data-tippy-placement="right" title="Maximum of 10 tags"></i></h5>
-										<div class="keywords-container">
-											<div class="keyword-input-container">
-												<input type="text" class="keyword-input with-border" placeholder="e.g. job title, responsibilites"/>
-												<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+										<div class="col-xl-6">
+											<div class="submit-field">
+												<h5>Email</h5>
+												<input type="text" class="with-border" value="tom@example.com">
 											</div>
-											<div class="keywords-list"><!-- keywords go here --></div>
-											<div class="clearfix"></div>
 										</div>
 
 									</div>
 								</div>
-
-								<div class="col-xl-12">
-									<div class="submit-field">
-										<h5>Job Description</h5>
-										<textarea cols="30" rows="5" class="with-border"></textarea>
-										<div class="uploadButton margin-top-30">
-											<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple/>
-											<label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
-											<span class="uploadButton-file-name">Images or documents that might be helpful in describing your job</span>
-										</div>
-									</div>
-								</div>
-
 							</div>
+
 						</div>
 					</div>
 				</div>
 
+				<!-- Dashboard Box -->
 				<div class="col-xl-12">
-					<a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Job</a>
+					<div class="dashboard-box">
+
+						<!-- Headline -->
+						<div class="headline">
+							<h3><i class="icon-material-outline-face"></i> My Profile</h3>
+						</div>
+
+						<div class="content">
+							<ul class="fields-ul">
+							<li>
+								<div class="row">
+									<div class="col-xl-4">
+										<div class="submit-field">
+											<div class="bidding-widget">
+												<!-- Headline -->
+												
+
+												
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xl-4">
+										<div class="submit-field">
+											<h4>Skills Required<i class="help-icon" data-tippy-placement="right" title="Add up to 10 skills"></i></h4>
+
+											<!-- Skills List -->
+											<div class="keywords-container">
+												<div class="keyword-input-container">
+													<input type="text" class="keyword-input with-border" placeholder="e.g. Angular, Laravel"/>
+													<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+												</div>
+												<div class="keywords-list">
+													<span class="keyword"><span class="keyword-remove"></span><span class="keyword-text">Angular</span></span>
+													<span class="keyword"><span class="keyword-remove"></span><span class="keyword-text">Vue JS</span></span>
+													<span class="keyword"><span class="keyword-remove"></span><span class="keyword-text">iOS</span></span>
+													<span class="keyword"><span class="keyword-remove"></span><span class="keyword-text">Android</span></span>
+													<span class="keyword"><span class="keyword-remove"></span><span class="keyword-text">Laravel</span></span>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xl-4">
+										<div class="submit-field">
+											<h5>Attachments</h5>
+											
+											<div class="uploadButton margin-top-0">
+												<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple/>
+												<label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
+												<span class="uploadButton-file-name">Maximum file size: 10 MB</span>
+											</div>
+											<div class="clearfix"></div>
+											
+											<!-- Upload Button -->
+											
+
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								
+									
+
+									<div class="col-xl-6">
+										<div class="submit-field">
+											<h5>Nationality</h5>
+											<select class="selectpicker with-border" data-size="7" title="Select Job Type" data-live-search="true">
+												<option value="AR">Argentina</option>
+												<option value="AM">Armenia</option>
+												<option value="AW">Aruba</option>
+												<option value="AU">Australia</option>
+												<option value="AT">Austria</option>
+												<option value="AZ">Azerbaijan</option>
+												<option value="BS">Bahamas</option>
+												<option value="BH">Bahrain</option>
+												<option value="BD">Bangladesh</option>
+												<option value="BB">Barbados</option>
+												<option value="BY">Belarus</option>
+												<option value="BE">Belgium</option>
+												<option value="BZ">Belize</option>
+												<option value="BJ">Benin</option>
+												<option value="BM">Bermuda</option>
+												<option value="BT">Bhutan</option>
+												<option value="BG">Bulgaria</option>
+												<option value="BF">Burkina Faso</option>
+												<option value="BI">Burundi</option>
+												<option value="KH">Cambodia</option>
+												<option value="CM">Cameroon</option>
+												<option value="CA">Canada</option>
+												<option value="CV">Cape Verde</option>
+												<option value="KY">Cayman Islands</option>
+												<option value="CO">Colombia</option>
+												<option value="KM">Comoros</option>
+												<option value="CG">Congo</option>
+												<option value="CK">Cook Islands</option>
+												<option value="CR">Costa Rica</option>
+												<option value="CI">Côte d'Ivoire</option>
+												<option value="HR">Croatia</option>
+												<option value="CU">Cuba</option>
+												<option value="CW">Curaçao</option>
+												<option value="CY">Cyprus</option>
+												<option value="CZ">Czech Republic</option>
+												<option value="DK">Denmark</option>
+												<option value="DJ">Djibouti</option>
+												<option value="DM">Dominica</option>
+												<option value="DO">Dominican Republic</option>
+												<option value="EC">Ecuador</option>
+												<option value="EG">Egypt</option>
+												<option value="GP">Guadeloupe</option>
+												<option value="GU">Guam</option>
+												<option value="GT">Guatemala</option>
+												<option value="GG">Guernsey</option>
+												<option value="GN">Guinea</option>
+												<option value="GW">Guinea-Bissau</option>
+												<option value="GY">Guyana</option>
+												<option value="HT">Haiti</option>
+												<option value="HN">Honduras</option>
+												<option value="HK">Hong Kong</option>
+												<option value="HU">Hungary</option>
+												<option value="IS">Iceland</option>
+												<option value="IN">India</option>
+												<option value="ID">Indonesia</option>
+												<option value="NO">Norway</option>
+												<option value="OM">Oman</option>
+												<option value="PK">Pakistan</option>
+												<option value="PW">Palau</option>
+												<option value="PA">Panama</option>
+												<option value="PG">Papua New Guinea</option>
+												<option value="PY">Paraguay</option>
+												<option value="PE">Peru</option>
+												<option value="PH">Philippines</option>
+												<option value="PN">Pitcairn</option>
+												<option value="PL">Poland</option>
+												<option value="PT">Portugal</option>
+												<option value="PR">Puerto Rico</option>
+												<option value="QA">Qatar</option>
+												<option value="RE">Réunion</option>
+												<option value="RO">Romania</option>
+												<option value="RU">Russian Federation</option>
+												<option value="RW">Rwanda</option>
+												<option value="SZ">Swaziland</option>
+												<option value="SE">Sweden</option>
+												<option value="CH">Switzerland</option>
+												<option value="TR">Turkey</option>
+												<option value="TM">Turkmenistan</option>
+												<option value="TV">Tuvalu</option>
+												<option value="UG">Uganda</option>
+												<option value="UA">Ukraine</option>
+												<option value="GB">United Kingdom</option>
+												<option value="US" selected>United States</option>
+												<option value="UY">Uruguay</option>
+												<option value="UZ">Uzbekistan</option>
+												<option value="YE">Yemen</option>
+												<option value="ZM">Zambia</option>
+												<option value="ZW">Zimbabwe</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-xl-12">
+										<div class="submit-field">
+											<h5>Introduce Yourself</h5>
+											<textarea cols="30" rows="5" class="with-border">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</textarea>
+										</div>
+									</div>
+
+								</div>
+							</li>
+						</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- Dashboard Box -->
+				<div class="col-xl-12">
+					<div id="test1" class="dashboard-box">
+
+						<!-- Headline -->
+						<div class="headline">
+							<h3><i class="icon-material-outline-lock"></i> Password & Security</h3>
+						</div>
+
+						<div class="content with-padding">
+							<div class="row">
+								<div class="col-xl-4">
+									<div class="submit-field">
+										<h5>Current Password</h5>
+										<input type="password" class="with-border">
+									</div>
+								</div>
+
+								<div class="col-xl-4">
+									<div class="submit-field">
+										<h5>New Password</h5>
+										<input type="password" class="with-border">
+									</div>
+								</div>
+
+								<div class="col-xl-4">
+									<div class="submit-field">
+										<h5>Repeat New Password</h5>
+										<input type="password" class="with-border">
+									</div>
+								</div>
+
+								<div class="col-xl-12">
+									<div class="checkbox">
+										<input type="checkbox" id="two-step" checked>
+										<label for="two-step"><span class="checkbox-icon"></span> Enable Two-Step Verification via Email</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Button -->
+				<div class="col-xl-12">
+					<a href="#" class="button ripple-effect big margin-top-30">Save Changes</a>
 				</div>
 
 			</div>
@@ -417,28 +595,7 @@
 				<div class="small-footer-copyrights">
 					© 2018 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
-				<ul class="footer-social-links">
-					<li>
-						<a href="#" title="Facebook" data-tippy-placement="top">
-							<i class="icon-brand-facebook-f"></i>
-						</a>
-					</li>
-					<li>
-						<a href="#" title="Twitter" data-tippy-placement="top">
-							<i class="icon-brand-twitter"></i>
-						</a>
-					</li>
-					<li>
-						<a href="#" title="Google Plus" data-tippy-placement="top">
-							<i class="icon-brand-google-plus-g"></i>
-						</a>
-					</li>
-					<li>
-						<a href="#" title="LinkedIn" data-tippy-placement="top">
-							<i class="icon-brand-linkedin-in"></i>
-						</a>
-					</li>
-				</ul>
+				
 				<div class="clearfix"></div>
 			</div>
 			<!-- Footer / End -->
@@ -582,9 +739,8 @@ $('#snackbar-user-status label').click(function() {
 	}
 </script>
 
-<!-- Google API & Maps -->
-<!-- Geting an API Key: https://developers.google.com/maps/documentation/javascript/get-api-key -->
-<script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
+<!-- Google API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"></script>
 
 
 </body>

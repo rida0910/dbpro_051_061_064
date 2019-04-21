@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 
@@ -39,15 +39,15 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="test1.html">Home </a></li>
+						
+								<li><a href="Test1.html">Home </a></li>
 								
 							
-						                                            <li><a href="post-a-job.html">Post a Job</a></li>
-                                                                                                                                                                             
-								
-						
+						<li><a href="post-a-job.html">Post a Job</a></li>
 
 						<li><a href="manage-bidders.html">Manage Bidders</a></li>
+
+						
 
 					</ul>
 				</nav>
@@ -178,10 +178,10 @@
 										<!-- Notification -->
 										<li class="notifications-not-read">
 											<a href="employer-messages-dashboard.html">
-												<span class="notification-avatar status-offline"><img src="images/user-avatar-small-02.jpg" alt=""></span>
+												<span class="notification-avatar status-online"><img src="images/user-avatar-placeholder.png" alt=""></span>
 												<div class="notification-text">
-													<strong>Sindy Forest</strong>
-													<p class="notification-msg-text">Hi Tom! Hate to break it to you, but I'm actually on vacation until...</p>
+													<strong>Marcin Kowalski</strong>
+													<p class="notification-msg-text">I received payment. Thanks for cooperation!</p>
 													<span class="color">Yesterday</span>
 												</div>
 											</a>
@@ -203,7 +203,7 @@
 					<!-- Messages -->
 					<div class="header-notifications user-menu">
 						<div class="header-notifications-trigger">
-							<a href="#"><div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div></a>
+							<a href="#"><div class="user-avatar"><img src="images/user-avatar-small-01.jpg" alt=""></div></a>
 						</div>
 
 						<!-- Dropdown -->
@@ -214,19 +214,13 @@
 
 								<!-- User Name / Avatar -->
 								<div class="user-details">
-									<div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div>
+									
 									<div class="user-name">
 										Tom Smith <span>Freelancer</span>
 									</div>
 								</div>
 								
-								<!-- User Status Switcher -->
-								<div class="status-switch" id="snackbar-user-status">
-									<label class="user-online current-status">Online</label>
-									<label class="user-invisible">Invisible</label>
-									<!-- Status Indicator -->
-									<span class="status-indicator" aria-hidden="true"></span>
-								</div>	
+								
 						</div>
 						
 						<ul class="user-menu-small-nav">
@@ -262,10 +256,7 @@
 <!-- Header Container / End -->
 
 
-<!-- Dashboard Container -->
-<div class="dashboard-container">
 
-	
 
 	<!-- Dashboard Content
 	================================================== -->
@@ -274,14 +265,15 @@
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
-				<h3>Post a Job</h3>
+				<h3>Manage Candidates</h3>
+				<span class="margin-top-7">Job Applications for <a href="#">Full Stack PHP Developer</a></span>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs" class="dark">
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Dashboard</a></li>
-						<li>Post a Job</li>
+						<li>Manage Candidates</li>
 					</ul>
 				</nav>
 			</div>
@@ -295,153 +287,122 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3><i class="icon-feather-folder-plus"></i> Job Submission Form</h3>
+							<h3><i class="icon-material-outline-supervisor-account"></i> 3 Candidates</h3>
 						</div>
 
-						<div class="content with-padding padding-bottom-10">
-							<div class="row">
+						<div class="content">
+							<ul class="dashboard-box-list">
+								<li>
+									<!-- Overview -->
+									<div class="freelancer-overview manage-candidates">
+										<div class="freelancer-overview-inner">
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Job Title</h5>
-										<input type="text" class="with-border">
-									</div>
-								</div>
-
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Job Type</h5>
-										<select class="selectpicker with-border" data-size="7" title="Select Job Type">
-											<option>Full Time</option>
-											<option>Freelance</option>
-											<option>Part Time</option>
-											<option>Internship</option>
-											<option>Temporary</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Job Category</h5>
-										<select class="selectpicker with-border" data-size="7" title="Select Category">
-											<option>Accounting and Finance</option>
-											<option>Clerical & Data Entry</option>
-											<option>Counseling</option>
-											<option>Court Administration</option>
-											<option>Human Resources</option>
-											<option>Investigative</option>
-											<option>IT and Computers</option>
-											<option>Law Enforcement</option>
-											<option>Management</option>
-											<option>Miscellaneous</option>
-											<option>Public Relations</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Location</h5>
-										<div class="input-with-icon">
-											<div id="autocomplete-container">
-												<input id="autocomplete-input" class="with-border" type="text" placeholder="Type Address">
+											<!-- Avatar -->
+											<div class="freelancer-avatar">
+												<div class="verified-badge"></div>
+												<a href="#"><img src="images/user-avatar-big-03.jpg" alt=""></a>
 											</div>
-											<i class="icon-material-outline-location-on"></i>
-										</div>
-									</div>
-								</div>
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Salary</h5>
-										<div class="row">
-											<div class="col-xl-6">
-												<div class="input-with-icon">
-													<input class="with-border" type="text" placeholder="Min">
-													<i class="currency">USD</i>
+											<!-- Name -->
+											<div class="freelancer-name">
+												<h4><a href="#">Sindy Forest <img class="flag" src="images/flags/au.svg" alt="" title="Australia" data-tippy-placement="top"></a></h4>
+
+												<!-- Details -->
+												<span class="freelancer-detail-item"><a href="#"><i class="icon-feather-mail"></i> sindy@example.com</a></span>
+												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i> (+61) 123-456-789</span>
+
+												<!-- Rating -->
+												<div class="freelancer-rating">
+													<div class="star-rating" data-rating="5.0"></div>
 												</div>
-											</div>
-											<div class="col-xl-6">
-												<div class="input-with-icon">
-													<input class="with-border" type="text" placeholder="Max">
-													<i class="currency">USD</i>
+
+												<!-- Buttons -->
+												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+													<a href="#" class="button ripple-effect"><i class="icon-feather-file-text"></i> Download CV</a>
+													<a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
+													<a href="#" class="button gray ripple-effect ico" title="Remove Candidate" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+								</li>
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Tags <span>(optional)</span>  <i class="help-icon" data-tippy-placement="right" title="Maximum of 10 tags"></i></h5>
-										<div class="keywords-container">
-											<div class="keyword-input-container">
-												<input type="text" class="keyword-input with-border" placeholder="e.g. job title, responsibilites"/>
-												<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+								<li>
+									<!-- Overview -->
+									<div class="freelancer-overview manage-candidates">
+										<div class="freelancer-overview-inner">
+
+											<!-- Avatar -->
+											<div class="freelancer-avatar">
+												<a href="#"><img src="images/user-avatar-placeholder.png" alt=""></a>
 											</div>
-											<div class="keywords-list"><!-- keywords go here --></div>
-											<div class="clearfix"></div>
+
+											<!-- Name -->
+											<div class="freelancer-name">
+												<h4><a href="#">Sebastiano Piccio <img class="flag" src="images/flags/it.svg" alt="" title="Italy" data-tippy-placement="top"></a></h4>
+											
+
+												<!-- Details -->
+												<span class="freelancer-detail-item"><a href="#"><i class="icon-feather-mail"></i> sebastiano@example.com</a></span>
+												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i> (+39) 123-456-789</span>
+
+												<!-- Rating -->
+												<br>
+												<span class="company-not-rated">Minimum of 3 votes required</span>
+
+												<!-- Buttons -->
+												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+													<a href="#" class="button ripple-effect"><i class="icon-feather-file-text"></i> Download CV</a>
+													<a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
+													<a href="#" class="button gray ripple-effect ico" title="Remove Candidate" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+												</div>
+											</div>
 										</div>
-
 									</div>
-								</div>
+								</li>
 
-								<div class="col-xl-12">
-									<div class="submit-field">
-										<h5>Job Description</h5>
-										<textarea cols="30" rows="5" class="with-border"></textarea>
-										<div class="uploadButton margin-top-30">
-											<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple/>
-											<label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
-											<span class="uploadButton-file-name">Images or documents that might be helpful in describing your job</span>
+								<li>
+									<!-- Overview -->
+									<div class="freelancer-overview manage-candidates">
+										<div class="freelancer-overview-inner">
+
+											<!-- Avatar -->
+											<div class="freelancer-avatar">
+												<a href="#"><img src="images/user-avatar-placeholder.png" alt=""></a>
+											</div>
+
+											<!-- Name -->
+											<div class="freelancer-name">
+												<h4><a href="#">Nikolay Azarov <img class="flag" src="images/flags/ru.svg" alt="" title="Russia" data-tippy-placement="top"></a></h4>
+
+												<!-- Details -->
+												<span class="freelancer-detail-item"><a href="#"><i class="icon-feather-mail"></i> nikolay@example.com</a></span>
+												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i> (+7) 123-456-789</span>
+
+												<!-- Rating -->
+												<br>
+												<span class="company-not-rated">Minimum of 3 votes required</span>
+
+												<!-- Buttons -->
+												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+													<a href="#" class="button ripple-effect"><i class="icon-feather-file-text"></i> Download CV</a>
+													<a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
+													<a href="#" class="button gray ripple-effect ico" title="Remove Candidate" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+												</div>
+											</div>
 										</div>
 									</div>
-								</div>
+								</li>
 
-							</div>
+							</ul>
 						</div>
 					</div>
-				</div>
-
-				<div class="col-xl-12">
-					<a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Job</a>
 				</div>
 
 			</div>
 			<!-- Row / End -->
 
-			<!-- Footer -->
-			<div class="dashboard-footer-spacer"></div>
-			<div class="small-footer margin-top-15">
-				<div class="small-footer-copyrights">
-					© 2018 <strong>Hireo</strong>. All Rights Reserved.
-				</div>
-				<ul class="footer-social-links">
-					<li>
-						<a href="#" title="Facebook" data-tippy-placement="top">
-							<i class="icon-brand-facebook-f"></i>
-						</a>
-					</li>
-					<li>
-						<a href="#" title="Twitter" data-tippy-placement="top">
-							<i class="icon-brand-twitter"></i>
-						</a>
-					</li>
-					<li>
-						<a href="#" title="Google Plus" data-tippy-placement="top">
-							<i class="icon-brand-google-plus-g"></i>
-						</a>
-					</li>
-					<li>
-						<a href="#" title="LinkedIn" data-tippy-placement="top">
-							<i class="icon-brand-linkedin-in"></i>
-						</a>
-					</li>
-				</ul>
-				<div class="clearfix"></div>
-			</div>
-			<!-- Footer / End -->
+			
 
 		</div>
 	</div>
@@ -452,6 +413,43 @@
 
 </div>
 <!-- Wrapper / End -->
+
+
+<!-- Send Direct Message Popup
+================================================== -->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+	<!--Tabs -->
+	<div class="sign-in-form">
+
+		<ul class="popup-tabs-nav">
+			<li><a href="#tab">Send Message</a></li>
+		</ul>
+
+		<div class="popup-tabs-container">
+
+			<!-- Tab -->
+			<div class="popup-tab-content" id="tab">
+				
+				<!-- Welcome Text -->
+				<div class="welcome-text">
+					<h3>Direct Message To Sindy</h3>
+				</div>
+					
+				<!-- Form -->
+				<form method="post" id="send-pm">
+					<textarea name="textarea" cols="10" placeholder="Message" class="with-border" required></textarea>
+				</form>
+				
+				<!-- Button -->
+				<button class="button full-width button-sliding-icon ripple-effect" type="submit" form="send-pm">Send <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- Send Direct Message Popup / End -->
 
 
 <!-- Scripts
@@ -485,107 +483,6 @@ $('#snackbar-user-status label').click(function() {
 	}); 
 }); 
 </script>
-
-<!-- Chart.js // documentation: http://www.chartjs.org/docs/latest/ -->
-<script src="js/chart.min.js"></script>
-<script>
-	Chart.defaults.global.defaultFontFamily = "Nunito";
-	Chart.defaults.global.defaultFontColor = '#888';
-	Chart.defaults.global.defaultFontSize = '14';
-
-	var ctx = document.getElementById('chart').getContext('2d');
-
-	var chart = new Chart(ctx, {
-		type: 'line',
-
-		// The data for our dataset
-		data: {
-			labels: ["January", "February", "March", "April", "May", "June"],
-			// Information about the dataset
-	   		datasets: [{
-				label: "Views",
-				backgroundColor: 'rgba(42,65,232,0.08)',
-				borderColor: '#2a41e8',
-				borderWidth: "3",
-				data: [196,132,215,362,210,252],
-				pointRadius: 5,
-				pointHoverRadius:5,
-				pointHitRadius: 10,
-				pointBackgroundColor: "#fff",
-				pointHoverBackgroundColor: "#fff",
-				pointBorderWidth: "2",
-			}]
-		},
-
-		// Configuration options
-		options: {
-
-		    layout: {
-		      padding: 10,
-		  	},
-
-			legend: { display: false },
-			title:  { display: false },
-
-			scales: {
-				yAxes: [{
-					scaleLabel: {
-						display: false
-					},
-					gridLines: {
-						 borderDash: [6, 10],
-						 color: "#d8d8d8",
-						 lineWidth: 1,
-	            	},
-				}],
-				xAxes: [{
-					scaleLabel: { display: false },  
-					gridLines:  { display: false },
-				}],
-			},
-
-		    tooltips: {
-		      backgroundColor: '#333',
-		      titleFontSize: 13,
-		      titleFontColor: '#fff',
-		      bodyFontColor: '#fff',
-		      bodyFontSize: 13,
-		      displayColors: false,
-		      xPadding: 10,
-		      yPadding: 10,
-		      intersect: false
-		    }
-		},
-
-
-});
-
-</script>
-
-
-<!-- Google Autocomplete -->
-<script>
-	function initAutocomplete() {
-		 var options = {
-		  types: ['(cities)'],
-		  // componentRestrictions: {country: "us"}
-		 };
-
-		 var input = document.getElementById('autocomplete-input');
-		 var autocomplete = new google.maps.places.Autocomplete(input, options);
-
-		if ($('.submit-field')[0]) {
-		    setTimeout(function(){ 
-		        $(".pac-container").prependTo("#autocomplete-container");
-		    }, 300);
-		}
-	}
-</script>
-
-<!-- Google API & Maps -->
-<!-- Geting an API Key: https://developers.google.com/maps/documentation/javascript/get-api-key -->
-<script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
-
 
 </body>
 </html>
