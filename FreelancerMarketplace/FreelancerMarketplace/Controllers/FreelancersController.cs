@@ -50,7 +50,7 @@ namespace FreelancerMarketplace.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddInfo([Bind(Include = "FreelancerId,CategoryId,ExperienceInCategory,ProfessionalTitle,ProfessionalOverview,JobType")] Freelancer freelancer)
+        public ActionResult AddInfo([Bind(Include = "CategoryId,ExperienceInCategory,ProfessionalTitle,ProfessionalOverview,JobType")] Freelancer freelancer)
         {
             if (ModelState.IsValid)
             {
