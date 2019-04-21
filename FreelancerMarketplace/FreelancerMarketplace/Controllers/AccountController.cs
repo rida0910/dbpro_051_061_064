@@ -74,6 +74,7 @@ namespace FreelancerMarketplace.Controllers
             }
             // Require the user to have a confirmed email before they can log on.
             var user = await UserManager.FindByNameAsync(model.Email);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             if (user != null)
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
@@ -81,11 +82,32 @@ namespace FreelancerMarketplace.Controllers
                     ViewBag.errorMessage = "You must have a confirmed email to log on.";
                     return View("Error");
                 }
+                if (UserManager.IsInRole(user.Id, "Employer"))
+                {
+                    return RedirectToAction("Dashboard", "Employer");
+                }
+                if (UserManager.IsInRole(user.Id, "Freelancer"))
+                {
+                    DB66Entities db = new DB66Entities();
+                    var people = db.People;
+                    if (people.Any(p => p.User_AccountID == user.Id))
+                    {
+                        RedirectToAction("Index", "Freelancers");
+                    }
+                    else
+                    {
+                        RedirectToAction("AddInfo", "Freelancers");
+                    }
+                }
+                if (UserManager.IsInRole(user.Id, "Admin"))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
             }
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            
             switch (result)
             {
                 case SignInStatus.Success:
