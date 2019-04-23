@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FreelancerMarketplace;
+using FreelancerMarketplace.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FreelancerMarketplace.Controllers
 {
@@ -19,6 +22,11 @@ namespace FreelancerMarketplace.Controllers
         {
             var freelancers = db.Freelancers.Include(f => f.Category).Include(f => f.Lookup).Include(f => f.Lookup1);
             return View(freelancers.ToList());
+        }
+
+        public ActionResult Dashboard()
+        {
+            return View();
         }
 
         // GET: Freelancers/Details/5
@@ -40,8 +48,8 @@ namespace FreelancerMarketplace.Controllers
         public ActionResult AddInfo()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
-            ViewBag.ExperienceInCategory = new SelectList(db.Lookups, "Id", "value");
-            ViewBag.JobType = new SelectList(db.Lookups, "Id", "value");
+            ViewBag.ExperienceInCategory = new SelectList(db.Lookups.Where(x => x.category == "EXPERIENCE"), "Id", "value");
+            ViewBag.JobType = new SelectList(db.Lookups.Where(x => x.category.Equals("JOBTYPE")), "Id", "value");
             return View();
         }
 
@@ -50,18 +58,43 @@ namespace FreelancerMarketplace.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddInfo([Bind(Include = "CategoryId,ExperienceInCategory,ProfessionalTitle,ProfessionalOverview,JobType")] Freelancer freelancer)
+        public ActionResult AddInfo([Bind(Include = "ImageFile,ProfessionalTitle,ProfessionalOverview,CategoryId,ExperienceInCategory,JobType")] Freelancer freelancer, 
+            string FirstName, string LastName, string Gender, string Nationality, string Address)
         {
             if (ModelState.IsValid)
             {
+                Person person = new Person();
+                person.FirstName = FirstName;
+                person.LastName = LastName;
+                person.Gender = 2;
+                person.Nationality = Nationality;
+                person.Address = Address;
+                person.AccountType = "Freelancer";
+                person.User_AccountID = User.Identity.GetUserId();
+                person.Approved = false;
+
+                //freelancer.ImageFile = person.ImageFile;
+                string fileName = Path.GetFileNameWithoutExtension(freelancer.ImageFile.FileName);
+                string extension = Path.GetExtension(freelancer.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                freelancer.ProfilePicture = "~/Images/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                freelancer.ImageFile.SaveAs(fileName);
+
+                person.ProfilePicture = freelancer.ProfilePicture;
+                db.People.Add(person);
+                db.SaveChanges();
+
+                freelancer.FreelancerId = person.PersonId;
                 db.Freelancers.Add(freelancer);
                 db.SaveChanges();
+                ModelState.Clear();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", freelancer.CategoryId);
-            ViewBag.ExperienceInCategory = new SelectList(db.Lookups, "Id", "value", freelancer.ExperienceInCategory);
-            ViewBag.JobType = new SelectList(db.Lookups, "Id", "value", freelancer.JobType);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
+            ViewBag.ExperienceInCategory = new SelectList(db.Lookups.Where(x => x.category == "EXPERIENCE"), "Id", "value");
+            ViewBag.JobType = new SelectList(db.Lookups.Where(x => x.category.Equals("JOBTYPE")), "Id", "value");
             return View(freelancer);
         }
 

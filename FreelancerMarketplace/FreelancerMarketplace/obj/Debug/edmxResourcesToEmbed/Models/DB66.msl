@@ -206,16 +206,16 @@
     <EntitySetMapping Name="People">
       <EntityTypeMapping TypeName="DB66Model.Person">
         <MappingFragment StoreEntitySet="Person">
-          <ScalarProperty Name="AccountType" ColumnName="AccountType" />
-          <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
-          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
           <ScalarProperty Name="PersonId" ColumnName="PersonId" />
           <ScalarProperty Name="User_AccountID" ColumnName="User_AccountID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Approved" ColumnName="Approved" />
+          <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+          <ScalarProperty Name="AccountType" ColumnName="AccountType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

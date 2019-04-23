@@ -1,4 +1,4 @@
-﻿@model FreelancerMarketplace.Freelancer
+﻿@model FreelancerMarketplace.Models.Freelancer
 
 @{
     /**/
@@ -17,10 +17,11 @@
 
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/colors/blue.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/colors/blue.css">
 
 </head>
+
 
 
 <p>
@@ -32,7 +33,7 @@
 </p>
 <center><h2>Tell us more about you</h2></center>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("AddInfo", "Freelancers", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <p>
@@ -52,12 +53,13 @@
                 </div>
 
                 <div class="col-auto">
-                    <div class="avatar-wrapper" data-tippy-placement="bottom" title="Upload Picture">
+                    <div class="avatar-wrapper" data-tippy-placement="bottom" title="Change Avatar">
                         <img class="profile-pic" src="images/user-avatar-placeholder.png" alt="" />
                         <div class="upload-button"></div>
-                        <input class="file-upload" type="file" accept="image/*" />
+                        <input class="file-upload" name ="ImageFile" type="file" accept="image/*" />
                     </div>
                 </div>
+
 
                 <div class="col">
                     <p>
@@ -73,14 +75,14 @@
                             <div class="col-xl-6">
                                 <div class="submit-field">
 
-                                    <input type="text" class="with-border" value="First name">
+                                    <input type="text" class="with-border" name="FirstName" value="First name">
                                 </div>
                             </div>
 
                             <div class="col-xl-6">
                                 <div class="submit-field">
 
-                                    <input type="text" class="with-border" value="Last name">
+                                    <input type="text" class="with-border" name="LastName" value="Last name">
                                 </div>
                             </div>
 
@@ -135,70 +137,70 @@
 
 
 
-                <div class="col-xl-6">
+                <div class="col-md-10">
                     <div class="submit-field">
                         <h5>Nationality</h5>
-                        <select class="selectpicker with-border" data-size="7" title="Select Job Type" data-live-search="true">
-                            <option value="AR">Argentina</option>
-                            <option value="AM">Armenia</option>
-                            <option value="AW">Aruba</option>
-                            <option value="AU">Australia</option>
-                            <option value="AT">Austria</option>
-                            <option value="AZ">Azerbaijan</option>
-                            <option value="BS">Bahamas</option>
-                            <option value="BH">Bahrain</option>
-                            <option value="BD">Bangladesh</option>
-                            <option value="BB">Barbados</option>
-                            <option value="BY">Belarus</option>
-                            <option value="BE">Belgium</option>
-                            <option value="BZ">Belize</option>
-                            <option value="BJ">Benin</option>
-                            <option value="BM">Bermuda</option>
-                            <option value="BT">Bhutan</option>
-                            <option value="BG">Bulgaria</option>
-                            <option value="BF">Burkina Faso</option>
-                            <option value="BI">Burundi</option>
-                            <option value="KH">Cambodia</option>
-                            <option value="CM">Cameroon</option>
-                            <option value="CA">Canada</option>
-                            <option value="CV">Cape Verde</option>
-                            <option value="KY">Cayman Islands</option>
-                            <option value="CO">Colombia</option>
-                            <option value="KM">Comoros</option>
-                            <option value="CG">Congo</option>
-                            <option value="CK">Cook Islands</option>
-                            <option value="CR">Costa Rica</option>
-                            <option value="CI">Côte d'Ivoire</option>
-                            <option value="HR">Croatia</option>
-                            <option value="CU">Cuba</option>
-                            <option value="CW">Curaçao</option>
-                            <option value="CY">Cyprus</option>
-                            <option value="CZ">Czech Republic</option>
-                            <option value="DK">Denmark</option>
-                            <option value="DJ">Djibouti</option>
-                            <option value="DM">Dominica</option>
-                            <option value="DO">Dominican Republic</option>
-                            <option value="EC">Ecuador</option>
-                            <option value="EG">Egypt</option>
-                            <option value="GP">Guadeloupe</option>
-                            <option value="GU">Guam</option>
-                            <option value="GT">Guatemala</option>
-                            <option value="GG">Guernsey</option>
-                            <option value="GN">Guinea</option>
-                            <option value="GW">Guinea-Bissau</option>
-                            <option value="GY">Guyana</option>
-                            <option value="HT">Haiti</option>
-                            <option value="HN">Honduras</option>
-                            <option value="HK">Hong Kong</option>
-                            <option value="HU">Hungary</option>
-                            <option value="IS">Iceland</option>
-                            <option value="IN">India</option>
-                            <option value="ID">Indonesia</option>
-                            <option value="NO">Norway</option>
-                            <option value="OM">Oman</option>
-                            <option value="PK" selected>Pakistan</option>
-                            <option value="PW">Palau</option>
-                            <option value="PA">Panama</option>
+                        <select data-size="7" title="Select Job Type" data-live-search="true" name="Nationality">
+                            <option value="Argentina">Argentina</option>
+                            <option value="Armenia">Armenia</option>
+                            <option value="Aruba">Aruba</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Austria">Austria</option>
+                            <option value="Azerbaijan">Azerbaijan</option>
+                            <option value="Bahamas">Bahamas</option>
+                            <option value="Bahrain">Bahrain</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="Barbados">Barbados</option>
+                            <option value="Belarus">Belarus</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Belize">Belize</option>
+                            <option value="Benin">Benin</option>
+                            <option value="Bermuda">Bermuda</option>
+                            <option value="Bhutan">Bhutan</option>
+                            <option value="Bulgaria">Bulgaria</option>
+                            <option value="Burkina">Burkina Faso</option>
+                            <option value="Burundi">Burundi</option>
+                            <option value="Cambodia">Cambodia</option>
+                            <option value="Cameroon">Cameroon</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Cape Verde">Cape Verde</option>
+                            <option value="Cayman Islands">Cayman Islands</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Comoros">Comoros</option>
+                            <option value="Congo">Congo</option>
+                            <option value="Cook Islands">Cook Islands</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                            <option value="Croatia">Croatia</option>
+                            <option value="Cuba">Cuba</option>
+                            <option value="Curaçao">Curaçao</option>
+                            <option value="Cyprus">Cyprus</option>
+                            <option value="Czech Republic">Czech Republic</option>
+                            <option value="Denmark">Denmark</option>
+                            <option value="Djibouti">Djibouti</option>
+                            <option value="Dominica">Dominica</option>
+                            <option value="Dominican Republic">Dominican Republic</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="Egypt">Egypt</option>
+                            <option value="Guadeloupe">Guadeloupe</option>
+                            <option value="Guam">Guam</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Guernsey">Guernsey</option>
+                            <option value="Guinea">Guinea</option>
+                            <option value="Guinea-Bissau">Guinea-Bissau</option>
+                            <option value="Guyana">Guyana</option>
+                            <option value="Haiti">Haiti</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="Hong Kong">Hong Kong</option>
+                            <option value="Hungary">Hungary</option>
+                            <option value="Iceland">Iceland</option>
+                            <option value="India">India</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Norway">Norway</option>
+                            <option value="Oman">Oman</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="Palau">Palau</option>
+                            <option value="Panama">Panama</option>
                             <option value="PG">Papua New Guinea</option>
                             <option value="PY">Paraguay</option>
                             <option value="PE">Peru</option>
@@ -207,24 +209,24 @@
                             <option value="PL">Poland</option>
                             <option value="PT">Portugal</option>
                             <option value="PR">Puerto Rico</option>
-                            <option value="QA">Qatar</option>
+                            <option value="Qatar">Qatar</option>
                             <option value="RE">Réunion</option>
                             <option value="RO">Romania</option>
-                            <option value="RU">Russian Federation</option>
+                            <option value="Russian">Russian Federation</option>
                             <option value="RW">Rwanda</option>
                             <option value="SZ">Swaziland</option>
                             <option value="SE">Sweden</option>
-                            <option value="CH">Switzerland</option>
-                            <option value="TR">Turkey</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="Turkey">Turkey</option>
                             <option value="TM">Turkmenistan</option>
                             <option value="TV">Tuvalu</option>
                             <option value="UG">Uganda</option>
                             <option value="UA">Ukraine</option>
                             <option value="GB">United Kingdom</option>
-                            <option value="US">United States</option>
-                            <option value="UY">Uruguay</option>
+                            <option value="United States" selected>United States</option>
+                            <option value="Uruguay">Uruguay</option>
                             <option value="UZ">Uzbekistan</option>
-                            <option value="YE">Yemen</option>
+                            <option value="Yemen">Yemen</option>
                             <option value="ZM">Zambia</option>
                             <option value="ZW">Zimbabwe</option>
                         </select>
@@ -232,8 +234,13 @@
                 </div>
 
 
-
-
+                <div class="col-md-10">
+                    <div class="submit-field">
+                        <h5>Address <i class="help-icon" data-tippy-placement="right" title="Your current official address"></i></h5>
+                        <input type="text" class="form-control" name="Address" />
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
 
 
 
@@ -259,6 +266,16 @@
 
 
 
+                <div class="col-md-10">
+                    <div class="submit-field">
+                        <h5>Skills <i class="help-icon" data-tippy-placement="right" title="Add up to 10 skills"></i></h5>
+                        <textarea class="form-control" rows="3" placeholder="Enter skills separated with commas e.g Angular, Laravel"></textarea>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+
+
 
 
                 <div class="form-group">
@@ -277,7 +294,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
     </div>
 }
 

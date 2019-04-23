@@ -194,104 +194,105 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="AspNetRole.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUser.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserClaim.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserLogin.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Attachment.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Bid.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Category.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Company.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\FreelancersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB66Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB66Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB66Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB66Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB66Model.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Employer.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Freelancer.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Freelancerlanguage.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FreelancerService.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FreelancerSkill.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Job.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JobDone.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JobSkill.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Language.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Lookup.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Message.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Attachment.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Bid.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Company.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB66.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB66.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB66.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB66.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB66.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employer.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Freelancer.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Freelancerlanguage.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FreelancerService.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FreelancerSkill.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FreelancerViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Job.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobDone.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobSkill.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Language.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lookup.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Person.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
+    <Compile Include="Models\Message.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Person.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Skill.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>DB66.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Skill.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>DB66Model.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -306,16 +307,6 @@
     <Content Include="css\icons.css" />
     <Content Include="css\invoice.css" />
     <Content Include="css\style.css" />
-    <Content Include="DB66Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB66Model.edmx</DependentUpon>
-      <LastGenOutput>DB66Model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DB66Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB66Model.edmx</DependentUpon>
-      <LastGenOutput>DB66Model.cs</LastGenOutput>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\Brand-Icons.svg" />
     <Content Include="fonts\Feather-Icons.svg" />
@@ -654,17 +645,20 @@
     <Content Include="js\snackbar.js" />
     <Content Include="js\tippy.all.min.js" />
     <Content Include="home.jpg" />
+    <Content Include="Models\DB66.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DB66.edmx</DependentUpon>
+      <LastGenOutput>DB66.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DB66.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DB66.edmx</DependentUpon>
+      <LastGenOutput>DB66.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="DB66Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DB66Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DB66Model.edmx.diagram">
-      <DependentUpon>DB66Model.edmx</DependentUpon>
     </Content>
     <Content Include="css\desktop.ini" />
     <Content Include="images\flags\LICENSE" />
@@ -757,6 +751,13 @@
     <Content Include="fonts\Line-Awesome.woff" />
     <Content Include="fonts\Material-Icons.ttf" />
     <Content Include="fonts\Material-Icons.woff" />
+    <EntityDeploy Include="Models\DB66.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DB66.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DB66.edmx.diagram">
+      <DependentUpon>DB66.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -811,6 +812,7 @@
     <Content Include="Views\Freelancers\Edit.cshtml" />
     <Content Include="Views\Freelancers\Index.cshtml" />
     <Content Include="Views\Freelancers\AddInfo.cshtml" />
+    <Content Include="Views\Freelancers\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
