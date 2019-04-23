@@ -15,13 +15,18 @@ namespace FreelancerMarketplace.Controllers
         }
 
         // GET: Employer/Details/5
-        public ActionResult Settings(int id)
+        public ActionResult Details(int id)
         {
             return View();
         }
 
         // GET: Employer/Create
-        public ActionResult Create()
+        public ActionResult AddInfo()
+        {
+            return View();
+        }
+
+        public ActionResult Messages()
         {
             return View();
         }
