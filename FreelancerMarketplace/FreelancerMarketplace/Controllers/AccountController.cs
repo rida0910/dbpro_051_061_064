@@ -92,7 +92,7 @@ namespace FreelancerMarketplace.Controllers
                     var people = db.People;
                     if (people.Any(p => p.User_AccountID == user.Id))
                     {
-                        return RedirectToAction("Index", "Freelancers");
+                        return RedirectToAction("Dashboard", "Freelancers");
                     }
                     else
                     {

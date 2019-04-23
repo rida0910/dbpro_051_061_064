@@ -59,21 +59,20 @@ namespace FreelancerMarketplace.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddInfo([Bind(Include = "ImageFile,ProfessionalTitle,ProfessionalOverview,CategoryId,ExperienceInCategory,JobType")] Freelancer freelancer, 
-            string FirstName, string LastName, string Gender, string Nationality, string Address)
+            string FirstName, string LastName, string Gender, string Nationality, string Address, string Skills)
         {
             if (ModelState.IsValid)
             {
                 Person person = new Person();
                 person.FirstName = FirstName;
                 person.LastName = LastName;
-                person.Gender = 2;
+                person.Gender = db.Lookups.FirstOrDefault(x => x.value.Equals(Gender)).Id;
                 person.Nationality = Nationality;
                 person.Address = Address;
                 person.AccountType = "Freelancer";
                 person.User_AccountID = User.Identity.GetUserId();
                 person.Approved = false;
 
-                //freelancer.ImageFile = person.ImageFile;
                 string fileName = Path.GetFileNameWithoutExtension(freelancer.ImageFile.FileName);
                 string extension = Path.GetExtension(freelancer.ImageFile.FileName);
                 fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
@@ -88,8 +87,46 @@ namespace FreelancerMarketplace.Controllers
                 freelancer.FreelancerId = person.PersonId;
                 db.Freelancers.Add(freelancer);
                 db.SaveChanges();
+
+                
+                
+                
+                var SkillsList = Skills.Split(',');
+                foreach (string s in SkillsList)
+                {
+                    Skill skill = new Skill();
+                    if (!db.Skills.Any(x => x.SkillName == s))
+                    {
+                        
+                        skill.SkillName = s;
+                        db.Skills.Add(skill);
+                        db.SaveChanges();
+
+                        if (!db.FreelancerSkills.Any(x => x.Skill.SkillName == s))
+                        {
+                            FreelancerSkill freelancerSkill = new FreelancerSkill();
+                            freelancerSkill.Skill = skill;
+                            freelancerSkill.SkillId = skill.SkillId;
+                            freelancerSkill.FreelancerId = freelancer.FreelancerId;
+                            db.FreelancerSkills.Add(freelancerSkill);
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        if (!db.FreelancerSkills.Any(x => x.Skill.SkillName == s))
+                        {
+                            FreelancerSkill freelancerSkill = new FreelancerSkill();
+                            freelancerSkill.SkillId = db.Skills.FirstOrDefault(x => x.SkillName.Equals(s)).SkillId;
+                            freelancerSkill.FreelancerId = freelancer.FreelancerId;
+                            db.FreelancerSkills.Add(freelancerSkill);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
                 ModelState.Clear();
-                return RedirectToAction("Index");
+                return RedirectToAction("Dashboard");
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
