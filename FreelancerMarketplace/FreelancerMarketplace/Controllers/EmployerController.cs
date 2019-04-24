@@ -15,7 +15,7 @@ namespace FreelancerMarketplace.Controllers
         }
 
         // GET: Employer/Details/5
-        public ActionResult Details(int id)
+        public ActionResult ManageBidders(int id)
         {
             return View();
         }
@@ -30,6 +30,7 @@ namespace FreelancerMarketplace.Controllers
         {
             return View();
         }
+
 
         // POST: Employer/Create
         [HttpPost]
