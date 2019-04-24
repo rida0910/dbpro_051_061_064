@@ -20,6 +20,7 @@ namespace FreelancerMarketplace.Models
             this.Freelancers = new HashSet<Freelancer>();
             this.Freelancers1 = new HashSet<Freelancer>();
             this.People = new HashSet<Person>();
+            this.Jobs = new HashSet<Job>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,7 @@ namespace FreelancerMarketplace.Models
         public virtual ICollection<Freelancer> Freelancers1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Person> People { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }
