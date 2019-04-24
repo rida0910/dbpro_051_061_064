@@ -21,7 +21,7 @@ namespace FreelancerMarketplace.Models
         public string ProfessionalTitle { get; set; }
         public string ProfessionalOverview { get; set; }
         public int JobType { get; set; }
-    
+
         public virtual Category Category { get; set; }
         public virtual Lookup Lookup { get; set; }
         public virtual Lookup Lookup1 { get; set; }

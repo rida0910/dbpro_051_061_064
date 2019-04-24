@@ -20,9 +20,6 @@ namespace FreelancerMarketplace.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public Nullable<int> AttachmentID { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public System.DateTime Expiry { get; set; }
         public int SkillID { get; set; }
         public int EmployerID { get; set; }
         public System.DateTime TimePosted { get; set; }

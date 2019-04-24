@@ -55,6 +55,7 @@ namespace FreelancerMarketplace.Controllers
                 }
                 var id = User.Identity.GetUserId();
                 job.EmployerID = db.People.FirstOrDefault(p => p.User_AccountID.Equals(id)).PersonId;
+                job.TimePosted = DateTime.Now;
                 db.Jobs.Add(job);
                 db.SaveChanges();
 
@@ -72,8 +73,7 @@ namespace FreelancerMarketplace.Controllers
                         if (!db.JobSkills.Any(x => x.Skill.SkillName == s))
                         {
                             JobSkill jobSkill = new JobSkill();
-                            jobSkill.Skill = skill;
-                            jobSkill.SkillId = skill.SkillId;
+                            jobSkill.SkillId = skill1.SkillId;
                             jobSkill.JobId = job.JobId;
                             db.JobSkills.Add(jobSkill);
                             db.SaveChanges();
