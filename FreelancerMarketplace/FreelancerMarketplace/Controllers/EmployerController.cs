@@ -34,7 +34,7 @@ namespace FreelancerMarketplace.Controllers
         {
             return View();
         }
-        public ActionResult ManagJobs()
+        public ActionResult Managejobs()
         {
             return View();
         }
