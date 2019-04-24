@@ -1,0 +1,33 @@
+﻿@model IEnumerable<FreelancerMarketplace.Models.Employer>
+
+@{
+    ViewBag.Title = "ViewEmployers";
+}
+
+<h2>ViewEmployers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EmployerId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EmployerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EmployerId })
+        </td>
+    </tr>
+}
+
+</table>
