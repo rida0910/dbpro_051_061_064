@@ -9,13 +9,13 @@ namespace FreelancerMarketplace.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        public ActionResult Index()
+        public ActionResult ViewFreelancers()
         {
             return View();
         }
 
         // GET: Admin/Details/5
-        public ActionResult Details(int id)
+        public ActionResult ViewEmployers(int id)
         {
             return View();
         }

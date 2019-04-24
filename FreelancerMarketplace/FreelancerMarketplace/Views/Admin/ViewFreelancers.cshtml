@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FreelancerMarketplace.Models.Freelancer>
+
+@{
+    ViewBag.Title = "ViewFreelancers";
+}
+
+<h2>ViewFreelancers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExperienceInCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfessionalTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfessionalOverview)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfilePicture)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExperienceInCategory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfessionalTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfessionalOverview)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfilePicture)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FreelancerId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FreelancerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FreelancerId })
+        </td>
+    </tr>
+}
+
+</table>
