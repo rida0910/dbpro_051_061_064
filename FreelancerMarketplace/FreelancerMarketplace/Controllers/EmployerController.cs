@@ -32,32 +32,19 @@ namespace FreelancerMarketplace.Controllers
         public ActionResult AddInfo()
         {
             return View();
-
-        } 
-        public ActionResult PostAJob()
-        {
-            return View();
-        }
-        public ActionResult FreelancerProfileSeenByEmployer()
-        {
-            return View();
-        }
-        public ActionResult Managejobs()
-        {
-            return View();
-        }
-        public ActionResult ManageCandidateDashboard()
-        {
-            return View();
         }
 
-
-
+        // GET: Employer/Messages
         public ActionResult Messages()
         {
             return View();
         }
 
+
+        public ActionResult MyJobs()
+        {
+            return View();
+        }
 
         // POST: Employer/Create
         [HttpPost]

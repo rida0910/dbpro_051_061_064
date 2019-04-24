@@ -1,0 +1,99 @@
+﻿@model IEnumerable<FreelancerMarketplace.Models.Job>
+
+@{
+    ViewBag.Title = "MyJobs";
+}
+
+<h2>MyJobs</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AttachmentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expiry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SkillID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimePosted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinPayment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxPayment)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AttachmentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Expiry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkillID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimePosted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Deadline)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinPayment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxPayment)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.JobId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.JobId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.JobId })
+        </td>
+    </tr>
+}
+
+</table>
