@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using FreelancerMarketplace;
+using FreelancerMarketplace.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FreelancerMarketplace.Controllers
 {
     public class EmployerController : Controller
     {
+        private DB66Entities db = new DB66Entities();
         // GET: Employer
         public ActionResult Dashboard()
         {
@@ -70,26 +78,34 @@ namespace FreelancerMarketplace.Controllers
             }
         }
 
-        // GET: Employer/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Employer/DeleteJob/5
+        public ActionResult DeleteJob(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Job job = db.Jobs.Find(id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+            return View(job);
         }
 
-        // POST: Employer/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        // POST: Employer/DeleteJob/5
+        [HttpPost, ActionName("DeleteJob")]
+        [ValidateAntiForgeryToken]
+        public ActionResult JobDeleted(int id, FormCollection collection)
         {
-            try
-            {
+            
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                Job job = db.Jobs.Find(id);
+                db.Jobs.Remove(job);
+                db.SaveChanges();
+                return RedirectToAction("MyJobs");
+            
         }
     }
 }
