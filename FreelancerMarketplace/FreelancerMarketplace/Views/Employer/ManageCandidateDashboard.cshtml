@@ -1,33 +1,29 @@
 ﻿
 @{
-    ViewBag.Title = "Managejobs";
+    ViewBag.Title = "ManageCandidateDashboard";
 }
 
-<h2>Managejobs</h2>
+<h2>ManageCandidateDashboard</h2>
 
 <!doctype html>
 <html lang="en">
 <head>
 
-    <!-- Basic Page Needs
-    ================================================== -->
+   
     <title>Hireo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- CSS
-    ================================================== -->
+  
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/colors/blue.css">
 
 </head>
 <body class="gray">
 
-    <!-- Wrapper -->
     <div id="wrapper">
 
-        <!-- Header Container
-        ================================================== -->
+        
         <header id="header-container" class="fullwidth dashboard-header not-sticky">
 
             <!-- Header -->
@@ -45,14 +41,14 @@
                         <!-- Main Navigation -->
                         <nav id="navigation">
                             <ul id="responsive">
+
+
                                 <li><a href="Test1.html">Home </a></li>
 
 
                                 <li><a href="post-a-job.html">Post a Job</a></li>
 
                                 <li><a href="manage-bidders.html">Manage Bidders</a></li>
-
-
 
 
 
@@ -207,7 +203,7 @@
                             <!-- Messages -->
                             <div class="header-notifications user-menu">
                                 <div class="header-notifications-trigger">
-                                    <a href="#"><div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div></a>
+                                    <a href="#"><div class="user-avatar"><img src="images/user-avatar-small-01.jpg" alt=""></div></a>
                                 </div>
 
                                 <!-- Dropdown -->
@@ -218,19 +214,13 @@
 
                                         <!-- User Name / Avatar -->
                                         <div class="user-details">
-                                            <div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div>
+
                                             <div class="user-name">
                                                 Tom Smith <span>Freelancer</span>
                                             </div>
                                         </div>
 
-                                        <!-- User Status Switcher -->
-                                        <div class="status-switch" id="snackbar-user-status">
-                                            <label class="user-online current-status">Online</label>
-                                            <label class="user-invisible">Invisible</label>
-                                            <!-- Status Indicator -->
-                                            <span class="status-indicator" aria-hidden="true"></span>
-                                        </div>
+
                                     </div>
 
                                     <ul class="user-menu-small-nav">
@@ -263,165 +253,193 @@
         </header>
         <div class="clearfix"></div>
         <!-- Header Container / End -->
-        <!-- Dashboard Container -->
-        <div class="dashboard-container">
+        <!-- Dashboard Content
+        ================================================== -->
+        <div class="dashboard-content-container" data-simplebar>
+            <div class="dashboard-content-inner">
 
+                <!-- Dashboard Headline -->
+                <div class="dashboard-headline">
+                    <h3>Manage Candidates</h3>
+                    <span class="margin-top-7">Job Applications for <a href="#">Full Stack PHP Developer</a></span>
 
+                    <!-- Breadcrumbs -->
+                    <nav id="breadcrumbs" class="dark">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Dashboard</a></li>
+                            <li>Manage Candidates</li>
+                        </ul>
+                    </nav>
+                </div>
 
+                <!-- Row -->
+                <div class="row">
 
-            <!-- Dashboard Content
-            ================================================== -->
-            <div class="dashboard-content-container" data-simplebar>
-                <div class="dashboard-content-inner">
+                    <!-- Dashboard Box -->
+                    <div class="col-xl-12">
+                        <div class="dashboard-box margin-top-0">
 
-                    <!-- Dashboard Headline -->
-                    <div class="dashboard-headline">
-                        <h3>Manage Jobs</h3>
+                            <!-- Headline -->
+                            <div class="headline">
+                                <h3><i class="icon-material-outline-supervisor-account"></i> 3 Candidates</h3>
+                            </div>
 
-                        <!-- Breadcrumbs -->
-                        <nav id="breadcrumbs" class="dark">
-                            <ul>
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Dashboard</a></li>
-                                <li>Manage Jobs</li>
-                            </ul>
-                        </nav>
-                    </div>
+                            <div class="content">
+                                <ul class="dashboard-box-list">
+                                    <li>
+                                        <!-- Overview -->
+                                        <div class="freelancer-overview manage-candidates">
+                                            <div class="freelancer-overview-inner">
 
-                    <!-- Row -->
-                    <div class="row">
+                                                <!-- Avatar -->
+                                                <div class="freelancer-avatar">
+                                                    <div class="verified-badge"></div>
+                                                    <a href="#"><img src="images/user-avatar-big-03.jpg" alt=""></a>
+                                                </div>
 
-                        <!-- Dashboard Box -->
-                        <div class="col-xl-12">
-                            <div class="dashboard-box margin-top-0">
+                                                <!-- Name -->
+                                                <div class="freelancer-name">
+                                                    <h4><a href="#">Sindy Forest <img class="flag" src="images/flags/au.svg" alt="" title="Australia" data-tippy-placement="top"></a></h4>
 
-                                <!-- Headline -->
-                                <div class="headline">
-                                    <h3><i class="icon-material-outline-business-center"></i> My Job Listings</h3>
-                                </div>
-
-                                <div class="content">
-                                    <ul class="dashboard-box-list">
-                                        <li>
-                                            <!-- Job Listing -->
-                                            <div class="job-listing">
-
-                                                <!-- Job Listing Details -->
-                                                <div class="job-listing-details">
-
-                                                    <!-- Logo -->
-                                                    <!-- 											<a href="#" class="job-listing-company-logo">
-                                                                                                    <img src="images/company-logo-05.png" alt="">
-                                                                                                </a> -->
                                                     <!-- Details -->
-                                                    <div class="job-listing-description">
-                                                        <h3 class="job-listing-title"><a href="#">Frontend React Developer</a> <span class="dashboard-status-button green">Pending Approval</span></h3>
+                                                    <span class="freelancer-detail-item"><a href="#"><i class="icon-feather-mail"></i> sindy@example.com</a></span>
+                                                    <span class="freelancer-detail-item"><i class="icon-feather-phone"></i> (+61) 123-456-789</span>
 
-                                                        <!-- Job Listing Footer -->
-                                                        <div class="job-listing-footer">
-                                                            <ul>
-                                                                <li><i class="icon-material-outline-date-range"></i> Posted on 10 July, 2018</li>
-                                                                <li><i class="icon-material-outline-date-range"></i> Expiring on 10 August, 2018</li>
-                                                            </ul>
-                                                        </div>
+                                                    <!-- Rating -->
+                                                    <div class="freelancer-rating">
+                                                        <div class="star-rating" data-rating="5.0"></div>
+                                                    </div>
+
+                                                    <!-- Buttons -->
+                                                    <div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+                                                        <a href="#" class="button ripple-effect"><i class="icon-feather-file-text"></i> Download CV</a>
+                                                        <a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
+                                                        <a href="#" class="button gray ripple-effect ico" title="Remove Candidate" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </li>
 
-                                            <!-- Buttons -->
-                                            <div class="buttons-to-right always-visible">
-                                                <a href="manage-candidates-dashboard.html" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Candidates <span class="button-info">0</span></a>
-                                                <a href="#" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
-                                                <a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
-                                            </div>
-                                        </li>
+                                    <li>
+                                        <!-- Overview -->
+                                        <div class="freelancer-overview manage-candidates">
+                                            <div class="freelancer-overview-inner">
 
-                                        <li>
-                                            <!-- Job Listing -->
-                                            <div class="job-listing">
-
-                                                <!-- Job Listing Details -->
-                                                <div class="job-listing-details">
-
-                                                    <!-- Details -->
-                                                    <div class="job-listing-description">
-                                                        <h3 class="job-listing-title"><a href="#">Full Stack PHP Developer</a> <span class="dashboard-status-button yellow">Expiring</span></h3>
-
-                                                        <!-- Job Listing Footer -->
-                                                        <div class="job-listing-footer">
-                                                            <ul>
-                                                                <li><i class="icon-material-outline-date-range"></i> Posted on 28 June, 2018</li>
-                                                                <li><i class="icon-material-outline-date-range"></i> Expiring on 28 July, 2018</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
+                                                <!-- Avatar -->
+                                                <div class="freelancer-avatar">
+                                                    <a href="#"><img src="images/user-avatar-placeholder.png" alt=""></a>
                                                 </div>
-                                            </div>
 
-                                            <!-- Buttons -->
-                                            <div class="buttons-to-right always-visible">
-                                                <a href="manage-candidates-dashboard.html" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Candidates <span class="button-info">3</span></a>
-                                                <a href="#" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
-                                                <a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
-                                            </div>
-                                        </li>
+                                                <!-- Name -->
+                                                <div class="freelancer-name">
+                                                    <h4><a href="#">Sebastiano Piccio <img class="flag" src="images/flags/it.svg" alt="" title="Italy" data-tippy-placement="top"></a></h4>
 
-                                        <li>
-                                            <!-- Job Listing -->
-                                            <div class="job-listing">
-
-                                                <!-- Job Listing Details -->
-                                                <div class="job-listing-details">
 
                                                     <!-- Details -->
-                                                    <div class="job-listing-description">
-                                                        <h3 class="job-listing-title"><a href="#">Node.js Developer</a> <span class="dashboard-status-button red">Expired</span></h3>
+                                                    <span class="freelancer-detail-item"><a href="#"><i class="icon-feather-mail"></i> sebastiano@example.com</a></span>
+                                                    <span class="freelancer-detail-item"><i class="icon-feather-phone"></i> (+39) 123-456-789</span>
 
-                                                        <!-- Job Listing Footer -->
-                                                        <div class="job-listing-footer">
-                                                            <ul>
-                                                                <li><i class="icon-material-outline-date-range"></i> Posted on 16 May, 2018</li>
-                                                            </ul>
-                                                        </div>
+                                                    <!-- Rating -->
+                                                    <br>
+                                                    <span class="company-not-rated">Minimum of 3 votes required</span>
+
+                                                    <!-- Buttons -->
+                                                    <div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+                                                        <a href="#" class="button ripple-effect"><i class="icon-feather-file-text"></i> Download CV</a>
+                                                        <a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
+                                                        <a href="#" class="button gray ripple-effect ico" title="Remove Candidate" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </li>
 
-                                            <!-- Buttons -->
-                                            <div class="buttons-to-right always-visible">
-                                                <a href="manage-candidates-dashboard.html" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Candidates <span class="button-info">7</span></a>
-                                                <a href="#" class="button dark ripple-effect"><i class="icon-feather-rotate-ccw"></i> Refresh</a>
-                                                <a href="#" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
-                                                <a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+                                    <li>
+                                        <!-- Overview -->
+                                        <div class="freelancer-overview manage-candidates">
+                                            <div class="freelancer-overview-inner">
+
+                                                <!-- Avatar -->
+                                                <div class="freelancer-avatar">
+                                                    <a href="#"><img src="images/user-avatar-placeholder.png" alt=""></a>
+                                                </div>
+
+                                                <!-- Name -->
+                                                <div class="freelancer-name">
+                                                    <h4><a href="#">Nikolay Azarov <img class="flag" src="images/flags/ru.svg" alt="" title="Russia" data-tippy-placement="top"></a></h4>
+
+                                                    <!-- Details -->
+                                                    <span class="freelancer-detail-item"><a href="#"><i class="icon-feather-mail"></i> nikolay@example.com</a></span>
+                                                    <span class="freelancer-detail-item"><i class="icon-feather-phone"></i> (+7) 123-456-789</span>
+
+                                                    <!-- Rating -->
+                                                    <br>
+                                                    <span class="company-not-rated">Minimum of 3 votes required</span>
+
+                                                    <!-- Buttons -->
+                                                    <div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+                                                        <a href="#" class="button ripple-effect"><i class="icon-feather-file-text"></i> Download CV</a>
+                                                        <a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
+                                                        <a href="#" class="button gray ripple-effect ico" title="Remove Candidate" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </li>
+                                        </div>
+                                    </li>
 
-                                    </ul>
-                                </div>
+                                </ul>
                             </div>
                         </div>
-
                     </div>
-                    <!-- Row / End -->
-                    <!-- Footer -->
-                    <div class="dashboard-footer-spacer"></div>
-                    <div class="small-footer margin-top-15">
-                        <div class="small-footer-copyrights">
-                            © 2018 <strong>Hireo</strong>. All Rights Reserved.
-                        </div>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <!-- Footer / End -->
 
                 </div>
+                <!-- Row / End -->
+
+
+
             </div>
-            <!-- Dashboard Content / End -->
-
         </div>
-        <!-- Dashboard Container / End -->
+        <!-- Dashboard Content / End -->
 
+    </div>
+    <!-- Dashboard Container / End -->
+    </div>
+    <!-- Wrapper / End -->
+    <!-- Send Direct Message Popup
+    ================================================== -->
+    <div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+        <!--Tabs -->
+        <div class="sign-in-form">
+
+            <ul class="popup-tabs-nav">
+                <li><a href="#tab">Send Message</a></li>
+            </ul>
+
+            <div class="popup-tabs-container">
+
+                <!-- Tab -->
+                <div class="popup-tab-content" id="tab">
+
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3>Direct Message To Sindy</h3>
+                    </div>
+
+                    <!-- Form -->
+                    <form method="post" id="send-pm">
+                        <textarea name="textarea" cols="10" placeholder="Message" class="with-border" required></textarea>
+                    </form>
+
+                    <!-- Button -->
+                    <button class="button full-width button-sliding-icon ripple-effect" type="submit" form="send-pm">Send <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+                </div>
+
+            </div>
+        </div>
     </div>
 
 

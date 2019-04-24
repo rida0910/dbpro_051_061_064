@@ -17,7 +17,6 @@ namespace FreelancerMarketplace.Models
         public int JobId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public int PaymentAmount { get; set; }
         public Nullable<int> AttachmentID { get; set; }
         public System.DateTime Expiry { get; set; }
         public int SkillID { get; set; }
@@ -25,9 +24,13 @@ namespace FreelancerMarketplace.Models
         public System.DateTime TimePosted { get; set; }
         public int CategoryID { get; set; }
         public Nullable<System.DateTime> Deadline { get; set; }
+        public int MinPayment { get; set; }
+        public Nullable<int> JobType { get; set; }
+        public Nullable<int> MaxPayment { get; set; }
     
         public virtual Attachment Attachment { get; set; }
         public virtual Category Category { get; set; }
         public virtual Skill Skill { get; set; }
+        public virtual Lookup Lookup { get; set; }
     }
 }
