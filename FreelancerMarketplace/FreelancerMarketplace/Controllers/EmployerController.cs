@@ -24,7 +24,26 @@ namespace FreelancerMarketplace.Controllers
         public ActionResult AddInfo()
         {
             return View();
+
+        } 
+        public ActionResult PostAJob()
+        {
+            return View();
         }
+        public ActionResult FreelancerProfileSeenByEmployer()
+        {
+            return View();
+        }
+        public ActionResult Managejobs()
+        {
+            return View();
+        }
+        public ActionResult ManageCandidateDashboard()
+        {
+            return View();
+        }
+
+
 
         public ActionResult Messages()
         {
