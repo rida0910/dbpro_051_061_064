@@ -30,7 +30,7 @@ namespace FreelancerMarketplace.Models
         public int MinPayment { get; set; }
         public Nullable<int> JobType { get; set; }
         public Nullable<int> MaxPayment { get; set; }
-    
+
         public virtual Attachment Attachment { get; set; }
         public virtual Category Category { get; set; }
         public virtual Skill Skill { get; set; }
