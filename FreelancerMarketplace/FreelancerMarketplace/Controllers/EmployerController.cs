@@ -21,18 +21,18 @@ namespace FreelancerMarketplace.Controllers
         {
             return View();
         }
-
+        
         // GET: Employer/Details/5
         public ActionResult ManageBidders(int id)
         {
             return View();
         }
-
-        // GET: Employer/Create
-        public ActionResult AddInfo()
+        public ActionResult Index()
         {
-            return View();
+            var employer = db.Employers.Include(e => e.Company);
+            return View(employer.ToList());
         }
+
 
         // GET: Employer/Messages
         public ActionResult Messages()
@@ -43,7 +43,18 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult MyJobs()
         {
-            return View();
+            string id = User.Identity.GetUserId();
+            int empId = db.People.FirstOrDefault(p => p.User_AccountID.Equals(id)).PersonId;
+
+            List<Job> Myjobs = new List<Job>();
+            foreach (Job job in db.Jobs)
+            {
+                if (job.EmployerID == empId)
+                {
+                    Myjobs.Add(job);
+                }
+            }
+            return View(Myjobs);
         }
 
         // POST: Employer/Create
@@ -63,25 +74,31 @@ namespace FreelancerMarketplace.Controllers
         }
 
         // GET: Employer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Job job = db.Jobs.Find(id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+            return View(job);
+           
         }
-
-        // POST: Employer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,Title,Description, PaymentAmonut, AttatchmentId, Expiry, SkillID, EmployerID, TimePosted, CategoryId, Deadline")] Job job)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                db.Entry(job).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("MyJobs");
             }
-            catch
-            {
-                return View();
-            }
+            return View(job);
         }
 
         // GET: Employer/DeleteJob/5
@@ -98,15 +115,12 @@ namespace FreelancerMarketplace.Controllers
             }
             return View(job);
         }
-
-        // POST: Employer/DeleteJob/5
+        
         [HttpPost, ActionName("DeleteJob")]
         [ValidateAntiForgeryToken]
         public ActionResult JobDeleted(int id, FormCollection collection)
         {
             
-                // TODO: Add delete logic here
-
                 Job job = db.Jobs.Find(id);
                 db.Jobs.Remove(job);
                 db.SaveChanges();
