@@ -84,7 +84,7 @@ namespace FreelancerMarketplace.Controllers
                 }
                 if (UserManager.IsInRole(user.Id, "Employer"))
                 {
-                    return RedirectToAction("Dashboard", "Employer");
+                    return RedirectToAction("MyJobs", "Employer");
                 }
                 if (UserManager.IsInRole(user.Id, "Freelancer"))
                 {
