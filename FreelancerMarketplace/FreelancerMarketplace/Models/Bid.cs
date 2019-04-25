@@ -19,5 +19,6 @@ namespace FreelancerMarketplace.Models
         public int FreelancerID { get; set; }
         public int JobID { get; set; }
         public System.DateTime BidTime { get; set; }
+        public Nullable<int> PaymentAmount { get; set; }
     }
 }
