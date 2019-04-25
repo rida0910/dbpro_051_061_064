@@ -27,7 +27,11 @@ namespace FreelancerMarketplace.Controllers
         {
             return View();
         }
-        
+        public ActionResult Index()
+        {
+            var employer = db.Employers.Include(e => e.Company);
+            return View(employer.ToList());
+        }
 
 
         // GET: Employer/Messages
@@ -100,14 +104,13 @@ namespace FreelancerMarketplace.Controllers
             }
             return View(job);
         }
-
-        // POST: Employer/DeleteJob/5
+        
         [HttpPost, ActionName("DeleteJob")]
         [ValidateAntiForgeryToken]
         public ActionResult JobDeleted(int id, FormCollection collection)
         {
             
-                // TODO: Add delete logic here
+              
 
                 Job job = db.Jobs.Find(id);
                 db.Jobs.Remove(job);
