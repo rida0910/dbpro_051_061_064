@@ -21,18 +21,14 @@ namespace FreelancerMarketplace.Controllers
         {
             return View();
         }
-
+        
         // GET: Employer/Details/5
         public ActionResult ManageBidders(int id)
         {
             return View();
         }
+        
 
-        // GET: Employer/Create
-        public ActionResult AddInfo()
-        {
-            return View();
-        }
 
         // GET: Employer/Messages
         public ActionResult Messages()
@@ -63,25 +59,31 @@ namespace FreelancerMarketplace.Controllers
         }
 
         // GET: Employer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
-        }
-
-        // POST: Employer/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
+            if (id == null)
             {
-                // TODO: Add update logic here
-
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Job job = db.Jobs.Find(id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+            return View(job);
+           
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,Title,Description, PaymentAmonut, AttatchmentId, Expiry, SkillID, EmployerID, TimePosted, CategoryId, Deadline")] Job job)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(job).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(job);
         }
 
         // GET: Employer/DeleteJob/5
