@@ -135,6 +135,39 @@ namespace FreelancerMarketplace.Controllers
             return View(freelancer);
         }
 
+        public ActionResult AvailableJobs()
+        {
+            List<Job> list = new List<Job>();
+            var jobs = db.Jobs;
+            foreach (Job job in jobs)
+            {
+                int jobId = job.JobId;
+                if (!db.Bids.Any(b => b.JobID.Equals(jobId) && b.Status.Equals(1)))
+                {
+                    list.Add(job);
+                }
+            }
+            return View(list);
+        }
+
+        public ActionResult Bid(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Job job = db.Jobs.FirstOrDefault(j => j.JobId == id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+            return View(job);
+        }
+
+
+
+
         // GET: Freelancers/Edit/5
         public ActionResult Edit(int? id)
         {

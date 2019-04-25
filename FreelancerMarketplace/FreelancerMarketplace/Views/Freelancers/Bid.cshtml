@@ -1,0 +1,98 @@
+﻿@model FreelancerMarketplace.Models.Job
+
+@{
+    ViewBag.Title = "Bid";
+}
+
+<h2>Bid</h2>
+
+<div>
+    <h4>Job</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimePosted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimePosted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinPayment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinPayment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxPayment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxPayment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Attachment.Path)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Attachment.Path)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Skill.SkillName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skill.SkillName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lookup.value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lookup.value)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

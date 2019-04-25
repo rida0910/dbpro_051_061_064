@@ -1,0 +1,423 @@
+﻿@model IEnumerable<FreelancerMarketplace.Models.Job>
+
+@{
+    ViewBag.Title = "AvailableJobs";
+}
+
+<h2>AvailableJobs</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimePosted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinPayment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxPayment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Attachment.Path)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Skill.SkillName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lookup.value)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimePosted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinPayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxPayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attachment.Path)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Skill.SkillName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lookup.value)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.JobId }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body class="gray">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+
+        <div class="clearfix"></div>
+        <!-- Header Container / End -->
+        <!-- Spacer -->
+        <div class="margin-top-90"></div>
+        <!-- Spacer / End-->
+        <!-- Page Content
+        ================================================== -->
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4">
+                    <div class="sidebar-container">
+
+                        <!-- Location -->
+                        <div class="sidebar-widget">
+                            <h3>Location</h3>
+                            <div class="input-with-icon">
+                                <div id="autocomplete-container">
+                                    <input id="autocomplete-input" type="text" placeholder="Location">
+                                </div>
+                                <i class="icon-material-outline-location-on"></i>
+                            </div>
+                        </div>
+
+
+                        <!-- Category -->
+                        <div class="sidebar-widget">
+                            <h3>Category</h3>
+                            <select class="selectpicker default" multiple data-selected-text-format="count" data-size="7" title="All Categories">
+                                <option>Admin Support</option>
+                                <option>Customer Service</option>
+                                <option>Data Analytics</option>
+                                <option>Design & Creative</option>
+                                <option>Legal</option>
+                                <option>Software Developing</option>
+                                <option>IT & Networking</option>
+                                <option>Writing</option>
+                                <option>Translation</option>
+                                <option>Sales & Marketing</option>
+                            </select>
+                        </div>
+
+
+
+
+                        <!-- Budget -->
+                        <div class="sidebar-widget">
+                            <h3>Fixed Price</h3>
+                            <div class="margin-top-55"></div>
+
+                            <!-- Range Slider -->
+                            <input class="range-slider" type="text" value="" data-slider-currency="$" data-slider-min="10" data-slider-max="2500" data-slider-step="25" data-slider-value="[10,2500]" />
+                        </div>
+
+
+
+
+
+                        <!-- Tags -->
+                        <div class="sidebar-widget">
+                            <h3>Skills</h3>
+
+                            <div class="tags-container">
+                                <div class="tag">
+                                    <input type="checkbox" id="tag1" />
+                                    <label for="tag1">front-end dev</label>
+                                </div>
+                                <div class="tag">
+                                    <input type="checkbox" id="tag2" />
+                                    <label for="tag2">angular</label>
+                                </div>
+                                <div class="tag">
+                                    <input type="checkbox" id="tag3" />
+                                    <label for="tag3">react</label>
+                                </div>
+                                <div class="tag">
+                                    <input type="checkbox" id="tag4" />
+                                    <label for="tag4">vue js</label>
+                                </div>
+                                <div class="tag">
+                                    <input type="checkbox" id="tag5" />
+                                    <label for="tag5">web apps</label>
+                                </div>
+                                <div class="tag">
+                                    <input type="checkbox" id="tag6" />
+                                    <label for="tag6">design</label>
+                                </div>
+                                <div class="tag">
+                                    <input type="checkbox" id="tag7" />
+                                    <label for="tag7">wordpress</label>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <!-- More Skills -->
+                            <div class="keywords-container margin-top-20">
+                                <div class="keyword-input-container">
+                                    <input type="text" class="keyword-input" placeholder="add more skills" />
+                                    <button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+                                </div>
+                                <div class="keywords-list"><!-- keywords go here --></div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                <div class="col-xl-9 col-lg-8 content-left-offset">
+
+
+
+                    <!-- Tasks Container -->
+                    <div class="tasks-list-container tasks-grid-layout margin-top-35">
+
+
+
+
+
+
+
+                        @foreach (var item in Model)
+                        {
+                            <!-- Task -->
+                            <a href="@Url.Action("Bid", "Freelancers", new { id = item.JobId })" class="task-listing">
+
+                                <!-- Job Listing Details -->
+                                <div class="task-listing-details">
+
+                                    <!-- Details -->
+                                    <div class="task-listing-description">
+                                        <h3 class="task-listing-title"> @Html.DisplayFor(modelItem => item.Title)</h3>
+                                        <ul class="task-icons">
+                                            <li><i class="icon-material-outline-access-time"></i> @GetPrettyDate(item.TimePosted)</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                                <div class="task-listing-bid">
+                                    <div class="task-listing-bid-inner">
+                                        <div class="task-offers">
+                                            <strong> @Html.DisplayFor(modelItem => item.MinPayment) PKR - @Html.DisplayFor(modelItem => item.MaxPayment) PKR</strong>
+                                            
+                                        </div>
+                                        <span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
+                                    </div>
+                                </div>
+                            </a>
+
+                        }
+
+                    </div>
+                    <!-- Tasks Container / End -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wrapper / End -->
+</body>
+
+
+
+
+
+@functions {
+
+    static string GetPrettyDate(DateTime d)
+    {
+        // 1.
+        // Get time span elapsed since the date.
+        TimeSpan s = DateTime.Now.Subtract(d);
+
+        // 2.
+        // Get total number of days elapsed.
+        int dayDiff = (int)s.TotalDays;
+
+        // 3.
+        // Get total number of seconds elapsed.
+        int secDiff = (int)s.TotalSeconds;
+
+        // 4.
+        // Don't allow out of range values.
+        if (dayDiff < 0 || dayDiff >= 31)
+        {
+            return null;
+        }
+
+        // 5.
+        // Handle same-day times.
+        if (dayDiff == 0)
+        {
+            // A.
+            // Less than one minute ago.
+            if (secDiff < 60)
+            {
+                return "just now";
+            }
+            // B.
+            // Less than 2 minutes ago.
+            if (secDiff < 120)
+            {
+                return "1 minute ago";
+            }
+            // C.
+            // Less than one hour ago.
+            if (secDiff < 3600)
+            {
+                return string.Format("{0} minutes ago",
+                    Math.Floor((double)secDiff / 60));
+            }
+            // D.
+            // Less than 2 hours ago.
+            if (secDiff < 7200)
+            {
+                return "1 hour ago";
+            }
+            // E.
+            // Less than one day ago.
+            if (secDiff < 86400)
+            {
+                return string.Format("{0} hours ago",
+                    Math.Floor((double)secDiff / 3600));
+            }
+        }
+        // 6.
+        // Handle previous days.
+        if (dayDiff == 1)
+        {
+            return "yesterday";
+        }
+        if (dayDiff < 7)
+        {
+            return string.Format("{0} days ago",
+                dayDiff);
+        }
+        if (dayDiff < 31)
+        {
+            return string.Format("{0} weeks ago",
+                Math.Ceiling((double)dayDiff / 7));
+        }
+        return null;
+    }
+}
