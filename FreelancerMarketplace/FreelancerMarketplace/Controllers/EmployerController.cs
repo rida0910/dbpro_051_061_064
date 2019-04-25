@@ -43,7 +43,18 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult MyJobs()
         {
-            return View();
+            string id = User.Identity.GetUserId();
+            int empId = db.People.FirstOrDefault(p => p.User_AccountID.Equals(id)).PersonId;
+
+            List<Job> Myjobs = new List<Job>();
+            foreach (Job job in db.Jobs)
+            {
+                if (job.EmployerID == empId)
+                {
+                    Myjobs.Add(job);
+                }
+            }
+            return View(Myjobs);
         }
 
         // POST: Employer/Create
@@ -85,7 +96,7 @@ namespace FreelancerMarketplace.Controllers
             {
                 db.Entry(job).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyJobs");
             }
             return View(job);
         }
@@ -110,8 +121,6 @@ namespace FreelancerMarketplace.Controllers
         public ActionResult JobDeleted(int id, FormCollection collection)
         {
             
-              
-
                 Job job = db.Jobs.Find(id);
                 db.Jobs.Remove(job);
                 db.SaveChanges();
