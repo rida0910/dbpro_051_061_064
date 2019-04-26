@@ -1,98 +1,287 @@
-﻿@model FreelancerMarketplace.Models.Job
+﻿@model FreelancerMarketplace.Models.JobViewModel
 
 @{
     ViewBag.Title = "Bid";
 }
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <body>
 
-<h2>Bid</h2>
+        <!-- Wrapper -->
+        <div id="wrapper">
 
-<div>
-    <h4>Job</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <!-- Titlebar
+            ================================================== -->
+            <div class="single-page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="single-page-header-inner">
+                                <div class="left-side">
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                                    <div class="header-details">
+                                        <h3> @Html.DisplayFor(model => model.Job.Title)</h3>
+                                        <h5>About the Employer</h5>
+                                        <ul>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TimePosted)
-        </dt>
+                                            <li> Employer's Name: @ViewBag.Name</li>
+                                            <li> @ViewBag.Nationality</li>
+                                            <li><div class="verified-badge-with-title">Verified</div></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="right-side">
+                                    <div class="salary-box">
+                                        <div class="salary-type">Project Budget</div>
+                                        <div class="salary-amount">@Html.DisplayFor(model => model.Job.MinPayment) PKR - @Html.DisplayFor(model => model.Job.MaxPayment) PKR</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.TimePosted)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Deadline)
-        </dt>
+            <!-- Page Content
+            ================================================== -->
+            <div class="container">
+                <div class="row">
 
-        <dd>
-            @Html.DisplayFor(model => model.Deadline)
-        </dd>
+                    <!-- Content -->
+                    <div class="col-xl-8 col-lg-8 content-right-offset">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MinPayment)
-        </dt>
+                        <!-- Description -->
+                        <div class="single-page-section">
+                            <h3 class="margin-bottom-25">Project Description</h3>
+                            @Html.DisplayFor(model => model.Job.Description)
+                        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.MinPayment)
-        </dd>
+                        <!-- Atachments -->
+                        <div class="single-page-section">
+                            <h3>Attachments</h3>
+                            <div class="attachments-container">
+                                <a href="@Url.Action("Download", "Freelancers", new { id = Model.Job.AttachmentID })" class="attachment-box ripple-effect"><span>Project Brief</span><i>PDF</i></a>
+                            </div>
+                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxPayment)
-        </dt>
+                        <!-- Skills -->
+                        <div class="single-page-section">
+                            <h3>Skills Required</h3>
+                            <div class="task-tags">
+                                <span>@Html.DisplayFor(model => model.Job.Skill.SkillName)</span>
+                                @foreach (var item in ViewBag.OtherSkills)
+                                {
+                                    <span>@item</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaxPayment)
-        </dd>
+                        <!-- Freelancers Bidding -->
+                        <div class="boxed-list margin-bottom-60">
+                            <div class="boxed-list-headline">
+                                <h3><i class="icon-material-outline-group"></i> Freelancers Bidding</h3>
+                            </div>
+                            <ul class="boxed-list-ul">
+                                <li>
+                                    <div class="bid">
+                                        <!-- Avatar -->
+                                        <div class="bids-avatar">
+                                            <div class="freelancer-avatar">
+                                                <div class="verified-badge"></div>
+                                                <a href="single-freelancer-profile.html"><img src="images/user-avatar-big-01.jpg" alt=""></a>
+                                            </div>
+                                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Attachment.Path)
-        </dt>
+                                        <!-- Content -->
+                                        <div class="bids-content">
+                                            <!-- Name -->
+                                            <div class="freelancer-name">
+                                                <h4><a href="single-freelancer-profile.html">Tom Smith <img class="flag" src="images/flags/gb.svg" alt="" title="United Kingdom" data-tippy-placement="top"></a></h4>
+                                                <div class="star-rating" data-rating="4.9"></div>
+                                            </div>
+                                        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Attachment.Path)
-        </dd>
+                                        <!-- Bid -->
+                                        <div class="bids-bid">
+                                            <div class="bid-rate">
+                                                <div class="rate">$4,400</div>
+                                                <span>in 7 days</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bid">
+                                        <!-- Avatar -->
+                                        <div class="bids-avatar">
+                                            <div class="freelancer-avatar">
+                                                <div class="verified-badge"></div>
+                                                <a href="single-freelancer-profile.html"><img src="images/user-avatar-big-02.jpg" alt=""></a>
+                                            </div>
+                                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </dt>
+                                        <!-- Content -->
+                                        <div class="bids-content">
+                                            <!-- Name -->
+                                            <div class="freelancer-name">
+                                                <h4><a href="single-freelancer-profile.html">David Peterson <img class="flag" src="images/flags/de.svg" alt="" title="Germany" data-tippy-placement="top"></a></h4>
+                                                <div class="star-rating" data-rating="4.2"></div>
+                                            </div>
+                                        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.CategoryName)
-        </dd>
+                                        <!-- Bid -->
+                                        <div class="bids-bid">
+                                            <div class="bid-rate">
+                                                <div class="rate">$2,200</div>
+                                                <span>in 14 days</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bid">
+                                        <!-- Avatar -->
+                                        <div class="bids-avatar">
+                                            <div class="freelancer-avatar">
+                                                <a href="single-freelancer-profile.html"><img src="images/user-avatar-placeholder.png" alt=""></a>
+                                            </div>
+                                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Skill.SkillName)
-        </dt>
+                                        <!-- Content -->
+                                        <div class="bids-content">
+                                            <!-- Name -->
+                                            <div class="freelancer-name">
+                                                <h4><a href="single-freelancer-profile.html">Marcin Kowalski <img class="flag" src="images/flags/pl.svg" alt="" title="Poland" data-tippy-placement="top"></a></h4>
+                                                <span class="not-rated">Minimum of 3 votes required</span>
 
-        <dd>
-            @Html.DisplayFor(model => model.Skill.SkillName)
-        </dd>
+                                            </div>
+                                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Lookup.value)
-        </dt>
+                                        <!-- Bid -->
+                                        <div class="bids-bid">
+                                            <div class="bid-rate">
+                                                <div class="rate">$3,800</div>
+                                                <span>In 20 days</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bid">
+                                        <!-- Avatar -->
+                                        <div class="bids-avatar">
+                                            <div class="freelancer-avatar">
+                                                <a href="single-freelancer-profile.html"><img src="images/user-avatar-placeholder.png" alt=""></a>
+                                            </div>
+                                        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Lookup.value)
-        </dd>
+                                        <!-- Content -->
+                                        <div class="bids-content">
+                                            <!-- Name -->
+                                            <div class="freelancer-name">
+                                                <h4><a href="single-freelancer-profile.html">Sebastiano Piccio <img class="flag" src="images/flags/it.svg" alt="" title="Italy" data-tippy-placement="top"></a></h4>
+                                                <div class="star-rating" data-rating="4.5"></div>
+                                            </div>
+                                        </div>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                                        <!-- Bid -->
+                                        <div class="bids-bid">
+                                            <div class="bid-rate">
+                                                <div class="rate">$3,400</div>
+                                                <span>In 10 days</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Sidebar -->
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="sidebar-container">
+
+                            <div class="countdown green margin-bottom-35">Deadline: @Html.DisplayFor(model => model.Job.Deadline)</div>
+
+                            <div class="sidebar-widget">
+                                <div class="bidding-widget">
+                                    <div class="bidding-headline"><h3>Bid on this job!</h3></div>
+                                    <div class="bidding-inner">
+
+                                        <!-- Headline -->
+                                        <span class="bidding-detail">Set your <strong>minimal rate</strong></span>
+
+                                        <!-- Price Slider -->
+                                        <div class="bidding-value">PKR <span id="biddingVal"></span></div>
+                                        <input class="bidding-slider" type="text" value="" data-slider-handle="custom" data-slider-currency="PKR" data-slider-min=@Model.Job.MinPayment data-slider-max=@Model.Job.MaxPayment data-slider-value="auto" data-slider-step="2" data-slider-tooltip="hide" name="BidAmount" />
+
+                                        <!-- Headline -->
+                                        <span class="bidding-detail margin-top-30">Set your <strong>delivery time</strong></span>
+
+                                        <!-- Fields -->
+                                        <div class="bidding-fields">
+
+                                            <div class="bidding-field">
+
+                                                @Html.EditorFor(model => model.Bid.DeliveryTime, new { @class = "datepicker form-control", placeholder = "Enter Delivery Time here..." })
+                                            </div>
+                                        </div>
+
+                                        <!-- Button -->
+                                        @*<button id="snackbar-place-bid" class="button ripple-effect move-on-hover full-width margin-top-30"><span>Place a Bid</span></button>*@
+                                        <input type="submit" value="Place a Bid" class="button ripple-effect move-on-hover full-width margin-top-30" />
+
+                                    </div>
+                                    @using Microsoft.AspNet.Identity
+                                    @if (!Request.IsAuthenticated)
+                                    {
+                                        <div class="bidding-signup">Don't have an account? <a href="@Url.Action("Register", "Account")">Sign Up</a></div>
+                                    }
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Spacer -->
+                <div class="margin-top-15"></div>
+                <!-- Spacer / End-->
+
+
+
+            </div>
+            <!-- Wrapper / End -->
+        </div>
+
+
+    </body>
+}
+    @section Scripts {
+
+        @Scripts.Render("~/bundles/jqueryui")
+        @Styles.Render("~/Content/cssjqryUi")
+
+        <script type="text/javascript">
+            $(function () {
+                $('.datepicker').datepicker({
+                    dateFormat: "dd/M/yy",
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-60:+0"
+                });
+
+            });
+        </script>
+
+    }

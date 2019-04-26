@@ -139,10 +139,12 @@ namespace FreelancerMarketplace.Controllers
         {
             List<Job> list = new List<Job>();
             var jobs = db.Jobs;
+            var userid = User.Identity.GetUserId();
+            int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
             foreach (Job job in jobs)
             {
                 int jobId = job.JobId;
-                if (!db.Bids.Any(b => b.JobID.Equals(jobId) && b.Status.Equals(1)))
+                if (!db.Bids.Any(b => b.JobID.Equals(jobId) && b.Status.Equals(1) || b.FreelancerID.Equals(freeId)));
                 {
                     list.Add(job);
                 }
@@ -162,11 +164,72 @@ namespace FreelancerMarketplace.Controllers
             {
                 return HttpNotFound();
             }
-            return View(job);
+            int empid = job.EmployerID;
+            Employer emp = db.Employers.FirstOrDefault(e => e.EmployerId.Equals(empid));
+            Person person = db.People.FirstOrDefault(p => p.PersonId.Equals(empid));
+            ViewBag.Nationality = person.Nationality;
+            ViewBag.Name = person.FirstName + " " + person.LastName;
+            
+
+            
+            var jobskils = db.JobSkills;
+            List<string> list = new List<string>();
+            foreach (JobSkill js in jobskils)
+            {
+                if (js.JobId == id)
+                {
+                    Skill skill = db.Skills.FirstOrDefault(x => x.SkillId == js.SkillId);
+                    list.Add(skill.SkillName);
+                }
+            }
+            ViewBag.OtherSkills = list;
+            Bid bid = new Bid();
+            ViewBag.DeliveryTime = bid.DeliveryTime;
+
+            JobViewModel jobview = new JobViewModel();
+            jobview.Job = job;
+
+            return View(jobview);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Bid(int id, string BidAmount, JobViewModel jobView)
+        {
+            int bidamount = int.Parse(BidAmount);
+            DateTime? time = jobView.Bid.DeliveryTime;
+
+            Bid bid = new Bid();
+            bid.Status = 0;
+            var userid = User.Identity.GetUserId();
+            int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
+            bid.FreelancerID = freeId;
+            bid.JobID = id;
+            bid.BidTime = DateTime.Now;
+            bid.PaymentAmount = bidamount;
+            bid.DeliveryTime = time;
+            db.Bids.Add(bid);
+            db.SaveChanges();
+
+            return RedirectToAction("AvailableJobs");
+        }
+
+        public FileResult Download (int id)
+        {
+            var attachment = db.Attachments.FirstOrDefault(a => a.AttachmentId == id);
+            return File(attachment.Path, GetMimeType(Path.GetFileName(attachment.Path)), "ProjectFile" + Path.GetExtension(attachment.Path));
         }
 
 
-
+        private string GetMimeType(string fileName)
+        {
+            string mimeType = "application/unknown";
+            string ext = System.IO.Path.GetExtension(fileName).ToLower();
+            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            if (regKey != null && regKey.GetValue("Content Type") != null)
+                mimeType = regKey.GetValue("Content Type").ToString();
+            return mimeType;
+        }
 
         // GET: Freelancers/Edit/5
         public ActionResult Edit(int? id)
