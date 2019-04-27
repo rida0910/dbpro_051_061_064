@@ -18,21 +18,24 @@ namespace FreelancerMarketplace.Controllers
            
             foreach(Freelancer freelancer in freelancers)
             {
-                FreelancerViewModel freelancerViewModel = new FreelancerViewModel();
-                freelancerViewModel.Freelancer = freelancer;
                 Person p = db.People.FirstOrDefault(x => x.PersonId == freelancer.FreelancerId);
-                freelancerViewModel.Person = p;
-                AspNetUser aspNetUser = db.AspNetUsers.FirstOrDefault(x => x.Id == p.User_AccountID);
-                freelancerViewModel.AspNetUser = aspNetUser;
-                var Fskills = db.FreelancerSkills.Where(s => s.FreelancerId == freelancer.FreelancerId);
-                freelancerViewModel.FreelancerSkill = Fskills;
-                list.Add(freelancerViewModel);
+                if (p.Approved == true)
+                {
+                    FreelancerViewModel freelancerViewModel = new FreelancerViewModel();
+                    freelancerViewModel.Freelancer = freelancer;
+                    freelancerViewModel.Person = p;
+                    AspNetUser aspNetUser = db.AspNetUsers.FirstOrDefault(x => x.Id == p.User_AccountID);
+                    freelancerViewModel.AspNetUser = aspNetUser;
+                    var Fskills = db.FreelancerSkills.Where(s => s.FreelancerId == freelancer.FreelancerId);
+                    freelancerViewModel.FreelancerSkill = Fskills;
+                    list.Add(freelancerViewModel);
+                }
             }
 
             return View(list);
         }
 
-        public ActionResult ViewProfile(int? id)
+        public ActionResult ViewFreelancerProfile(int? id)
         {
             Person p = db.People.FirstOrDefault(x => x.PersonId == id);
             AspNetUser aspNetUser = db.AspNetUsers.FirstOrDefault(x => x.Id == p.User_AccountID);
@@ -58,8 +61,30 @@ namespace FreelancerMarketplace.Controllers
             Person p = db.People.FirstOrDefault(x => x.PersonId == id);
             p.Approved = false;
             db.SaveChanges();
-            return RedirectToAction("ViewFreelancers");
+            if (p.AccountType == "Freelancer")
+            {
+                return RedirectToAction("ViewFreelancers");
+            }
+            else if (p.AccountType == "Employer")
+            {
+                return RedirectToAction("ViewEmployers");
+            }
+            return RedirectToAction("ApprovalRequests");
         }
-       
+        
+        public ActionResult ApprovalRequests()
+        {
+            var people = db.People.Where(x => x.Approved == false && x.AccountType == "Freelancer");
+            return View(people.ToList());
+        }
+
+        public ActionResult ApproveRegistration(int id)
+        {
+            Person p = db.People.FirstOrDefault(x => x.PersonId == id);
+            p.Approved = true;
+            db.SaveChanges();
+            
+            return RedirectToAction("ApprovalRequests");
+        }
     }
 }

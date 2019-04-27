@@ -1,11 +1,10 @@
-﻿@model IEnumerable<FreelancerMarketplace.Models.FreelancerViewModel>
+﻿@model IEnumerable<FreelancerMarketplace.Models.Person>
 
 @{
-    ViewBag.Title = "ViewFreelancers";
+    ViewBag.Title = "ApprovalRequests";
 }
 <br />
-
-<center><h2>Registered Freelancers</h2></center>
+<center><h2>Approval Requests</h2></center>
 
 @foreach (var item in Model)
 {
@@ -26,29 +25,19 @@
                         <!-- Avatar -->
                         <div class="freelancer-avatar">
                             
-                            <a href="single-freelancer-profile.html"><img src="@Url.Content(item.Person.ProfilePicture)" alt="Image not available"></a>
+                            <a href="single-freelancer-profile.html"><img src="@Url.Content(item.ProfilePicture)" alt="Image not available"></a>
                         </div>
 
                         <!-- Name -->
                         <div class="freelancer-name">
-                            <h4><a href="#">@Html.DisplayFor(modelItem => item.Person.FirstName) @Html.DisplayFor(modelItem => item.Person.LastName)</a></h4>
-                            <span>@Html.DisplayFor(modelItem => item.Freelancer.ProfessionalTitle)</span>
+                            <h4><a href="#">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</a></h4>
+                            
                             <!-- Rating -->
                             <div class="freelancer-rating">
                                 <strong>Email: </strong>
                                 @Html.DisplayFor(modelItem => item.AspNetUser.Email)
                             </div>
-                            <div class="freelancer-rating">
-                                <div class="task-tags">
-                                    <strong>Skills: </strong>
-                                    @foreach (var item1 in item.FreelancerSkill)
-                                    {    
-                                    <span>
-                                        @Html.DisplayFor(modelItem => item1.Skill.SkillName)
-                                    </span>
-                                    }
-                                </div>
-                             </div>
+                            
                             </div>
                         </div>
                 </div>
@@ -57,12 +46,12 @@
                 <div class="freelancer-details">
                     <div class="freelancer-details-list">
                         <ul>
-                            <li>Location <strong><i class="icon-material-outline-location-on"></i> @Html.DisplayFor(modelItem => item.Person.Nationality)</strong></li>
+                            <li>Location <strong><i class="icon-material-outline-location-on"></i> @Html.DisplayFor(modelItem => item.Nationality)</strong></li>
                             <li>Phone number <strong>@Html.DisplayFor(modelItem => item.AspNetUser.PhoneNumber)</strong></li>
                             <li></li>
                         </ul>
                     </div>
-                    <a  href="/Admin/ViewFreelancerProfile/@item.Person.PersonId" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
+                    <a  href="/Admin/ViewFreelancerProfile/@item.PersonId" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
                 </div>
             </div>
             <!-- Freelancer / End -->
