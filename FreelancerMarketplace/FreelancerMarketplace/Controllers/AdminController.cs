@@ -56,7 +56,7 @@ namespace FreelancerMarketplace.Controllers
         public ActionResult CancelRegistration(int id)
         {
             Person p = db.People.FirstOrDefault(x => x.PersonId == id);
-            p.Approved = true;
+            p.Approved = false;
             db.SaveChanges();
             return RedirectToAction("ViewFreelancers");
         }
