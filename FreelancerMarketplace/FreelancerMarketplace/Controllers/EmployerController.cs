@@ -102,6 +102,45 @@ namespace FreelancerMarketplace.Controllers
             }
             return View(job);
         }
+        public ActionResult AddInformation()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddInformation([Bind(Include = "ImageFile,CompanyName")] Employer employer,
+           string FirstName, string LastName, string Gender, string Nationality, string Address, string company)
+        {
+            if (ModelState.IsValid)
+            {
+                Person person = new Person();
+                person.FirstName = FirstName;
+                person.LastName = LastName;
+                person.Gender = db.Lookups.FirstOrDefault(x => x.value.Equals(Gender)).Id;
+                person.Nationality = Nationality;
+                person.Address = Address;
+                person.AccountType = "Employer";
+                person.User_AccountID = User.Identity.GetUserId();
+                person.Approved = false;
+
+                string fileName = Path.GetFileNameWithoutExtension(employer.ImageFile.FileName);
+                string extension = Path.GetExtension(employer.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                employer.ProfilePicture = "~/Images/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                employer.ImageFile.SaveAs(fileName);
+
+                person.ProfilePicture = employer.ProfilePicture;
+                db.People.Add(person);
+                db.SaveChanges();
+
+                employer.EmployerId = person.PersonId;
+                db.Employers.Add(employer);
+                db.SaveChanges();
+
+            }
+            return View(employer);
+        }
 
         // GET: Employer/DeleteJob/5
         public ActionResult DeleteJob(int? id)
