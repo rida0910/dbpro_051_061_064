@@ -2,122 +2,154 @@
 
 @{
     ViewBag.Title = "AvailableJobs";
+    Layout = "~/Views/Shared/_LayoutFreelancer.cshtml";
 }
 
+@using (Html.BeginForm())
+{
+    <body class="gray">
 
-<body class="gray">
-
-    <!-- Wrapper -->
-    <div id="wrapper">
+        <!-- Wrapper -->
+        <div id="wrapper">
 
 
-        <div class="clearfix"></div>
-        <!-- Header Container / End -->
-        <!-- Spacer -->
-        
-        <!-- Spacer / End-->
-        <!-- Page Content
-        ================================================== -->
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-3 col-lg-4">
-                    <div class="sidebar-container">
+            <div class="clearfix"></div>
+            <!-- Header Container / End -->
+            <!-- Spacer -->
+            <!-- Spacer / End-->
+            <!-- Page Content
+            ================================================== -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="sidebar-container">
 
-                        <!-- Location -->
-                        <div class="sidebar-widget">
-                            <h3>Location</h3>
-                            <div class="input-with-icon">
-                                <div id="autocomplete-container">
-                                    <input id="autocomplete-input" type="text" placeholder="Location">
+                            <!-- Location -->
+                            <div class="sidebar-widget">
+                                <h3>Location</h3>
+                                <div class="input-with-icon">
+                                    <div id="autocomplete-container">
+                                        @*<input id="autocomplete-input" type="text" placeholder="Location">*@
+                                        <select data-size="7" title="Select Job Type" data-live-search="true" name="Location">
+                                            <option value="Argentina">Argentina</option>
+                                            <option value="Armenia">Armenia</option>
+                                            <option value="Aruba">Aruba</option>
+                                            <option value="Australia">Australia</option>
+                                            <option value="Austria">Austria</option>
+                                            <option value="Azerbaijan">Azerbaijan</option>
+                                            <option value="Bahamas">Bahamas</option>
+                                            <option value="Bahrain">Bahrain</option>
+                                            <option value="Bangladesh">Bangladesh</option>
+                                            <option value="Barbados">Barbados</option>
+                                            <option value="Belarus">Belarus</option>
+                                            <option value="Belgium">Belgium</option>
+                                            <option value="Belize">Belize</option>
+                                            <option value="Benin">Benin</option>
+                                            <option value="Bermuda">Bermuda</option>
+                                            <option value="Bhutan">Bhutan</option>
+                                            <option value="Bulgaria">Bulgaria</option>
+                                            <option value="Burkina">Burkina Faso</option>
+                                            <option value="Burundi">Burundi</option>
+                                            <option value="Cambodia">Cambodia</option>
+                                            <option value="Cameroon">Cameroon</option>
+                                            <option value="Canada">Canada</option>
+                                            <option value="Cape Verde">Cape Verde</option>
+                                            <option value="Cayman Islands">Cayman Islands</option>
+                                            <option value="Colombia">Colombia</option>
+                                            <option value="Comoros">Comoros</option>
+                                            <option value="Congo">Congo</option>
+                                            <option value="Cook Islands">Cook Islands</option>
+                                            <option value="Costa Rica">Costa Rica</option>
+                                            <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                                            <option value="Croatia">Croatia</option>
+                                            <option value="Cuba">Cuba</option>
+                                            <option value="Curaçao">Curaçao</option>
+                                            <option value="Cyprus">Cyprus</option>
+                                            <option value="Czech Republic">Czech Republic</option>
+                                            <option value="Denmark">Denmark</option>
+                                            <option value="Djibouti">Djibouti</option>
+                                            <option value="Dominica">Dominica</option>
+                                            <option value="Dominican Republic">Dominican Republic</option>
+                                            <option value="Ecuador">Ecuador</option>
+                                            <option value="Egypt">Egypt</option>
+                                            <option value="Guadeloupe">Guadeloupe</option>
+                                            <option value="Guam">Guam</option>
+                                            <option value="Guatemala">Guatemala</option>
+                                            <option value="Guernsey">Guernsey</option>
+                                            <option value="Guinea">Guinea</option>
+                                            <option value="Guinea-Bissau">Guinea-Bissau</option>
+                                            <option value="Guyana">Guyana</option>
+                                            <option value="Haiti">Haiti</option>
+                                            <option value="Honduras">Honduras</option>
+                                            <option value="Hong Kong">Hong Kong</option>
+                                            <option value="Hungary">Hungary</option>
+                                            <option value="Iceland">Iceland</option>
+                                            <option value="India">India</option>
+                                            <option value="Indonesia">Indonesia</option>
+                                            <option value="Norway">Norway</option>
+                                            <option value="Oman">Oman</option>
+                                            <option value="Pakistan" selected>Pakistan</option>
+                                            <option value="Palau">Palau</option>
+                                            <option value="Panama">Panama</option>
+                                            <option value="PG">Papua New Guinea</option>
+                                            <option value="PY">Paraguay</option>
+                                            <option value="PE">Peru</option>
+                                            <option value="PH">Philippines</option>
+                                            <option value="PN">Pitcairn</option>
+                                            <option value="PL">Poland</option>
+                                            <option value="PT">Portugal</option>
+                                            <option value="PR">Puerto Rico</option>
+                                            <option value="Qatar">Qatar</option>
+                                            <option value="RE">Réunion</option>
+                                            <option value="RO">Romania</option>
+                                            <option value="Russian">Russian Federation</option>
+                                            <option value="RW">Rwanda</option>
+                                            <option value="SZ">Swaziland</option>
+                                            <option value="SE">Sweden</option>
+                                            <option value="Switzerland">Switzerland</option>
+                                            <option value="Turkey">Turkey</option>
+                                            <option value="TM">Turkmenistan</option>
+                                            <option value="TV">Tuvalu</option>
+                                            <option value="UG">Uganda</option>
+                                            <option value="UA">Ukraine</option>
+                                            <option value="GB">United Kingdom</option>
+                                            <option value="United States">United States</option>
+                                            <option value="Uruguay">Uruguay</option>
+                                            <option value="UZ">Uzbekistan</option>
+                                            <option value="Yemen">Yemen</option>
+                                            <option value="ZM">Zambia</option>
+                                            <option value="ZW">Zimbabwe</option>
+                                        </select>
+                                    </div>
+                                    <i class="icon-material-outline-location-on"></i>
                                 </div>
-                                <i class="icon-material-outline-location-on"></i>
                             </div>
-                        </div>
 
 
-                        <!-- Category -->
-                        <div class="sidebar-widget">
-                            <h3>Category</h3>
-                            <select class="selectpicker default" multiple data-selected-text-format="count" data-size="7" title="All Categories">
-                                <option>Admin Support</option>
-                                <option>Customer Service</option>
-                                <option>Data Analytics</option>
-                                <option>Design & Creative</option>
-                                <option>Legal</option>
-                                <option>Software Developing</option>
-                                <option>IT & Networking</option>
-                                <option>Writing</option>
-                                <option>Translation</option>
-                                <option>Sales & Marketing</option>
-                            </select>
-                        </div>
-
-
-
-
-                        <!-- Budget -->
-                        <div class="sidebar-widget">
-                            <h3>Fixed Price</h3>
-                            <div class="margin-top-55"></div>
-
-                            <!-- Range Slider -->
-                            <input class="range-slider" type="text" value="" data-slider-currency="$" data-slider-min="10" data-slider-max="2500" data-slider-step="25" data-slider-value="[10,2500]" />
-                        </div>
-
-
-
-
-
-                        <!-- Tags -->
-                        <div class="sidebar-widget">
-                            <h3>Skills</h3>
-
-                            <div class="tags-container">
-                                <div class="tag">
-                                    <input type="checkbox" id="tag1" />
-                                    <label for="tag1">front-end dev</label>
-                                </div>
-                                <div class="tag">
-                                    <input type="checkbox" id="tag2" />
-                                    <label for="tag2">angular</label>
-                                </div>
-                                <div class="tag">
-                                    <input type="checkbox" id="tag3" />
-                                    <label for="tag3">react</label>
-                                </div>
-                                <div class="tag">
-                                    <input type="checkbox" id="tag4" />
-                                    <label for="tag4">vue js</label>
-                                </div>
-                                <div class="tag">
-                                    <input type="checkbox" id="tag5" />
-                                    <label for="tag5">web apps</label>
-                                </div>
-                                <div class="tag">
-                                    <input type="checkbox" id="tag6" />
-                                    <label for="tag6">design</label>
-                                </div>
-                                <div class="tag">
-                                    <input type="checkbox" id="tag7" />
-                                    <label for="tag7">wordpress</label>
-                                </div>
+                            <!-- Category -->
+                            <div class="sidebar-widget">
+                                <h3>Category</h3>
+                                @Html.DropDownList("CategoryId", null, "--Select Category--", htmlAttributes: new { @class = "form-control" })
                             </div>
+
+
+
+
+                            <!-- Budget -->
+                            <div class="sidebar-widget">
+                                <h3>Price</h3>
+                                <div class="margin-top-55"></div>
+
+                                <!-- Range Slider -->
+                                <input class="range-slider" type="text" value="" data-slider-currency="PKR" data-slider-min="10" data-slider-max="10000" data-slider-step="25" data-slider-value="[10,2500]" name="PaymentRange" />
+                            </div>
+
+                            <input type="submit" value="Apply search filters" class="button ripple-effect move-on-hover full-width margin-top-30" />
+
                             <div class="clearfix"></div>
 
-                            <!-- More Skills -->
-                            <div class="keywords-container margin-top-20">
-                                <div class="keyword-input-container">
-                                    <input type="text" class="keyword-input" placeholder="add more skills" />
-                                    <button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
-                                </div>
-                                <div class="keywords-list"><!-- keywords go here --></div>
-                                <div class="clearfix"></div>
-                            </div>
                         </div>
-                        <div class="clearfix"></div>
-
                     </div>
-                </div>
 
 
 
@@ -128,12 +160,12 @@
 
 
 
-                <div class="col-xl-9 col-lg-8 content-left-offset">
+                    <div class="col-xl-9 col-lg-8 content-left-offset">
 
 
 
-                    <!-- Tasks Container -->
-                    <div class="tasks-list-container tasks-grid-layout margin-top-35">
+                        <!-- Tasks Container -->
+                        <div class="tasks-list-container tasks-grid-layout margin-top-35">
 
 
 
@@ -141,47 +173,47 @@
 
 
 
-                        @foreach (var item in Model)
-                        {
-                            <!-- Task -->
-                            <a href="@Url.Action("Bid", "Freelancers", new { id = item.JobId })" class="task-listing">
+                            @foreach (var item in Model)
+                            {
+                                <!-- Task -->
+                                <a href="@Url.Action("Bid", "Freelancers", new { id = item.JobId })" class="task-listing">
 
-                                <!-- Job Listing Details -->
-                                <div class="task-listing-details">
+                                    <!-- Job Listing Details -->
+                                    <div class="task-listing-details">
 
-                                    <!-- Details -->
-                                    <div class="task-listing-description">
-                                        <h3 class="task-listing-title"> @Html.DisplayFor(modelItem => item.Title)</h3>
-                                        <ul class="task-icons">
-                                            <li><i class="icon-material-outline-access-time"></i> @GetPrettyDate(item.TimePosted)</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-                                <div class="task-listing-bid">
-                                    <div class="task-listing-bid-inner">
-                                        <div class="task-offers">
-                                            <strong> @Html.DisplayFor(modelItem => item.MinPayment) PKR - @Html.DisplayFor(modelItem => item.MaxPayment) PKR</strong>
-                                            
+                                        <!-- Details -->
+                                        <div class="task-listing-description">
+                                            <h3 class="task-listing-title"> @Html.DisplayFor(modelItem => item.Title)</h3>
+                                            <ul class="task-icons">
+                                                <li><i class="icon-material-outline-access-time"></i> @GetPrettyDate(item.TimePosted)</li>
+                                            </ul>
                                         </div>
-                                        <span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
+
                                     </div>
-                                </div>
-                            </a>
 
-                        }
+                                    <div class="task-listing-bid">
+                                        <div class="task-listing-bid-inner">
+                                            <div class="task-offers">
+                                                <strong> @Html.DisplayFor(modelItem => item.MinPayment) PKR - @Html.DisplayFor(modelItem => item.MaxPayment) PKR</strong>
 
+                                            </div>
+                                            <span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            }
+
+                        </div>
+                        <!-- Tasks Container / End -->
                     </div>
-                    <!-- Tasks Container / End -->
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Wrapper / End -->
-</body>
-
+        <!-- Wrapper / End -->
+    </body>
+}
 
 
 
