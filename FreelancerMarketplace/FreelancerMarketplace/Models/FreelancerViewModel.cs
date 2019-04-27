@@ -11,4 +11,5 @@ namespace FreelancerMarketplace.Models
        public Bid Bid { get; set; }
 
     }
+
 }
