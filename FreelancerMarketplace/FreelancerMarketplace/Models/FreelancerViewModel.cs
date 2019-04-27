@@ -12,4 +12,18 @@ namespace FreelancerMarketplace.Models
 
     }
 
+    public class MyJobsViewModel
+    {
+        public Job Job { get; set; }
+        public Employer Employer { get; set; }
+
+    }
+
+    public class BiddersViewModel
+    {
+        public Bid Bid { get; set; }
+        public Freelancer Freelancer { get; set; }
+        public  AspNetUser AspNetUser { get; set; }
+
+    }
 }

@@ -6,3 +6,4 @@ FreelancerMarketplace/.vs/config/applicationhost.config
 *.user
 *.cache
 *.pdf
+*.config
