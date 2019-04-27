@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreelancerMarketplace.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,82 +9,57 @@ namespace FreelancerMarketplace.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        private DB66Entities db = new DB66Entities();
+        
         public ActionResult ViewFreelancers()
         {
-            return View();
+            var freelancers = db.Freelancers;
+            List<FreelancerViewModel> list = new List<FreelancerViewModel>();
+           
+            foreach(Freelancer freelancer in freelancers)
+            {
+                FreelancerViewModel freelancerViewModel = new FreelancerViewModel();
+                freelancerViewModel.Freelancer = freelancer;
+                Person p = db.People.FirstOrDefault(x => x.PersonId == freelancer.FreelancerId);
+                freelancerViewModel.Person = p;
+                AspNetUser aspNetUser = db.AspNetUsers.FirstOrDefault(x => x.Id == p.User_AccountID);
+                freelancerViewModel.AspNetUser = aspNetUser;
+                var Fskills = db.FreelancerSkills.Where(s => s.FreelancerId == freelancer.FreelancerId);
+                freelancerViewModel.FreelancerSkill = Fskills;
+                list.Add(freelancerViewModel);
+            }
+
+            return View(list);
         }
 
-        // GET: Admin/Details/5
+        public ActionResult ViewProfile(int? id)
+        {
+            Person p = db.People.FirstOrDefault(x => x.PersonId == id);
+            AspNetUser aspNetUser = db.AspNetUsers.FirstOrDefault(x => x.Id == p.User_AccountID);
+            Freelancer freelancer = db.Freelancers.FirstOrDefault(f => f.FreelancerId == p.PersonId);
+            var Fskills = db.FreelancerSkills.Where(s => s.FreelancerId == freelancer.FreelancerId);
+
+            FreelancerViewModel freelancerViewModel = new FreelancerViewModel();
+            freelancerViewModel.Person = p;
+            freelancerViewModel.AspNetUser = aspNetUser;
+            freelancerViewModel.Freelancer = freelancer;
+            freelancerViewModel.FreelancerSkill = Fskills;
+
+            return View(freelancerViewModel);
+        }
+        
         public ActionResult ViewEmployers(int id)
         {
             return View();
         }
 
-        // GET: Admin/Create
-        public ActionResult Create()
+        public ActionResult CancelRegistration(int id)
         {
-            return View();
+            Person p = db.People.FirstOrDefault(x => x.PersonId == id);
+            p.Approved = true;
+            db.SaveChanges();
+            return RedirectToAction("ViewFreelancers");
         }
-
-        // POST: Admin/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Admin/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Admin/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Admin/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Admin/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
     }
 }
