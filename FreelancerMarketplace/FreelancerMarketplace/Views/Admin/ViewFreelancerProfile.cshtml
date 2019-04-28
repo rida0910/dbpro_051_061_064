@@ -1,0 +1,145 @@
+﻿@model FreelancerMarketplace.Models.FreelancerViewModel
+
+@{
+    ViewBag.Title = "ViewProfile";
+}
+
+
+
+<body>
+
+
+
+    <!-- Titlebar
+    ================================================== -->
+    <div class="single-page-header freelancer-header" data-background-image="images/single-freelancer.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="single-page-header-inner">
+                        <div class="left-side">
+                            <div class="header-image freelancer-avatar"><img src="@Url.Content(Model.Person.ProfilePicture)" alt=""></div>
+                            <div class="header-details">
+                                <h3>@Model.Person.FirstName @Model.Person.LastName <span>@Model.Freelancer.ProfessionalTitle</span></h3>
+                                <ul>
+
+                                    <li> @Model.Person.Nationality</li>
+                                    <li>@Model.AspNetUser.Email</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Page Content
+    ================================================== -->
+    <div class="container">
+        <div class="row">
+
+            <!-- Content -->
+            <div class="col-xl-8 col-lg-8 content-right-offset">
+
+                <!-- Page Content -->
+                <div class="single-page-section">
+                    <h3 class="margin-bottom-25">About Me</h3>
+                    <p>@Model.Freelancer.ProfessionalOverview</p>
+                    <br />
+                    <!-- Widget -->
+                    <div>
+                        <h3 class="margin-bottom-25">Skills</h3>
+                        <div class="task-tags">
+                            <span>iOS</span>
+                            <span>Android</span>
+                            <span>mobile apps</span>
+                            <span>design</span>
+                            <span>Python</span>
+                            <span>Flask</span>
+                            <span>PHP</span>
+                            <span>WordPress</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Sidebar -->
+            <div class="col-xl-4 col-lg-4">
+                <div class="sidebar-container">
+
+
+
+                    <!-- Button -->
+                    @if (Model.Person.Approved == true)
+                    {
+                        <a href="#small-dialog" class="popup-with-zoom-anim apply-now-button margin-bottom-50">Cancel Registration</a>
+                    }
+                    @if (Model.Person.Approved == false)
+                    {
+                        <a href="#small-dialog" class="popup-with-zoom-anim apply-now-button margin-bottom-50">Approve Registration</a>
+                    }
+
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+    <!-- Spacer -->
+    <div class="margin-top-15"></div>
+    <!-- Spacer / End-->
+    <!-- Wrapper / End -->
+    <!-- Make an Offer Popup
+    ================================================== -->
+    <div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+        <!--Tabs -->
+        <div class="sign-in-form">
+
+            <ul class="popup-tabs-nav">
+                <li><a href="#Remove">Cancel Registration</a></li>
+            </ul>
+
+            <div class="popup-tabs-container">
+
+                
+
+                <div class="popup-tab-content" id="Remove">
+                    <div class="bidding-widget">
+                        <!-- Headline -->
+                        <span class="bidding-detail"><strong>Are you sure you want to cancel this freelancer's registration?</strong></span>
+                        <!-- Button -->
+                        @{ int pid = Model.Person.PersonId;}
+                        @if (Model.Person.Approved == true)
+                        {
+                            <button onclick="location.href='@Url.Action("CancelRegistration", "Admin", new { id = pid })'" class="button full-width button-sliding-icon ripple-effect" type="submit">Cancel Registration<i class="icon-material-outline-arrow-right-alt"></i></button>
+                        }
+                        @if (Model.Person.Approved == false)
+                        {
+                            <button onclick="location.href='@Url.Action("ApproveRegistration", "Admin", new { id = pid })'" class="button full-width button-sliding-icon ripple-effect" type="submit">Approve Registration<i class="icon-material-outline-arrow-right-alt"></i></button>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Edit Bid Popup / End -->
+    </body>
+

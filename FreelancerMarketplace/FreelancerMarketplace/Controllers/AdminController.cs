@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreelancerMarketplace.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,82 +9,98 @@ namespace FreelancerMarketplace.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        private DB66Entities db = new DB66Entities();
+        
         public ActionResult ViewFreelancers()
         {
-            return View();
-        }
-
-        // GET: Admin/Details/5
-        public ActionResult ViewEmployers(int id)
-        {
-            return View();
-        }
-
-        // GET: Admin/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Admin/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            var freelancers = db.Freelancers;
+            List<FreelancerViewModel> list = new List<FreelancerViewModel>();
+           
+            foreach(Freelancer freelancer in freelancers)
             {
-                // TODO: Add insert logic here
+                Person p = db.People.FirstOrDefault(x => x.PersonId == freelancer.FreelancerId);
+                if (p.Approved == true)
+                {
+                    FreelancerViewModel freelancerViewModel = new FreelancerViewModel();
+                    freelancerViewModel.Freelancer = freelancer;
+                    freelancerViewModel.Person = p;
+                    AspNetUser aspNetUser = db.AspNetUsers.FirstOrDefault(x => x.Id == p.User_AccountID);
+                    freelancerViewModel.AspNetUser = aspNetUser;
+                    var Fskills = db.FreelancerSkills.Where(s => s.FreelancerId == freelancer.FreelancerId);
+                    freelancerViewModel.FreelancerSkill = Fskills;
+                    list.Add(freelancerViewModel);
+                }
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View(list);
         }
 
-        // GET: Admin/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult ViewFreelancerProfile(int? id)
         {
-            return View();
+            Person p = db.People.FirstOrDefault(x => x.PersonId == id);
+            AspNetUser aspNetUser = db.AspNetUsers.FirstOrDefault(x => x.Id == p.User_AccountID);
+            Freelancer freelancer = db.Freelancers.FirstOrDefault(f => f.FreelancerId == p.PersonId);
+            var Fskills = db.FreelancerSkills.Where(s => s.FreelancerId == freelancer.FreelancerId);
+
+            FreelancerViewModel freelancerViewModel = new FreelancerViewModel();
+            freelancerViewModel.Person = p;
+            freelancerViewModel.AspNetUser = aspNetUser;
+            freelancerViewModel.Freelancer = freelancer;
+            freelancerViewModel.FreelancerSkill = Fskills;
+
+            return View(freelancerViewModel);
+        }
+        
+        public ActionResult ViewEmployers()
+        {
+            var employers = db.Employers;
+            List<EmployerViewModel> list = new List<EmployerViewModel>();
+
+            foreach (Employer employer in employers)
+            {
+                Person p = db.People.FirstOrDefault(x => x.PersonId == employer.EmployerId);
+                EmployerViewModel employerViewModel = new EmployerViewModel();
+                employerViewModel.Employer = employer;
+                employerViewModel.Person = p;
+                AspNetUser aspNetUser = db.AspNetUsers.FirstOrDefault(x => x.Id == p.User_AccountID);
+                employerViewModel.AspNetUser = aspNetUser;
+                Company company = db.Companies.FirstOrDefault(x => x.CompanyId == employer.CompanyId);
+                employerViewModel.Company = company;
+                list.Add(employerViewModel);
+
+            }
+            return View(list);
         }
 
-        // POST: Admin/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult CancelRegistration(int id)
         {
-            try
+            Person p = db.People.FirstOrDefault(x => x.PersonId == id);
+            p.Approved = false;
+            db.SaveChanges();
+            if (p.AccountType == "Freelancer")
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewFreelancers");
             }
-            catch
+            else if (p.AccountType == "Employer")
             {
-                return View();
+                return RedirectToAction("ViewEmployers");
             }
+            return RedirectToAction("ApprovalRequests");
+        }
+        
+        public ActionResult ApprovalRequests()
+        {
+            var people = db.People.Where(x => x.Approved == false && x.AccountType == "Freelancer");
+            return View(people.ToList());
         }
 
-        // GET: Admin/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult ApproveRegistration(int id)
         {
-            return View();
-        }
-
-        // POST: Admin/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            Person p = db.People.FirstOrDefault(x => x.PersonId == id);
+            p.Approved = true;
+            db.SaveChanges();
+            
+            return RedirectToAction("ApprovalRequests");
         }
     }
 }

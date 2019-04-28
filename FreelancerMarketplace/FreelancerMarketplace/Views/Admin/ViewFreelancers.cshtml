@@ -1,63 +1,80 @@
-﻿@model IEnumerable<FreelancerMarketplace.Models.Freelancer>
+﻿@model IEnumerable<FreelancerMarketplace.Models.FreelancerViewModel>
 
 @{
     ViewBag.Title = "ViewFreelancers";
 }
+<br />
 
-<h2>ViewFreelancers</h2>
+<center><h2>Registered Freelancers</h2></center>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExperienceInCategory)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfessionalTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfessionalOverview)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfilePicture)
-        </th>
-        <th></th>
-    </tr>
+@foreach (var item in Model)
+{
+    <div class="container">
+        <!-- Freelancers List Container -->
+        <div class="freelancers-container freelancers-list-layout margin-top-35">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExperienceInCategory)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProfessionalTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProfessionalOverview)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProfilePicture)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FreelancerId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.FreelancerId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FreelancerId })
-        </td>
-    </tr>
+            <!--Freelancer -->
+            <div class="freelancer">
+
+                <!-- Overview -->
+                <div class="freelancer-overview">
+                    <div class="freelancer-overview-inner">
+
+                        <!-- Bookmark Icon -->
+                        <span class="bookmark-icon"></span>
+
+                        <!-- Avatar -->
+                        <div class="freelancer-avatar">
+                            
+                            <a href="single-freelancer-profile.html"><img src="@Url.Content(item.Person.ProfilePicture)" alt="Image not available"></a>
+                        </div>
+
+                        <!-- Name -->
+                        <div class="freelancer-name">
+                            <h4><a href="#">@Html.DisplayFor(modelItem => item.Person.FirstName) @Html.DisplayFor(modelItem => item.Person.LastName)</a></h4>
+                            <span>@Html.DisplayFor(modelItem => item.Freelancer.ProfessionalTitle)</span>
+                            <!-- Rating -->
+                            <div class="freelancer-rating">
+                                <strong>Email: </strong>
+                                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                            </div>
+                            <div class="freelancer-rating">
+                                <div class="task-tags">
+                                    <strong>Skills: </strong>
+                                    @foreach (var item1 in item.FreelancerSkill)
+                                    {    
+                                    <span>
+                                        @Html.DisplayFor(modelItem => item1.Skill.SkillName)
+                                    </span>
+                                    }
+                                </div>
+                             </div>
+                            </div>
+                        </div>
+                </div>
+
+                <!-- Details -->
+                <div class="freelancer-details">
+                    <div class="freelancer-details-list">
+                        <ul>
+                            <li>Location <strong><i class="icon-material-outline-location-on"></i> @Html.DisplayFor(modelItem => item.Person.Nationality)</strong></li>
+                            <li>Phone number <strong>@Html.DisplayFor(modelItem => item.AspNetUser.PhoneNumber)</strong></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <a  href="/Admin/ViewFreelancerProfile/@item.Person.PersonId" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
+                </div>
+            </div>
+            <!-- Freelancer / End -->
+
+        </div>
+    </div>
 }
-
-</table>
+    <br />
+    <br />
+    <br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br />

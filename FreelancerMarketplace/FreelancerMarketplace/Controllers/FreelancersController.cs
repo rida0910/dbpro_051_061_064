@@ -137,6 +137,7 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult AvailableJobs()
         {
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
             List<Job> list = new List<Job>();
             var jobs = db.Jobs;
             var userid = User.Identity.GetUserId();
@@ -144,12 +145,25 @@ namespace FreelancerMarketplace.Controllers
             foreach (Job job in jobs)
             {
                 int jobId = job.JobId;
-                if (!db.Bids.Any(b => b.JobID.Equals(jobId) && b.Status.Equals(1) || b.FreelancerID.Equals(freeId)));
+                if (!db.Bids.Any(b => b.JobID.Equals(jobId) && b.FreelancerID.Equals(freeId)))
                 {
                     list.Add(job);
                 }
             }
             return View(list);
+        }
+
+        [HttpPost]
+        public ActionResult AvailableJobs(Job job, string Location, string PaymentRange)
+        {
+            int category = job.CategoryID;
+            string catname = db.Categories.FirstOrDefault(x => x.CategoryId == category).CategoryName;
+            string loc = Location;
+            string range = PaymentRange;
+
+
+
+            return RedirectToAction("AvailableJobs");
         }
 
         public ActionResult Bid(int? id)
@@ -200,7 +214,8 @@ namespace FreelancerMarketplace.Controllers
             DateTime? time = jobView.Bid.DeliveryTime;
 
             Bid bid = new Bid();
-            bid.Status = 0;
+            bid.Active = 0;
+            bid.Accepted = false;
             var userid = User.Identity.GetUserId();
             int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
             bid.FreelancerID = freeId;
@@ -229,6 +244,41 @@ namespace FreelancerMarketplace.Controllers
             if (regKey != null && regKey.GetValue("Content Type") != null)
                 mimeType = regKey.GetValue("Content Type").ToString();
             return mimeType;
+        }
+
+
+        public ActionResult MyActiveBids()
+        {
+            var userid = User.Identity.GetUserId();
+            int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
+            var bids = db.Bids.Where(x => x.FreelancerID == freeId && x.Active.Equals(1));
+  
+            List<JobViewModel> list = new List<JobViewModel>();
+
+            foreach (Bid bid in bids)
+            {
+                Job job = db.Jobs.FirstOrDefault(x => x.JobId == bid.JobID);
+                JobViewModel jobView = new JobViewModel();
+                jobView.Bid = bid;
+                jobView.Job = job;
+                list.Add(jobView);
+            }
+            
+
+            return View(list);
+        }
+
+        public ActionResult CancelBid(int? id)
+        {
+            Bid bid = db.Bids.FirstOrDefault(x => x.BidId == id);
+            db.Bids.Remove(bid);
+            db.SaveChanges();
+            return RedirectToAction("MyActiveBids");
+        }
+
+        public ActionResult MyJobs()
+        {
+            return View();
         }
 
         // GET: Freelancers/Edit/5
