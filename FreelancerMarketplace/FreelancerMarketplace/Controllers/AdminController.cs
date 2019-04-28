@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace FreelancerMarketplace.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private DB66Entities db = new DB66Entities();

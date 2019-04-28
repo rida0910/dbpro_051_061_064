@@ -13,15 +13,101 @@ using Microsoft.AspNet.Identity;
 
 namespace FreelancerMarketplace.Controllers
 {
+    [Authorize(Roles = "Employer")]
     public class EmployerController : Controller
     {
         private DB66Entities db = new DB66Entities();
-        // GET: Employer
-        public ActionResult Dashboard()
+        
+
+        public ActionResult POstAJOb()
         {
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
+            ViewBag.JobType = new SelectList(db.Lookups.Where(x => x.category.Equals("JOBTYPE")), "Id", "value");
             return View();
         }
-        
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult POstAJOb([Bind(Include = "Title,Description,MinPayment,MaxPayment,AttachmentFile,CategoryId,Deadline,JobType")] Job job,
+            string MainSkill, string OtherSkills)
+        {
+            if (ModelState.IsValid)
+            {
+                Attachment attachment = new Attachment();
+                string fileName = Path.GetFileNameWithoutExtension(job.AttachmentFile.FileName);
+                string extension = Path.GetExtension(job.AttachmentFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                attachment.Path = "~/Images/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                job.AttachmentFile.SaveAs(fileName);
+
+                db.Attachments.Add(attachment);
+                db.SaveChanges();
+
+                job.AttachmentID = attachment.AttachmentId;
+                Skill skill = new Skill();
+                if (!db.Skills.Any(x => x.SkillName == MainSkill))
+                {
+
+                    skill.SkillName = MainSkill;
+                    db.Skills.Add(skill);
+                    db.SaveChanges();
+
+                    job.SkillID = skill.SkillId;
+                }
+                else
+                {
+                    job.SkillID = db.Skills.FirstOrDefault(x => x.SkillName.Equals(MainSkill)).SkillId;
+                }
+                var id = User.Identity.GetUserId();
+                job.EmployerID = db.People.FirstOrDefault(p => p.User_AccountID.Equals(id)).PersonId;
+                job.TimePosted = DateTime.Now;
+                db.Jobs.Add(job);
+                db.SaveChanges();
+
+                var SkillsList = OtherSkills.Split(',');
+                foreach (string s in SkillsList)
+                {
+                    Skill skill1 = new Skill();
+                    if (!db.Skills.Any(x => x.SkillName == s))
+                    {
+
+                        skill1.SkillName = s;
+                        db.Skills.Add(skill1);
+                        db.SaveChanges();
+
+                        if (!db.JobSkills.Any(x => x.Skill.SkillName == s))
+                        {
+                            JobSkill jobSkill = new JobSkill();
+                            jobSkill.SkillId = skill1.SkillId;
+                            jobSkill.JobId = job.JobId;
+                            db.JobSkills.Add(jobSkill);
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        if (!db.FreelancerSkills.Any(x => x.Skill.SkillName == s))
+                        {
+                            JobSkill jobSkill = new JobSkill();
+                            jobSkill.SkillId = db.Skills.FirstOrDefault(x => x.SkillName.Equals(s)).SkillId;
+                            jobSkill.JobId = job.JobId;
+                            db.JobSkills.Add(jobSkill);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
+                ModelState.Clear();
+                return RedirectToAction("Dashboard");
+            }
+
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
+            ViewBag.JobType = new SelectList(db.Lookups.Where(x => x.category.Equals("JOBTYPE")), "Id", "value");
+            return View(job);
+        }
+
+
         // GET: Employer/ManageBidders/5
         public ActionResult ManageBidders(int? id)
         {
@@ -30,8 +116,8 @@ namespace FreelancerMarketplace.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Job job = db.Jobs.Find(id);
-            Bid Bid = db.Bids.FirstOrDefault(b => b.BidId == id);
+            Job job = db.Jobs.FirstOrDefault(x => x.JobId == id);
+            Bid Bid = db.Bids.FirstOrDefault(b => b.JobID == id);
             List<Bid> AllBids = new List<Bid>();
             foreach (Bid bid in db.Bids)
             {
@@ -55,8 +141,8 @@ namespace FreelancerMarketplace.Controllers
             int freelancerid = Bid.FreelancerID;
             Freelancer freelancer = db.Freelancers.FirstOrDefault(f => f.FreelancerId.Equals(freelancerid));
             Person person = db.People.FirstOrDefault(p => p.PersonId.Equals(freelancerid));
-            int accountID = AspNetUser.Id;
-            AspNetUser user = db.AspNetUsers.FirstOrDefault(u => u.Id.Equals(accountID));
+            string userId = User.Identity.GetUserId();
+            AspNetUser user = db.AspNetUsers.FirstOrDefault(u => u.Id.Equals(userId));
 
             ViewBag.Name = person.FirstName + " " + person.LastName;
             ViewBag.Email = user.Email;

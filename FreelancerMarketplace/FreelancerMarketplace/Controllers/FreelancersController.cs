@@ -13,20 +13,31 @@ using Microsoft.AspNet.Identity;
 
 namespace FreelancerMarketplace.Controllers
 {
+    [Authorize(Roles = "Freelancer")]
     public class FreelancersController : Controller
     {
         private DB66Entities db = new DB66Entities();
 
         
 
-        public ActionResult Dashboard()
+        public ActionResult Managejobs()
         {
-            var jobs = db.Jobs;
-            foreach (Job job in jobs)
+            var bids = db.Bids;
+            var userid = User.Identity.GetUserId();
+            
+            List<JobViewModel> list = new List<JobViewModel>();
+            foreach (Bid bid in bids)
             {
-
+                JobViewModel jobView = new JobViewModel();
+                if (bid.FreelancerID == db.People.FirstOrDefault(x => x.User_AccountID == userid).PersonId && bid.Accepted == true && bid.Active == 1)
+                {
+                    Job job = db.Jobs.FirstOrDefault(x => x.JobId == bid.JobID);
+                    jobView.Bid = bid;
+                    jobView.Job = job;
+                    list.Add(jobView);
+                }
             }
-            return View();
+            return View(list);
         }
 
         
@@ -263,17 +274,11 @@ namespace FreelancerMarketplace.Controllers
             return RedirectToAction("MyActiveBids");
         }
 
-        public ActionResult MyJobs()
-        {
-            return View();
-        }
-
-        public ActionResult EditBid(int? id, string BidAmount, JobViewModel model)
+        
+        [HttpPost]
+        public ActionResult EditBid(int? id, JobViewModel jobView)
         {
             Bid bid = db.Bids.FirstOrDefault(x => x.BidId == id);
-            DateTime? time = model.Bid.DeliveryTime;
-            bid.DeliveryTime = time;
-            bid.PaymentAmount = int.Parse(BidAmount);
             db.SaveChanges();
             return RedirectToAction("MyActiveBids");
 
