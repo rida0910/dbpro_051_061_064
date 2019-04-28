@@ -23,10 +23,53 @@ namespace FreelancerMarketplace.Controllers
         }
         
         // GET: Employer/Details/5
-        public ActionResult ManageBidders(int id)
+        public ActionResult ManageBidders(int? id)
         {
-            return View();
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Job job = db.Jobs.Find(id);
+            Bid Bid = db.Bids.FirstOrDefault(b => b.BidId == id);
+            List<Bid> AllBids = new List<Bid>();
+            foreach (Bid bid in db.Bids)
+            {
+                if (bid.JobID == job.JobId)
+                {
+                    AllBids.Add(bid);
+                }
+
+            }
+            ViewBag.Bids = AllBids;
+
+            List<Freelancer> freelancers = new List<Freelancer>();
+            foreach (Freelancer free in db.Freelancers)
+            {
+                if (free.FreelancerId == Bid.FreelancerID)
+                {
+                    freelancers.Add(free);
+                }
+            }
+            ViewBag.Freelancers = freelancers;
+            int freelancerid = Bid.FreelancerID;
+            Freelancer freelancer = db.Freelancers.FirstOrDefault(f => f.FreelancerId.Equals(freelancerid));
+            Person person = db.People.FirstOrDefault(p => p.PersonId.Equals(freelancerid));
+            int accountID = AspNetUser.Id;
+            AspNetUser user = db.AspNetUsers.FirstOrDefault(u => u.Id.Equals(accountID));
+
+            ViewBag.Name = person.FirstName + " " + person.LastName;
+            ViewBag.Email = user.Email;
+            ViewBag.DeliveryTime = Bid.DeliveryTime;
+            ViewBag.Payment = Bid.PaymentAmount;
+
+            BiddersViewModel biddersview = new BiddersViewModel();
+            biddersview.Bid = Bid;
+
+            return View(biddersview);
         }
+
+
         public ActionResult Index()
         {
             var employer = db.Employers.Include(e => e.Company);
@@ -40,23 +83,20 @@ namespace FreelancerMarketplace.Controllers
             return View();
         }
 
-    
-
-
         public ActionResult MyJobs()
         {
             string id = User.Identity.GetUserId();
             int empId = db.People.FirstOrDefault(p => p.User_AccountID.Equals(id)).PersonId;
 
-            List<Job> Myjobs = new List<Job>();
+            List<Job> MyJobs = new List<Job>();
             foreach (Job job in db.Jobs)
             {
                 if (job.EmployerID == empId)
                 {
-                    Myjobs.Add(job);
+                    MyJobs.Add(job);
                 }
             }
-            return View(Myjobs);
+            return View(MyJobs);
         }
 
         // POST: Employer/Create
