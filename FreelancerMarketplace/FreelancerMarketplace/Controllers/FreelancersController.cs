@@ -268,6 +268,15 @@ namespace FreelancerMarketplace.Controllers
             return View();
         }
 
-        
+        public ActionResult EditBid(int? id, string BidAmount, JobViewModel model)
+        {
+            Bid bid = db.Bids.FirstOrDefault(x => x.BidId == id);
+            DateTime? time = model.Bid.DeliveryTime;
+            bid.DeliveryTime = time;
+            bid.PaymentAmount = int.Parse(BidAmount);
+            db.SaveChanges();
+            return RedirectToAction("MyActiveBids");
+
+        }
     }
 }
