@@ -4,34 +4,12 @@
     ViewBag.Title = "ViewEmployers";
 }
 
-<h2>ViewEmployers</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }
-
-</table>
 
 
 
 
 
-<center><h2>Registered Freelancers</h2></center>
+<center><h2>All Employers</h2></center>
 
 @foreach (var item in Model)
 {
@@ -78,7 +56,14 @@
                             <li></li>
                         </ul>
                     </div>
-                    <a href="/Admin/ViewFreelancerProfile/@item.Person.PersonId" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
+                    @if (item.Person.Approved == true)
+                    {
+                        <a href="/Admin/CancelRegistration/@item.Person.PersonId" class="button button-sliding-icon ripple-effect">Cancel Registration <i class="icon-material-outline-arrow-right-alt"></i></a>
+                    }
+                    @if (item.Person.Approved == false)
+                    {
+                        <a href="/Admin/ApproveRegistration/@item.Person.PersonId" class="button button-sliding-icon ripple-effect">Approve Registration <i class="icon-material-outline-arrow-right-alt"></i></a>
+                    }
                 </div>
             </div>
             <!-- Freelancer / End -->
