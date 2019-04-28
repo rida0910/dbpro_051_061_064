@@ -23,7 +23,8 @@ namespace FreelancerMarketplace.Models
     {
         public Bid Bid { get; set; }
         public Freelancer Freelancer { get; set; }
-        public  AspNetUser AspNetUser { get; set; }
+        public Job Job { get; set; }
+        public AspNetUser AspNetUser { get; set; }
 
     }
 
