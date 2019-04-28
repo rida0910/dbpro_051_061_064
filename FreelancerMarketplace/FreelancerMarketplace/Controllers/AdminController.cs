@@ -51,9 +51,25 @@ namespace FreelancerMarketplace.Controllers
             return View(freelancerViewModel);
         }
         
-        public ActionResult ViewEmployers(int id)
+        public ActionResult ViewEmployers()
         {
-            return View();
+            var employers = db.Employers;
+            List<EmployerViewModel> list = new List<EmployerViewModel>();
+
+            foreach (Employer employer in employers)
+            {
+                Person p = db.People.FirstOrDefault(x => x.PersonId == employer.EmployerId);
+                EmployerViewModel employerViewModel = new EmployerViewModel();
+                employerViewModel.Employer = employer;
+                employerViewModel.Person = p;
+                AspNetUser aspNetUser = db.AspNetUsers.FirstOrDefault(x => x.Id == p.User_AccountID);
+                employerViewModel.AspNetUser = aspNetUser;
+                Company company = db.Companies.FirstOrDefault(x => x.CompanyId == employer.CompanyId);
+                employerViewModel.Company = company;
+                list.Add(employerViewModel);
+
+            }
+            return View(list);
         }
 
         public ActionResult CancelRegistration(int id)
