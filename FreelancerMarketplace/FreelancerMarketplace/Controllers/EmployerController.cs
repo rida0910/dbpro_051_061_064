@@ -17,7 +17,7 @@ namespace FreelancerMarketplace.Controllers
     public class EmployerController : Controller
     {
         private DB66Entities db = new DB66Entities();
-        
+
 
         public ActionResult POstAJOb()
         {
@@ -282,22 +282,26 @@ namespace FreelancerMarketplace.Controllers
             }
             return View(job);
         }
-        
+
         [HttpPost, ActionName("DeleteJob")]
         [ValidateAntiForgeryToken]
         public ActionResult JobDeleted(int id, FormCollection collection)
         {
-            
-                Job job = db.Jobs.Find(id);
-                db.Jobs.Remove(job);
-                db.SaveChanges();
-                return RedirectToAction("MyJobs");
-            
+
+            Job job = db.Jobs.Find(id);
+            db.Jobs.Remove(job);
+            db.SaveChanges();
+            return RedirectToAction("MyJobs");
+
         }
         public ActionResult FindFreelancer()
         {
             return View();
 
+        }
+        public ActionResult Message()
+        {
+            return View();
         }
     }
 }
