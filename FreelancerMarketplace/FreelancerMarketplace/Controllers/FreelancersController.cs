@@ -17,32 +17,19 @@ namespace FreelancerMarketplace.Controllers
     {
         private DB66Entities db = new DB66Entities();
 
-        // GET: Freelancers
-        public ActionResult Index()
-        {
-            var freelancers = db.Freelancers.Include(f => f.Category).Include(f => f.Lookup).Include(f => f.Lookup1);
-            return View(freelancers.ToList());
-        }
+        
 
         public ActionResult Dashboard()
         {
+            var jobs = db.Jobs;
+            foreach (Job job in jobs)
+            {
+
+            }
             return View();
         }
 
-        // GET: Freelancers/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Freelancer freelancer = db.Freelancers.Find(id);
-            if (freelancer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(freelancer);
-        }
+        
 
         // GET: Freelancers/Create
         public ActionResult AddInfo()
@@ -214,7 +201,7 @@ namespace FreelancerMarketplace.Controllers
             DateTime? time = jobView.Bid.DeliveryTime;
 
             Bid bid = new Bid();
-            bid.Active = 0;
+            bid.Active = 1;
             bid.Accepted = false;
             var userid = User.Identity.GetUserId();
             int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
@@ -251,7 +238,7 @@ namespace FreelancerMarketplace.Controllers
         {
             var userid = User.Identity.GetUserId();
             int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
-            var bids = db.Bids.Where(x => x.FreelancerID == freeId && x.Active.Equals(1));
+            var bids = db.Bids.Where(x => x.FreelancerID == freeId && x.Active.Equals(1) && x.Accepted == false);
   
             List<JobViewModel> list = new List<JobViewModel>();
 
@@ -281,76 +268,6 @@ namespace FreelancerMarketplace.Controllers
             return View();
         }
 
-        // GET: Freelancers/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Freelancer freelancer = db.Freelancers.Find(id);
-            if (freelancer == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", freelancer.CategoryId);
-            ViewBag.ExperienceInCategory = new SelectList(db.Lookups, "Id", "value", freelancer.ExperienceInCategory);
-            ViewBag.JobType = new SelectList(db.Lookups, "Id", "value", freelancer.JobType);
-            return View(freelancer);
-        }
-
-        // POST: Freelancers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FreelancerId,CategoryId,ExperienceInCategory,ProfessionalTitle,ProfessionalOverview,JobType")] Freelancer freelancer)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(freelancer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", freelancer.CategoryId);
-            ViewBag.ExperienceInCategory = new SelectList(db.Lookups, "Id", "value", freelancer.ExperienceInCategory);
-            ViewBag.JobType = new SelectList(db.Lookups, "Id", "value", freelancer.JobType);
-            return View(freelancer);
-        }
-
-        // GET: Freelancers/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Freelancer freelancer = db.Freelancers.Find(id);
-            if (freelancer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(freelancer);
-        }
-
-        // POST: Freelancers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Freelancer freelancer = db.Freelancers.Find(id);
-            db.Freelancers.Remove(freelancer);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }
