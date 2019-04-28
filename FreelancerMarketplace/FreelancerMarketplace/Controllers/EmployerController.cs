@@ -294,5 +294,10 @@ namespace FreelancerMarketplace.Controllers
                 return RedirectToAction("MyJobs");
             
         }
+        public ActionResult FindFreelancer()
+        {
+            return View();
+
+        }
     }
 }
