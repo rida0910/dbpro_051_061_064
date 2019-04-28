@@ -22,7 +22,7 @@ namespace FreelancerMarketplace.Controllers
             return View();
         }
         
-        // GET: Employer/Details/5
+        // GET: Employer/ManageBidders/5
         public ActionResult ManageBidders(int? id)
         {
 
