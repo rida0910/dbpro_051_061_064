@@ -214,7 +214,7 @@ namespace FreelancerMarketplace.Controllers
                 return HttpNotFound();
             }
             return View(job);
-           
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
