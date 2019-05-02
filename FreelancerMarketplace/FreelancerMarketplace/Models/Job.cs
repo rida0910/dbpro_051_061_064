@@ -22,10 +22,12 @@ namespace FreelancerMarketplace.Models
         public Nullable<int> AttachmentID { get; set; }
         public int SkillID { get; set; }
         public int EmployerID { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public System.DateTime TimePosted { get; set; }
         public int CategoryID { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Deadline { get; set; }
         public int MinPayment { get; set; }
         public Nullable<int> JobType { get; set; }
@@ -37,5 +39,7 @@ namespace FreelancerMarketplace.Models
         public virtual Lookup Lookup { get; set; }
 
         public HttpPostedFileBase AttachmentFile { get; set; }
+
+        public int countOfBids { get; set; }
     }
 }

@@ -22,14 +22,15 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult Managejobs()
         {
-            var bids = db.Bids;
+            var bids = db.Bids.Where(x => x.Accepted == true && x.Active == 1);
             var userid = User.Identity.GetUserId();
             
             List<JobViewModel> list = new List<JobViewModel>();
             foreach (Bid bid in bids)
             {
                 JobViewModel jobView = new JobViewModel();
-                if (bid.FreelancerID == db.People.FirstOrDefault(x => x.User_AccountID == userid).PersonId && bid.Accepted == true && bid.Active == 1)
+                int pid = db.People.FirstOrDefault(x => x.User_AccountID == userid).PersonId;
+                if (bid.FreelancerID == pid)
                 {
                     Job job = db.Jobs.FirstOrDefault(x => x.JobId == bid.JobID);
                     jobView.Bid = bid;
@@ -42,7 +43,7 @@ namespace FreelancerMarketplace.Controllers
 
         
 
-        // GET: Freelancers/Create
+        
         public ActionResult AddInfo()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
@@ -51,9 +52,7 @@ namespace FreelancerMarketplace.Controllers
             return View();
         }
 
-        // POST: Freelancers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddInfo([Bind(Include = "ImageFile,ProfessionalTitle,ProfessionalOverview,CategoryId,ExperienceInCategory,JobType")] Freelancer freelancer, 
@@ -124,7 +123,7 @@ namespace FreelancerMarketplace.Controllers
                 }
 
                 ModelState.Clear();
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("AvailableJobs");
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
@@ -251,18 +250,20 @@ namespace FreelancerMarketplace.Controllers
             int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
             var bids = db.Bids.Where(x => x.FreelancerID == freeId && x.Active.Equals(1) && x.Accepted == false);
   
-            List<JobViewModel> list = new List<JobViewModel>();
-
+            List<Bid> list = new List<Bid>();
+            List<string> joblist = new List<string>();
             foreach (Bid bid in bids)
             {
                 Job job = db.Jobs.FirstOrDefault(x => x.JobId == bid.JobID);
-                JobViewModel jobView = new JobViewModel();
-                jobView.Bid = bid;
-                jobView.Job = job;
-                list.Add(jobView);
+                //JobViewModel jobView = new JobViewModel();
+                //jobView.Bid = bid;
+                //jobView.Job = job;
+                list.Add(bid);
+                joblist.Add(job.Title);
+                
             }
-            
 
+            ViewBag.JobTitle = joblist;
             return View(list);
         }
 
@@ -274,14 +275,17 @@ namespace FreelancerMarketplace.Controllers
             return RedirectToAction("MyActiveBids");
         }
 
-        
-        [HttpPost]
-        public ActionResult EditBid(int? id, JobViewModel jobView)
+        public void EditBid([Bind(Include = "PaymentAmount,DeliveryTime")]Bid bid)
         {
-            Bid bid = db.Bids.FirstOrDefault(x => x.BidId == id);
-            db.SaveChanges();
-            return RedirectToAction("MyActiveBids");
+            if (ModelState.IsValid)
+            {
+                db.Entry(bid).State = EntityState.Modified;
+                db.SaveChanges();
+                
+            }
 
+            ModelState.AddModelError("", "Unable to save changes. Try again!");
+            
         }
     }
 }

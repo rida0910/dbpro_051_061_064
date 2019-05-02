@@ -11,14 +11,20 @@ namespace FreelancerMarketplace.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Bid
     {
         public int BidId { get; set; }
-        public int Status { get; set; }
         public int FreelancerID { get; set; }
         public int JobID { get; set; }
         public System.DateTime BidTime { get; set; }
         public Nullable<int> PaymentAmount { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> DeliveryTime { get; set; }
+        public int Active { get; set; }
+        public Nullable<bool> Accepted { get; set; }
     }
 }

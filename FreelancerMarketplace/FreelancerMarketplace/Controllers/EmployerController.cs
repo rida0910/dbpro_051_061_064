@@ -17,9 +17,9 @@ namespace FreelancerMarketplace.Controllers
     public class EmployerController : Controller
     {
         private DB66Entities db = new DB66Entities();
+        
 
-
-        public ActionResult POstAJOb()
+        public ActionResult PostAJob()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
             ViewBag.JobType = new SelectList(db.Lookups.Where(x => x.category.Equals("JOBTYPE")), "Id", "value");
@@ -28,7 +28,7 @@ namespace FreelancerMarketplace.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult POstAJOb([Bind(Include = "Title,Description,MinPayment,MaxPayment,AttachmentFile,CategoryId,Deadline,JobType")] Job job,
+        public ActionResult PostAJob([Bind(Include = "Title,Description,MinPayment,MaxPayment,AttachmentFile,CategoryId,Deadline,JobType")] Job job,
             string MainSkill, string OtherSkills)
         {
             if (ModelState.IsValid)
@@ -99,74 +99,12 @@ namespace FreelancerMarketplace.Controllers
                 }
 
                 ModelState.Clear();
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("MyJobs");
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
             ViewBag.JobType = new SelectList(db.Lookups.Where(x => x.category.Equals("JOBTYPE")), "Id", "value");
             return View(job);
-        }
-
-
-        // GET: Employer/ManageBidders/5
-        public ActionResult ManageBidders(int? id)
-        {
-
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Job job = db.Jobs.FirstOrDefault(x => x.JobId == id);
-            Bid Bid = db.Bids.FirstOrDefault(b => b.JobID == id);
-            List<Bid> AllBids = new List<Bid>();
-            foreach (Bid bid in db.Bids)
-            {
-                if (bid.JobID == job.JobId)
-                {
-                    AllBids.Add(bid);
-                }
-
-            }
-            ViewBag.Bids = AllBids;
-
-            List<Freelancer> freelancers = new List<Freelancer>();
-            foreach (Freelancer free in db.Freelancers)
-            {
-                if (free.FreelancerId == Bid.FreelancerID)
-                {
-                    freelancers.Add(free);
-                }
-            }
-            ViewBag.Freelancers = freelancers;
-            int freelancerid = Bid.FreelancerID;
-            Freelancer freelancer = db.Freelancers.FirstOrDefault(f => f.FreelancerId.Equals(freelancerid));
-            Person person = db.People.FirstOrDefault(p => p.PersonId.Equals(freelancerid));
-            string userId = User.Identity.GetUserId();
-            AspNetUser user = db.AspNetUsers.FirstOrDefault(u => u.Id.Equals(userId));
-
-            ViewBag.Name = person.FirstName + " " + person.LastName;
-            ViewBag.Email = user.Email;
-            ViewBag.DeliveryTime = Bid.DeliveryTime;
-            ViewBag.Payment = Bid.PaymentAmount;
-
-            BiddersViewModel biddersview = new BiddersViewModel();
-            biddersview.Bid = Bid;
-
-            return View(biddersview);
-        }
-
-
-        public ActionResult Index()
-        {
-            var employer = db.Employers.Include(e => e.Company);
-            return View(employer.ToList());
-        }
-
-
-        // GET: Employer/Messages
-        public ActionResult Messages()
-        {
-            return View();
         }
 
         public ActionResult MyJobs()
@@ -179,29 +117,60 @@ namespace FreelancerMarketplace.Controllers
             {
                 if (job.EmployerID == empId)
                 {
+                    job.countOfBids = db.Bids.Where(x => x.JobID == job.JobId).Count();
                     MyJobs.Add(job);
                 }
             }
             return View(MyJobs);
         }
 
-        // POST: Employer/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult ManageBidders(int? id)
         {
-            try
-            {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (id == null)
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
+            Job job = db.Jobs.FirstOrDefault(j => j.JobId == id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+
+            var bids = db.Bids.Where(x => x.JobID == job.JobId && x.Active == 1);
+            BiddersViewModel biddersViewModel = new BiddersViewModel();
+            biddersViewModel.Bids = bids;
+            biddersViewModel.Job = job;
+            List<Person> people = new List<Person>();
+            List<AspNetUser> users = new List<AspNetUser>();
+            foreach (Bid bid in bids)
+            {
+                Person person = db.People.FirstOrDefault(x => x.PersonId == bid.FreelancerID);
+                people.Add(person);
+                AspNetUser user = db.AspNetUsers.FirstOrDefault(x => x.Id == person.User_AccountID);
+                users.Add(user);
+            }
+
+            biddersViewModel.People = people;
+            biddersViewModel.AspNetUsers = users;
+
+            return View(biddersViewModel);
         }
 
-        // GET: Employer/Edit/5
+        public ActionResult AwardProject(int? id)
+        {
+            Bid bid = db.Bids.FirstOrDefault(x => x.BidId == id);
+            bid.Accepted = true;
+            db.SaveChanges();
+            return RedirectToAction("MyJobs");
+        }
+        
+        public ActionResult Messages()
+        {
+            return View();
+        }
+   
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -214,7 +183,7 @@ namespace FreelancerMarketplace.Controllers
                 return HttpNotFound();
             }
             return View(job);
-
+           
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -282,26 +251,17 @@ namespace FreelancerMarketplace.Controllers
             }
             return View(job);
         }
-
+        
         [HttpPost, ActionName("DeleteJob")]
         [ValidateAntiForgeryToken]
         public ActionResult JobDeleted(int id, FormCollection collection)
         {
-
-            Job job = db.Jobs.Find(id);
-            db.Jobs.Remove(job);
-            db.SaveChanges();
-            return RedirectToAction("MyJobs");
-
-        }
-        public ActionResult FindFreelancer()
-        {
-            return View();
-
-        }
-        public ActionResult Message()
-        {
-            return View();
+            
+                Job job = db.Jobs.Find(id);
+                db.Jobs.Remove(job);
+                db.SaveChanges();
+                return RedirectToAction("MyJobs");
+            
         }
     }
 }

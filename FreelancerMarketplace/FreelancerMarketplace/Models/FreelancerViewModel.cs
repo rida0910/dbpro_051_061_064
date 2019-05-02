@@ -21,10 +21,10 @@ namespace FreelancerMarketplace.Models
 
     public class BiddersViewModel
     {
-        public Bid Bid { get; set; }
-        public Freelancer Freelancer { get; set; }
+        public IEnumerable<Bid> Bids { get; set; }
+        public IEnumerable<Person> People { get; set; }
         public Job Job { get; set; }
-        public AspNetUser AspNetUser { get; set; }
+        public IEnumerable<AspNetUser> AspNetUsers { get; set; }
 
     }
 
