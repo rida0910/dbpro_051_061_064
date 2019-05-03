@@ -22,8 +22,14 @@
 
         <!-- Welcome Text -->
         <div class="welcome-text">
-
+            @if (Model.Accepted == true)
+            {
             <h3>UnAssign Project Awarded to @ViewBag.Name</h3>
+            }
+            @if (Model.Accepted == false)
+            {
+                <h3> Remove Bid From @ViewBag.Name </h3>
+            }
             <div class="bid-acceptance margin-top-15">
                 PKR  @Model.PaymentAmount
             </div>

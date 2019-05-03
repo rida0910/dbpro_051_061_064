@@ -84,7 +84,16 @@ namespace FreelancerMarketplace.Controllers
                 }
                 if (UserManager.IsInRole(user.Id, "Employer"))
                 {
-                    return RedirectToAction("MyJobs", "Employer");
+                    DB66Entities db = new DB66Entities();
+                    var people = db.People;
+                    if (people.Any(p => p.User_AccountID == user.Id))
+                    {
+                        return RedirectToAction("MyJobs", "Employer");
+                    }
+                    else
+                    {
+                        return RedirectToAction("AddInformation", "Employer");
+                    }
                 }
                 if (UserManager.IsInRole(user.Id, "Freelancer"))
                 {
