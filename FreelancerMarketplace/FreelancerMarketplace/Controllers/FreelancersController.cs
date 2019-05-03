@@ -46,6 +46,11 @@ namespace FreelancerMarketplace.Controllers
         
         public ActionResult AddInfo()
         {
+            string id = User.Identity.GetUserId();
+            if (db.People.Any(x => x.User_AccountID == id))
+            {
+                RedirectToAction("AvailableJobs");
+            }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
             ViewBag.ExperienceInCategory = new SelectList(db.Lookups.Where(x => x.category == "EXPERIENCE"), "Id", "value");
             ViewBag.JobType = new SelectList(db.Lookups.Where(x => x.category.Equals("JOBTYPE")), "Id", "value");

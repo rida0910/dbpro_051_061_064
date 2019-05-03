@@ -14,19 +14,7 @@ namespace FreelancerMarketplace.Models
     
     public partial class Company
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Company()
-        {
-            this.Employers = new HashSet<Employer>();
-            this.Employers1 = new HashSet<Employer>();
-        }
-    
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employer> Employers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employer> Employers1 { get; set; }
     }
 }

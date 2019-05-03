@@ -70,7 +70,7 @@
                                                     <!-- Buttons -->
                                                     <div class="buttons-to-right always-visible margin-top-25 margin-bottom-0">
                                                         <a href="@Url.Action("UnAssignProject", "Employer", new { id = Model.Bids.ElementAt(i).BidId})" class=" button ripple-effect"><i class="icon-material-outline-check"></i> Un-Assign Project</a>
-                                                        <a href="#small-dialog-2" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
+                                                        <a href="/Employer/SendMessage/@Model.People.ElementAt(i).PersonId" class=" button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
                                                         
                                                     </div>
                                                 </div>

@@ -11,15 +11,17 @@ namespace FreelancerMarketplace.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Message
     {
         public int MessageId { get; set; }
+        [Required]
         public string Text { get; set; }
         public Nullable<int> AttachmentId { get; set; }
-        public int JobId { get; set; }
         public int EmployerId { get; set; }
         public int FreelancerId { get; set; }
+        public Nullable<System.DateTime> Time { get; set; }
     
         public virtual Attachment Attachment { get; set; }
     }
