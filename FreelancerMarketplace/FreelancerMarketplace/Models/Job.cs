@@ -41,5 +41,6 @@ namespace FreelancerMarketplace.Models
         public HttpPostedFileBase AttachmentFile { get; set; }
 
         public int countOfBids { get; set; }
+        public int countOfAcceptedBids { get; set; }
     }
 }

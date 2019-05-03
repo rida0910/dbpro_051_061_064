@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FreelancerMarketplace.Models.JobViewModel>
+﻿@model IEnumerable<FreelancerMarketplace.Models.Bid>
 
 @{
     ViewBag.Title = "MyBids";
@@ -78,9 +78,9 @@
 
                                 <div class="content">
                                     <ul class="dashboard-box-list">
-
+                                        @{ int i = 0;}
                                         @foreach (var item in Model)
-    {
+                                        {
                                     <li>
                                         <!-- Job Listing -->
                                         <div class="job-listing width-adjustment">
@@ -90,15 +90,18 @@
 
                                                 <!-- Details -->
                                                 <div class="job-listing-description">
-                                                    <h3 class="job-listing-title"><a href="#">@Html.DisplayFor(modelItem => item.Job.Title)</a></h3>
+
+                                                    @{ string title = ViewBag.JobTitle[i];}
+                                                    @{ i += 1;}
+                                                    <h3 class="job-listing-title"><a href="#">@title</a></h3>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <!-- Task Details -->
                                         <ul class="dashboard-task-info">
-                                            <li><strong>PKR @Html.DisplayFor(modelItem => item.Bid.PaymentAmount)</strong><span>Payment Amount</span></li>
-                                            <li><strong>@Html.DisplayFor(modelItem => item.Bid.DeliveryTime)</strong><span>Delivery Date</span></li>
+                                            <li><strong>PKR @Html.DisplayFor(modelItem => item.PaymentAmount)</strong><span>Payment Amount</span></li>
+                                            <li><strong>@Html.DisplayFor(modelItem => item.DeliveryTime)</strong><span>Delivery Date</span></li>
                                         </ul>
 
                                         <!-- Buttons -->
@@ -110,67 +113,6 @@
                                     </li>
 
 
-                                    @*<!-- Edit Bid Popup
-    ================================================== -->
-                                        <div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
-
-                                            <!--Tabs -->
-                                            <div class="sign-in-form">
-
-                                                <ul class="popup-tabs-nav">
-                                                    <li><a href="#Edit">Edit Bid</a></li>
-                                                    <li><a href="#Remove">Remove Bid</a></li>
-                                                </ul>
-
-                                                <div class="popup-tabs-container">
-
-                                                    <!-- Tab -->
-                                                    <div class="popup-tab-content" id="Edit">
-
-                                                        <!-- Bidding -->
-                                                        <div class="bidding-widget">
-                                                            <!-- Headline -->
-                                                            <span class="bidding-detail">Set your <strong>minimal rate</strong></span>
-
-                                                            <!-- Price Slider -->
-                                                            <div class="bidding-value">PKR<span id="biddingVal"></span></div>
-                                                            <input class="bidding-slider" type="text" value="" data-slider-handle="custom" data-slider-currency="PKR" data-slider-min=@item.Job.MaxPayment data-slider-max=@item.Job.MaxPayment data-slider-value="auto" data-slider-step="1" data-slider-tooltip="hide" name="BidAmount" />
-
-                                                            <!-- Headline -->
-                                                            <span class="bidding-detail margin-top-30">Set your <strong>delivery time</strong></span>
-
-                                                            <!-- Fields -->
-                                                            <div class="bidding-fields">
-                                                                <div class="bidding-field">
-                                                                    @Html.EditorFor(modelItem => item.Bid.DeliveryTime, new { @class = "datepicker form-control", placeholder = "Enter Delivery Time here..." })
-                                                                </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- Button -->
-                                                        <button nclick="location.href='@Url.Action("EditBid", "Freelancers", new { id = item.Bid.BidId})'" class="button full-width button-sliding-icon ripple-effect" type="submit">Save Changes <i class="icon-material-outline-arrow-right-alt"></i></button>
-
-                                                    </div>
-
-                                                    <div class="popup-tab-content" id="Remove">
-                                                        <div class="bidding-widget">
-                                                            <!-- Headline -->
-                                                            <span class="bidding-detail"><strong>Are you sure you want to remove this bid?</strong></span>
-                                                            <!-- Button -->
-                                                            <button onclick="location.href='@Url.Action("CancelBid", "Freelancers", new { id = item.Bid.BidId})'" class="button full-width button-sliding-icon ripple-effect" type="submit">Remove Bid<i class="icon-material-outline-arrow-right-alt"></i></button>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        <!-- Edit Bid Popup / End -->*@
-
-
-                                    <!-- Edit Bid Popup
-================================================== -->
                                     <div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
 
                                         <!--Tabs -->
@@ -194,23 +136,24 @@
                                                         <!-- Price Slider -->
                                                         @*<div class="bidding-value">PKR<span id="biddingVal"></span></div>
                                                         <input class="bidding-slider" type="text" value="" data-slider-handle="custom" data-slider-currency="PKR" data-slider-min=@item.Job.MinPayment data-slider-max=@item.Job.MaxPayment data-slider-value="auto" data-slider-step="1" data-slider-tooltip="hide" name="BidAmount" />*@
-                                                        @Html.TextBoxFor(modelItem => item.Bid.PaymentAmount, new { @class = "bidding-slider" })
+                                                        @Html.TextBoxFor(modelItem => item.PaymentAmount, new { @class = "bidding-slider"})
                                                         <!-- Headline -->
                                                         <span class="bidding-detail margin-top-30">Set your <strong>delivery time</strong></span>
 
-                                                        @Html.EditorFor(modelItem => item.Bid.DeliveryTime, new { @class = "datepicker form-control", placeholder = "Enter Delivery Time here...", name="Date"})
+                                                        @Html.EditorFor(modelItem => item.DeliveryTime, new { @class = "datepicker form-control", placeholder = "Enter Delivery Time here...", name="Date"})
                                                     </div>
 
                                                     <!-- Button -->
-                                                    <button onclick="location.href='@Url.Action("EditBid", "Freelancers", new { id = item.Bid.BidId})'" class="button full-width button-sliding-icon ripple-effect" type="submit">Save Changes <i class="icon-material-outline-arrow-right-alt"></i></button>
+                                                    <button onclick="location.href='@Url.Action("EditBid", "Freelancers", new { id = item.BidId})'" class="button full-width button-sliding-icon ripple-effect" type="submit">Save Changes <i class="icon-material-outline-arrow-right-alt"></i></button>
 
                                                 </div>
                                                 <div class="popup-tab-content" id="Remove">
                                                     <div class="bidding-widget">
+
                                                         <!-- Headline -->
                                                         <span class="bidding-detail"><strong>Are you sure you want to remove this bid?</strong></span>
                                                         <!-- Button -->
-                                                        <button onclick="location.href='@Url.Action("CancelBid", "Freelancers", new { id = item.Bid.BidId})'" class="button full-width button-sliding-icon ripple-effect" type="submit">Remove Bid<i class="icon-material-outline-arrow-right-alt"></i></button>
+                                                        <button onclick="location.href='@Url.Action("CancelBid", "Freelancers", new { id = item.BidId})'" class="button full-width button-sliding-icon ripple-effect" type="submit">Remove Bid<i class="icon-material-outline-arrow-right-alt"></i></button>
                                                     </div>
                                                 </div>
 
@@ -219,8 +162,8 @@
                                     </div>
                                     <!-- Edit Bid Popup / End -->
 
-}
-</div>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -229,92 +172,5 @@
         </div>
     </div>
     <!-- Wrapper / End -->
-    
-    @*<!--Delete Popup-->
-    <div id="small-dialog2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
-        <!--Tabs -->
-        <div class="sign-in-form">
-
-            <ul class="popup-tabs-nav">
-                <li><a href="#">Remove Bid</a></li>
-            </ul>
-
-            <div class="popup-tabs-container">
-
-                <!-- Tab -->
-                <div class="popup-tab-content" id="tab">
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-
-
-
-
-
-
-
-
-
-    <!-- Edit Bid Popup
-        ================================================== -->
-    <div id="small-dialog2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
-
-        <!--Tabs -->
-        <div class="sign-in-form">
-
-            <ul class="popup-tabs-nav">
-                <li><a href="#tab">Edit Bid</a></li>
-            </ul>
-
-            <div class="popup-tabs-container">
-
-                <!-- Tab -->
-                <div class="popup-tab-content" id="tab">
-
-                    <!-- Bidding -->
-                    <div class="bidding-widget">
-                        <!-- Headline -->
-                        <span class="bidding-detail">Set your <strong>minimal hourly rate</strong></span>
-
-                        <!-- Price Slider -->
-                        <div class="bidding-value">$<span id="biddingVal"></span></div>
-                        <input class="bidding-slider" type="text" value="" data-slider-handle="custom" data-slider-currency="$" data-slider-min="10" data-slider-max="60" data-slider-value="40" data-slider-step="1" data-slider-tooltip="hide" />
-
-                        <!-- Headline -->
-                        <span class="bidding-detail margin-top-30">Set your <strong>delivery time</strong></span>
-
-                        <!-- Fields -->
-                        <div class="bidding-fields">
-                            <div class="bidding-field">
-                                <!-- Quantity Buttons -->
-                                <div class="qtyButtons with-border">
-                                    <div class="qtyDec"></div>
-                                    <input type="text" name="qtyInput" value="2">
-                                    <div class="qtyInc"></div>
-                                </div>
-                            </div>
-                            <div class="bidding-field">
-                                <select class="selectpicker default with-border">
-                                    <option selected>Days</option>
-                                    <option>Hours</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Button -->
-                    <button class="button full-width button-sliding-icon ripple-effect" type="submit">Save Changes <i class="icon-material-outline-arrow-right-alt"></i></button>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- Edit Bid Popup / End -->
-
-
-
+   
 </body>
-</html>

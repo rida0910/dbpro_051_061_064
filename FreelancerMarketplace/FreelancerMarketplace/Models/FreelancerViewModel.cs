@@ -25,6 +25,7 @@ namespace FreelancerMarketplace.Models
         public IEnumerable<Person> People { get; set; }
         public Job Job { get; set; }
         public IEnumerable<AspNetUser> AspNetUsers { get; set; }
+        
 
     }
 
