@@ -1,0 +1,43 @@
+﻿@model FreelancerMarketplace.Models.Bid
+
+    @{
+        ViewBag.Title = "CancelBid";
+        Layout = "~/Views/Shared/_LayoutFreelancer.cshtml";
+    }
+
+    <br />
+    <br />
+    <br />
+    <center>
+        @using (Html.BeginForm())
+        {
+        <h2>Cancel Bid for "@ViewBag.JobTitle"</h2>
+
+        <br />
+        <br />
+
+
+        <div class="bidding-widget col-md-8">
+
+            <!-- Headline -->
+            <span class="bidding-detail"><strong>Are you sure you want to remove this bid?</strong></span>
+            <br />
+            <!-- Button -->
+            <button onclick="location.href='@Url.Action("CancelBid", "Freelancers", new { id = Model.BidId })'" class="button full-width button-sliding-icon ripple-effect" type="submit">Remove Bid<i class="icon-material-outline-arrow-right-alt"></i></button>
+        </div>
+        }
+    </center>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />

@@ -1,0 +1,136 @@
+﻿@model FreelancerMarketplace.Models.JobViewModel
+@{
+    ViewBag.Title = "JobDetails";
+    Layout = "~/Views/Shared/_LayoutFreelancer.cshtml";
+}
+
+
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+
+
+        <!-- Titlebar
+        ================================================== -->
+        <div class="single-page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="single-page-header-inner">
+                            <div class="left-side">
+
+                                <div class="header-details">
+                                    <h3> @Html.DisplayFor(model => model.Job.Title)</h3>
+                                    <h5>About the Employer</h5>
+                                    <ul>
+
+                                        <li> Employer's Name: @ViewBag.Name</li>
+                                        <li> @ViewBag.Nationality</li>
+                                        <li><div class="verified-badge-with-title">Verified</div></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="right-side">
+                                <div class="salary-box">
+                                    <div class="salary-type">Project Budget</div>
+                                    <div class="salary-amount">@Html.DisplayFor(model => model.Job.MinPayment) PKR - @Html.DisplayFor(model => model.Job.MaxPayment) PKR</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Page Content
+        ================================================== -->
+        <div class="container">
+            <div class="row">
+
+                <!-- Content -->
+                <div class="col-xl-8 col-lg-8 content-right-offset">
+
+                    <!-- Description -->
+                    <div class="single-page-section">
+                        <h3 class="margin-bottom-25">Project Description</h3>
+                        @Html.DisplayFor(model => model.Job.Description)
+                    </div>
+
+                    <!-- Atachments -->
+                    <div class="single-page-section">
+                        <h3>Attachment</h3>
+                        <div class="attachments-container">
+                            <a href="@Url.Action("Download", "Freelancers", new { id = Model.Job.AttachmentID })" class="attachment-box ripple-effect"><span>Project Brief</span><i>PDF</i></a>
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="single-page-section">
+                        <h3>Skills Required</h3>
+                        <div class="task-tags">
+                            <span>@Html.DisplayFor(model => model.Job.Skill.SkillName)</span>
+                            @foreach (var item in ViewBag.OtherSkills)
+                            {
+                                <span>@item</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+
+                </div>
+
+
+                <!-- Sidebar -->
+                <div class="col-xl-4 col-lg-4">
+                    <div class="sidebar-container">
+
+                        <div class="countdown green margin-bottom-35">Deadline: @Html.DisplayFor(model => model.Job.Deadline)</div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Spacer -->
+            <div class="margin-top-15"></div>
+            <!-- Spacer / End-->
+
+
+
+        </div>
+        <!-- Wrapper / End -->
+    </div>
+
+
+</body>
+}
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker({
+                dateFormat: "dd/M/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+        });
+    </script>
+
+}
+
+
+

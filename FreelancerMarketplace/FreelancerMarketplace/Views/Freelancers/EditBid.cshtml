@@ -1,0 +1,46 @@
+﻿@model FreelancerMarketplace.Models.Bid
+
+@{
+    ViewBag.Title = "EditBid";
+    Layout = "~/Views/Shared/_LayoutFreelancer.cshtml";
+}
+
+<br />
+
+@using (Html.BeginForm())
+{
+    <center>
+        <h2>Edit Bid</h2>
+        <br />
+        <br />
+        <div class="bidding-widget col-md-8">
+            <!-- Headline -->
+            <span class="bidding-detail">Set your <strong>minimal rate</strong></span>
+
+            <!-- Price Slider -->
+            @*<div class="bidding-value">PKR<span id="biddingVal"></span></div>
+                <input class="bidding-slider" type="text" value="" data-slider-handle="custom" data-slider-currency="PKR" data-slider-min=@item.Job.MinPayment data-slider-max=@item.Job.MaxPayment data-slider-value="auto" data-slider-step="1" data-slider-tooltip="hide" name="BidAmount" />*@
+            <!-- Price Slider -->
+            <div class="bidding-value">PKR <span id="biddingVal"></span></div>
+            <input class="bidding-slider" type="text" value="" data-slider-handle="custom" data-slider-currency="PKR" data-slider-min=@ViewBag.Min data-slider-max=@ViewBag.Max data-slider-value="auto" data-slider-step="2" data-slider-tooltip="hide" name="BidAmount" />
+            <!-- Headline -->
+            <span class="bidding-detail margin-top-30">Set your <strong>delivery time</strong></span>
+
+            @Html.EditorFor(model => model.DeliveryTime, new { @class = "datepicker form-control", placeholder = "Enter Delivery Time here...", name = "Date" })
+
+            <!-- Button -->
+            <button onclick="location.href='@Url.Action("EditBid", "Freelancers", new { id = Model.BidId })'" class="button full-width button-sliding-icon ripple-effect" type="submit">Save Changes <i class="icon-material-outline-arrow-right-alt"></i></button>
+        </div>
+    </center>
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
