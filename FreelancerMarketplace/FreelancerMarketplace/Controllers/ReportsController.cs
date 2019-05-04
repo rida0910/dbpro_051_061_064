@@ -9,7 +9,7 @@ namespace FreelancerMarketplace.Controllers
 {
     public class ReportsController : Controller
     {
-   
+
         public ActionResult Index()
         {
             return FreelancerList();
@@ -26,7 +26,7 @@ namespace FreelancerMarketplace.Controllers
             Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             return File(s, "application/pdf");
         }
-        
+
         public ActionResult JobByEmployers()
         {
             return EmployersPostedJobs();
@@ -43,7 +43,7 @@ namespace FreelancerMarketplace.Controllers
             Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             return File(s, "application/pdf");
         }
-        
+
         public ActionResult EmployersInactiveProjects()
         {
             return EmployersPostedJobs();
@@ -96,8 +96,8 @@ namespace FreelancerMarketplace.Controllers
         }
 
 
-  
-       
-        }
+
+
+    }
     }
 
