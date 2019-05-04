@@ -1,9 +1,9 @@
-﻿@model FreelancerMarketplace.Models.JobViewModel
+﻿
+@model FreelancerMarketplace.Models.JobViewModel
 @{
     ViewBag.Title = "JobDetails";
-    Layout = "~/Views/Shared/_LayoutFreelancer.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <body>
 
@@ -89,8 +89,8 @@
                 <div class="col-xl-4 col-lg-4">
                     <div class="sidebar-container">
 
-                        <a href="/Freelancers/SendMessage/@Model.Job.EmployerID" class=" apply-now-button margin-bottom-50">Direct Message</a>
-                        <a href="/Freelancers/ViewBids/@Model.Job.JobId" class=" apply-now-button margin-bottom-50">Other Freelancers Bids</a>
+                        <a href="/Home/ViewBids/@Model.Job.JobId" class=" apply-now-button margin-bottom-50">View Bids</a>
+
                         <div class="countdown green margin-bottom-35">Deadline: @Html.DisplayFor(model => model.Job.Deadline)</div>
 
 

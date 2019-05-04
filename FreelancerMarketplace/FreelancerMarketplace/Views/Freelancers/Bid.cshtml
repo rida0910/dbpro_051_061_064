@@ -37,7 +37,7 @@
                                 <div class="right-side">
                                     <div class="salary-box">
                                         <div class="salary-type">Project Budget</div>
-                                        <div class="salary-amount">@Html.DisplayFor(model => model.Job.MinPayment) PKR - @Html.DisplayFor(model => model.Job.MaxPayment) PKR</div>
+                                        <div class="salary-amount">PKR @Html.DisplayFor(model => model.Job.MinPayment) - PKR @Html.DisplayFor(model => model.Job.MaxPayment)</div>
                                     </div>
                                 </div>
                             </div>
@@ -90,9 +90,10 @@
                     <!-- Sidebar -->
                     <div class="col-xl-4 col-lg-4">
                         <div class="sidebar-container">
-
-                            <a href="/Freelancers/SendMessage/@Model.Job.EmployerID" class=" apply-now-button margin-bottom-50">Contact Employer</a>
-
+                           
+                                <a href="/Freelancers/SendMessage/@Model.Job.EmployerID" class=" apply-now-button margin-bottom-50">Contact Employer</a>
+                                <a href="/Freelancers/ViewBids/@Model.Job.JobId" class=" apply-now-button margin-bottom-50">Other Freelancers Bids</a>
+                            
                             <div class="countdown green margin-bottom-35">Deadline: @Html.DisplayFor(model => model.Job.Deadline)</div>
 
 

@@ -46,30 +46,28 @@
             <!-- Search Bar -->
             <div class="row">
                 <div class="col-md-12">
-                    <div class="intro-banner-search-form margin-top-95">
+                    <div class=" margin-top-95">
 
-                        <!-- Search Field -->
-                        <div class="intro-search-field with-autocomplete">
-                            <label for="autocomplete-input" class="field-title ripple-effect">Where?</label>
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+                        {
+                            <!-- Search Field -->
+                        <div class="intro-search-field with-autocomplete intro-banner-search-form">
+                            <label for="autocomplete-input" class="field-title ripple-effect">Search Job</label>
                             <div class="input-with-icon">
-                                <input id="autocomplete-input" type="text" placeholder="Online Job">
-                                <i class="icon-material-outline-location-on"></i>
+                                <input id="autocomplete-input" type="text" placeholder="Job Title or Keywords..." name="SearchString">
+
                             </div>
+                            <!-- Button -->
+                            <div class="intro-search-button">
+                                <button class="button ripple-effect" type="submit">Search</button>
+                            </div>
+
                         </div>
+                        }
 
 
 
-
-                        <!-- Search Field -->
-                        <div class="intro-search-field">
-                            <label for="intro-keywords" class="field-title ripple-effect">What job you want?</label>
-                            <input id="intro-keywords" type="text" placeholder="Job Title or Keywords">
-                        </div>
-                        <!-- Button -->
-                        <div class="intro-search-button">
-                            <button class="button ripple-effect" onclick="window.location.href='jobs-list-layout-full-page-map.html'">Search</button>
-                        </div>
-
+                        
 
 
 
@@ -77,13 +75,13 @@
 
 
                         @*@using (Html.BeginForm("Search", "Home", FormMethod.Get))
-                            {
-                                <div class="input-with-icon">
-                                    @Html.TextBox("SearchString", null, new { @class = "form-control pull-right", placeholder = "Search Project" })
-                                    @*<button type="submit" class="btn btn-default pull-right">Search</button>*@
+        {
+            <div class="input-with-icon">
+                @Html.TextBox("SearchString", null, new { @class = "form-control pull-right", placeholder = "Search Project" })
+                @*<button type="submit" class="btn btn-default pull-right">Search</button>*@
                         @*<i class="icon-material-outline-search"></i>
-                                </div>
-                            }*@
+            </div>
+        }*@
 
 
 
@@ -127,7 +125,7 @@
                                 
                             </div>
                         </a>
-                        }
+                            }
 
 
                     </div>

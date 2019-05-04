@@ -1,6 +1,6 @@
-﻿@model IEnumerable<FreelancerMarketplace.Models.Job>
+﻿@model FreelancerMarketplace.Models.JobSearchViewModel
 @{
-    ViewBag.Title = "CategoryJobs";
+    ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,22 +20,25 @@
             ================================================== -->
             <div class="container">
                 <div class="row">
-                   
+
 
                     <div class="col-xl-9 col-lg-8 content-left-offset">
 
 
 
                         <!-- Tasks Container -->
-                        <div class="tasks-list-container tasks-grid-layout margin-top-35">
+                        <div>
 
 
 
 
+                            @if (Model.JobTitle.Count() != 0)
+                            {
+                            <h3>Jobs's title matched with search string</h3>
+                            <br />
 
-
-
-                            @foreach (var item in Model)
+                            }
+                            @foreach (var item in Model.JobTitle)
                             {
                                 <!-- Task -->
                                 <a href="/Home/JobDetails/@item.JobId" class="task-listing">
@@ -63,12 +66,89 @@
                                         </div>
                                     </div>
                                 </a>
+                                <br />
+                            }
+
+
+
+                            @if (Model.JobSkill.Count() != 0)
+                            {
+                            <h3>Jobs's Skill matched with search string</h3>
+                            <br />
+                            }
+                            @foreach (var item in Model.JobSkill)
+                            {
+                                <!-- Task -->
+                                <a href="/Home/JobDetails/@item.JobId" class="task-listing">
+
+                                    <!-- Job Listing Details -->
+                                    <div class="task-listing-details">
+
+                                        <!-- Details -->
+                                        <div class="task-listing-description">
+                                            <h3 class="task-listing-title"> @Html.DisplayFor(modelItem => item.Title)</h3>
+                                            <ul class="task-icons">
+                                                <li><i class="icon-material-outline-access-time"></i> @GetPrettyDate(item.TimePosted)</li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="task-listing-bid">
+                                        <div class="task-listing-bid-inner">
+                                            <div class="task-offers">
+                                                <strong> @Html.DisplayFor(modelItem => item.MinPayment) PKR - @Html.DisplayFor(modelItem => item.MaxPayment) PKR</strong>
+
+                                            </div>
+                                            <span class="button button-sliding-icon ripple-effect">View Details <i class="icon-material-outline-arrow-right-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <br />
 
                             }
 
-                            @if (Model.Count() == 0)
+
+                            @if (Model.JobCategory.Count() != 0)
                             {
-                                <h3>No Jobs available for this category!</h3>
+                            <h3>Jobs's Category matched with search string</h3>
+                            <br />
+                            }
+                            @foreach (var item in Model.JobCategory)
+                            {
+                                <!-- Task -->
+                                <a href="/Home/ViewBids/@item.JobId" class="task-listing">
+
+                                    <!-- Job Listing Details -->
+                                    <div class="task-listing-details">
+
+                                        <!-- Details -->
+                                        <div class="task-listing-description">
+                                            <h3 class="task-listing-title"> @Html.DisplayFor(modelItem => item.Title)</h3>
+                                            <ul class="task-icons">
+                                                <li><i class="icon-material-outline-access-time"></i> @GetPrettyDate(item.TimePosted)</li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="task-listing-bid">
+                                        <div class="task-listing-bid-inner">
+                                            <div class="task-offers">
+                                                <strong> @Html.DisplayFor(modelItem => item.MinPayment) PKR - @Html.DisplayFor(modelItem => item.MaxPayment) PKR</strong>
+
+                                            </div>
+                                            <span class="button button-sliding-icon ripple-effect">View Bids <i class="icon-material-outline-arrow-right-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <br />
+                            }
+
+
+                            @if (Model.JobTitle.Count() == 0 && Model.JobSkill.Count() == 0 && Model.JobCategory.Count() == 0)
+                            {
+                                <h3>No Jobs matched!</h3>
                             }
 
                         </div>

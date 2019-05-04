@@ -44,4 +44,11 @@ namespace FreelancerMarketplace.Models
         public Employer Employer { get; set; }
         public Company Company { get; set; }
     }
+
+    public class JobSearchViewModel
+    {
+        public IEnumerable<Job> JobTitle { get; set; }
+        public IEnumerable<Job> JobSkill { get; set; }
+        public IEnumerable<Job> JobCategory { get; set; }
+    }
 }
