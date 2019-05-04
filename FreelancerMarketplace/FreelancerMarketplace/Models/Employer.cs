@@ -11,13 +11,17 @@ namespace FreelancerMarketplace.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class Employer
     {
         public int EmployerId { get; set; }
         public int CompanyId { get; set; }
-    
+
         public virtual Company Company { get; set; }
         public virtual Company Company1 { get; set; }
+
+        public string ProfilePicture { get; set; }
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 }

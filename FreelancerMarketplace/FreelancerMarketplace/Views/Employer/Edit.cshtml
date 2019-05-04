@@ -1,8 +1,283 @@
-﻿@model FreelancerMarketplace.Models.Freelancer
+﻿@model FreelancerMarketplace.Models.Job
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Job</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.JobId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AttachmentID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AttachmentID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AttachmentID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SkillID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SkillID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SkillID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmployerID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EmployerID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EmployerID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TimePosted, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TimePosted, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TimePosted, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CategoryID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MinPayment, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MinPayment, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MinPayment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobType, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.JobType, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaxPayment, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MaxPayment, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MaxPayment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+
+
+
+
+
+
+@using (Html.BeginForm("Edit", "Employer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner">
+
+            <!-- Dashboard Headline -->
+            <div class="dashboard-headline">
+                <h3>Edit Job "@Model.Title"</h3>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+
+                <!-- Dashboard Box -->
+                <div class="col-xl-12">
+                    <div class="dashboard-box margin-top-0">
+
+                        <!-- Headline -->
+                        <div class="headline">
+                            <h3><i class="icon-feather-folder-plus"></i> Job Posting Form</h3>
+                        </div>
+
+                        <div class="content with-padding padding-bottom-10">
+                            <div class="row">
+
+                                <div class="col-xl-4">
+                                    <div class="submit-field">
+                                        <h5>Project Name</h5>
+                                        @Html.TextBoxFor(model => model.Title, new { @class = "form-control with-border", @placeholder = "e.g. build me a website" })
+                                        @*<input type="text" class="with-border" placeholder="e.g. build me a website">*@
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-4">
+                                    <div class="submit-field">
+                                        <h5>Category</h5>
+                                        @Html.DropDownList("CategoryID", null, "--Select Category--", htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-xl-4">
+
+                                    <div class="form-group">
+                                        <div class="submit-field">
+                                            <h5> What type of Job will it be?</h5>
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("JobType", null, "--Select job type--", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-xl-6">
+                                    <div class="submit-field">
+                                        <h5>Main Skill Required? <i class="help-icon" data-tippy-placement="right" title="Only one main skill of your project"></i></h5>
+                                        <div class="keywords-container">
+                                            <div class="keyword-input-container">
+                                                <input type="text" class="keyword-input with-border" placeholder="Main Skill required for this job" name="MainSkill" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6">
+                                    <div class="submit-field">
+                                        <h5>What is your estimated budget?</h5>
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="input-with-icon">
+                                                    @*<input class="with-border" type="text" placeholder="Minimum">*@
+                                                    @Html.TextBoxFor(model => model.MinPayment, new { @placeholder = "Minimum", @class = "form -control with-border" })
+                                                    <i class="currency">Pkr</i>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="input-with-icon">
+                                                    @*<input class="with-border" type="text" placeholder="Maximum">*@
+                                                    @Html.TextBoxFor(model => model.MaxPayment, new { @placeholder = "Maximum", @class = "form -control with-border" })
+                                                    <i class="currency">Pkr</i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-xl-6">
+                                    <div class="submit-field">
+                                        <h5>What other skills are required? <i class="help-icon" data-tippy-placement="right" title="Up to 5 skills that best describe your project"></i></h5>
+                                        <div class="keywords-container">
+                                            <div class="keyword-input-container">
+                                                <input type="text" class="keyword-input with-border" placeholder="Add more Skills" name="OtherSkills" />
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="col-xl-6">
+                                    <div class="submit-field">
+                                        <h5>DeadLine</h5>
+                                    </div>
+                                    @Html.EditorFor(model => model.Deadline, new { @class = "form-control", placeholder = "Enter Deadline here..." })
+                                    @Html.ValidationMessageFor(model => model.Deadline)
+                                </div>
+
+
+
+
+
+
+
+                                <div class="col-xl-12">
+                                    <div class="submit-field">
+                                        <h5>Describe Your Project</h5>
+                                        @*<textarea cols="30" rows="5" class="with-border"></textarea>*@
+                                        @Html.TextAreaFor(model => model.Description, 5, 30, new { @class = "form-control with-border" })
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Done" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Row / End -->
+}
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+}
