@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "ViewFreelancers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
 }
 <br />
 
@@ -25,7 +27,7 @@
 
                         <!-- Avatar -->
                         <div class="freelancer-avatar">
-                            
+
                             <a href="single-freelancer-profile.html"><img src="@Url.Content(item.Person.ProfilePicture)" alt="Image not available"></a>
                         </div>
 
@@ -42,15 +44,15 @@
                                 <div class="task-tags">
                                     <strong>Skills: </strong>
                                     @foreach (var item1 in item.FreelancerSkill)
-                                    {    
-                                    <span>
-                                        @Html.DisplayFor(modelItem => item1.Skill.SkillName)
-                                    </span>
+                                    {
+                                        <span>
+                                            @Html.DisplayFor(modelItem => item1.Skill.SkillName)
+                                        </span>
                                     }
                                 </div>
-                             </div>
                             </div>
                         </div>
+                    </div>
                 </div>
 
                 <!-- Details -->
@@ -62,7 +64,7 @@
                             <li></li>
                         </ul>
                     </div>
-                    <a  href="/Admin/ViewFreelancerProfile/@item.Person.PersonId" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
+                    <a href="/Admin/ViewFreelancerProfile/@item.Person.PersonId" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
                 </div>
             </div>
             <!-- Freelancer / End -->
@@ -70,11 +72,11 @@
         </div>
     </div>
 }
-    <br />
-    <br />
-    <br />
-    <br /><br />
-    <br /><br />
-    <br /><br />
-    <br /><br />
-    <br />
+<br />
+<br />
+<br />
+<br /><br />
+<br /><br />
+<br /><br />
+<br /><br />
+<br />

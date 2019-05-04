@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity;
 
 namespace FreelancerMarketplace.Controllers
 {
-    [Authorize(Roles = "Employer")]
+    [Authorize(Roles = "Employer, Admin")]
     public class EmployerController : Controller
     {
         private DB66Entities db = new DB66Entities();
@@ -23,6 +23,15 @@ namespace FreelancerMarketplace.Controllers
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
             ViewBag.JobType = new SelectList(db.Lookups.Where(x => x.category.Equals("JOBTYPE")), "Id", "value");
+
+            string userId = User.Identity.GetUserId();
+            if (db.People.Any(x => x.User_AccountID == userId && x.Approved == false))
+            {
+                ViewBag.Message = "Your Registration Request is pending...";
+
+                return View("Info");
+            }
+
             return View();
         }
 
@@ -109,6 +118,14 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult MyJobs()
         {
+            string userId = User.Identity.GetUserId();
+            if (db.People.Any(x => x.User_AccountID == userId && x.Approved == false))
+            {
+                ViewBag.Message = "Your Registration Request is pending...";
+
+                return View("Info");
+            }
+
             string id = User.Identity.GetUserId();
             int empId = db.People.FirstOrDefault(p => p.User_AccountID.Equals(id)).PersonId;
 
@@ -127,6 +144,14 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult ManageBidders(int? id)
         {
+
+            string userId = User.Identity.GetUserId();
+            if (db.People.Any(x => x.User_AccountID == userId && x.Approved == false))
+            {
+                ViewBag.Message = "Your Registration Request is pending...";
+
+                return View("Info");
+            }
 
             if (id == null)
             {
@@ -161,6 +186,13 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult ManageFreelancers(int? id)
         {
+            string userId = User.Identity.GetUserId();
+            if (db.People.Any(x => x.User_AccountID == userId && x.Approved == false))
+            {
+                ViewBag.Message = "Your Registration Request is pending...";
+
+                return View("Info");
+            }
 
             if (id == null)
             {
@@ -196,6 +228,14 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult AwardProject(int? id)
         {
+            string userId = User.Identity.GetUserId();
+            if (db.People.Any(x => x.User_AccountID == userId && x.Approved == false))
+            {
+                ViewBag.Message = "Your Registration Request is pending...";
+
+                return View("Info");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -222,6 +262,14 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult UnAssignProject(int? id)
         {
+            string userId = User.Identity.GetUserId();
+            if (db.People.Any(x => x.User_AccountID == userId && x.Approved == false))
+            {
+                ViewBag.Message = "Your Registration Request is pending...";
+
+                return View("Info");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -249,6 +297,14 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult SendMessage(int? id)
         {
+            string userId = User.Identity.GetUserId();
+            if (db.People.Any(x => x.User_AccountID == userId && x.Approved == false))
+            {
+                ViewBag.Message = "Your Registration Request is pending...";
+
+                return View("Info");
+            }
+
             Person p = db.People.FirstOrDefault(x => x.PersonId == id);
             ViewBag.Name = p.FirstName + " " + p.LastName;
             return View();
@@ -286,6 +342,14 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult Messages()
         {
+            string userId = User.Identity.GetUserId();
+            if (db.People.Any(x => x.User_AccountID == userId && x.Approved == false))
+            {
+                ViewBag.Message = "Your Registration Request is pending...";
+
+                return View("Info");
+            }
+
             string id = User.Identity.GetUserId();
             int Eid = db.People.FirstOrDefault(x => x.User_AccountID == id).PersonId;
             var messages = db.Messages.Where(x => x.EmployerId == Eid);
@@ -306,6 +370,14 @@ namespace FreelancerMarketplace.Controllers
 
         public ActionResult DisplayMessages(int? id)
         {
+            string userId = User.Identity.GetUserId();
+            if (db.People.Any(x => x.User_AccountID == userId && x.Approved == false))
+            {
+                ViewBag.Message = "Your Registration Request is pending...";
+
+                return View("Info");
+            }
+
             string id1 = User.Identity.GetUserId();
             int Eid = db.People.FirstOrDefault(x => x.User_AccountID == id1).PersonId;
             var messages = db.Messages.Where(x => x.EmployerId == Eid && x.FreelancerId == id);
@@ -401,7 +473,7 @@ namespace FreelancerMarketplace.Controllers
             string id = User.Identity.GetUserId();
             if (db.People.Any(x => x.User_AccountID == id))
             {
-                RedirectToAction("MyJobs");
+                return RedirectToAction("MyJobs");
             }
             return View();
         }
@@ -420,7 +492,7 @@ namespace FreelancerMarketplace.Controllers
                 person.Address = Address;
                 person.AccountType = "Employer";
                 person.User_AccountID = User.Identity.GetUserId();
-                person.Approved = false;
+                person.Approved = true;
 
                 string fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
                 string extension = Path.GetExtension(ImageFile.FileName);

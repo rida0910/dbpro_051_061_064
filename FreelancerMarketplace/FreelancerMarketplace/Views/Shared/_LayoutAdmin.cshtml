@@ -1,0 +1,111 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Hireo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/colors/blue.css">
+
+</head>
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header Container
+    ================================================== -->
+        <header id="header-container" class="fullwidth transparent">
+
+            <!-- Header -->
+            <div id="header">
+                <div class="container">
+
+                    <!-- Left Side Content -->
+                    <div class="left-side">
+
+                        <!-- Logo -->
+                        <div id="logo">
+                            <a href="index.html"><img src="~/images/logo.png" alt=""></a>
+                        </div>
+
+                        <!-- Main Navigation -->
+                        <nav id="navigation">
+                            <ul id="responsive">
+
+                                <li>
+                                    @Html.ActionLink("Registration Requests", "ApprovalRequests", "Admin")
+                                </li>
+
+                                <li>
+                                    @Html.ActionLink("Registered Freelancers", "ViewFreelancers", "Admin")
+                                        </li>
+                                <li>
+                                    @Html.ActionLink("Registered Employers", "ViewEmployers", "Admin")
+                                </li>
+                                 
+                                </ul>
+                                
+                        </nav>
+                        <div class="clearfix"></div>
+                        <!-- Main Navigation / End -->
+
+                    </div>
+                    <!-- Left Side Content / End -->
+                    <!-- Right Side Content / End -->
+                    <div class="right-side">
+                        @Html.Partial("_LoginPartial")
+
+
+                        <!-- Mobile Navigation Button -->
+                        <span class="mmenu-trigger">
+                            <button class="hamburger hamburger--collapse" type="button">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </span>
+
+                    </div>
+                    <!-- Right Side Content / End -->
+
+                </div>
+            </div>
+            <!-- Header / End -->
+
+        </header>
+        <div class="clearfix"></div>
+        <!-- Header Container / End -->
+        
+
+
+        <div>
+            @RenderBody()
+            <hr />
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        <script src="~/js/jquery-3.3.1.min.js"></script>
+        <script src="~/js/jquery-migrate-3.0.0.min.js"></script>
+        <script src="~/js/mmenu.min.js"></script>
+        <script src="~/js/tippy.all.min.js"></script>
+        <script src="~/js/simplebar.min.js"></script>
+        <script src="~/js/bootstrap-slider.min.js"></script>
+        <script src="~/js/bootstrap-select.min.js"></script>
+        <script src="~/js/snackbar.js"></script>
+        <script src="~/js/clipboard.min.js"></script>
+        <script src="~/js/counterup.min.js"></script>
+        <script src="~/js/magnific-popup.min.js"></script>
+        <script src="~/js/slick.min.js"></script>
+        <script src="~/js/custom.js"></script>
+
+</body>
+</html>

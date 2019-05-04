@@ -1,0 +1,67 @@
+﻿@model FreelancerMarketplace.Models.BiddersViewModel
+
+@{
+    ViewBag.Title = "ViewBids";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Freelancers Bidding -->
+<div class="boxed-list margin-bottom-60">
+    <div class="boxed-list-headline">
+        <h3><i class="icon-material-outline-group"></i> Freelancers Bidding on "@Model.Job.Title"</h3>
+    </div>
+    <ul class="boxed-list-ul">
+        <li>
+            @for (int i = 0; i < Model.Bids.Count(); i++)
+            {
+            <div class="bid">
+                <!-- Avatar -->
+                <div class="bids-avatar">
+                    <div class="freelancer-avatar">
+                        
+                        <a href="#"><img src="@Url.Content(Model.People.ElementAt(i).ProfilePicture)" alt=""></a>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="bids-content">
+                    <!-- Name -->
+                    <div class="freelancer-name">
+                        <h4><a href="single-freelancer-profile.html">@Model.People.ElementAt(i).FirstName @Model.People.ElementAt(i).LastName <img class="flag" src="images/flags/gb.svg" alt="" title="United Kingdom" data-tippy-placement="top"></a></h4>
+                        
+                    </div>
+                </div>
+
+                <!-- Bid -->
+                <div class="bids-bid">
+                    <div class="bid-rate">
+                        <div class="rate">PKR @Model.Bids.ElementAt(i).PaymentAmount</div>
+                        <span>@Model.Bids.ElementAt(i).DeliveryTime</span>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            }
+
+            @if (Model.Bids.Count() == 0)
+            {
+            <h3>No Freelancers bidding on this Project!</h3>
+            }
+        </li>
+            
+    </ul>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+		

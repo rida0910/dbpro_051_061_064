@@ -31,5 +31,7 @@ namespace FreelancerMarketplace.Models
         public virtual ICollection<FreelancerService> FreelancerServices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Job> Jobs { get; set; }
+
+        public int countOfJobs { get; set; }
     }
 }

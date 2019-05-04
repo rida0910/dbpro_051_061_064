@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "ViewEmployers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
 }
 
 
@@ -42,7 +44,7 @@
                                 <strong>Email: </strong>
                                 @Html.DisplayFor(modelItem => item.AspNetUser.Email)
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

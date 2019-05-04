@@ -32,33 +32,76 @@
 
                         <!-- Logo -->
                         <div id="logo">
-                            <a href="index.html"><img src="~/images/logo.png" alt=""></a>
+                            <a href="/Home"><img src="~/images/logo.png" alt=""></a>
                         </div>
 
-                        <!-- Main Navigation -->
                         <nav id="navigation">
                             <ul id="responsive">
+                                @if (Request.IsAuthenticated && User.IsInRole("Employer"))
+                                {
+                                    <!-- Main Navigation -->
 
-                                <li>
-                                    @Html.ActionLink("My Jobs", "MyJobs", "Employer")
-                                </li>
 
-                                <li>
-                                    @Html.ActionLink("Post a new Job", "PostAJob", "Employer")
-                                        </li>
-                                <li>
-                                    @Html.ActionLink("Messages", "Messages", "Employer")
-                                </li>
-                                 <li>
-                                     @Html.ActionLink("Find Freelancer", "FindFreelancer", "Employer")
-                                 </li>
-                                </ul>
-                                
+                                    <li>
+                                        @Html.ActionLink("My Jobs", "MyJobs", "Employer")
+                                    </li>
+
+                                    <li>
+                                        @Html.ActionLink("Post a new Job", "PostAJob", "Employer")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Messages", "Messages", "Employer")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Find Freelancer", "FindFreelancer", "Employer")
+                                    </li>
+                               
+                        }
+                                <div class="clearfix"></div>
+                                <!-- Main Navigation / End -->
+
+                                @if (Request.IsAuthenticated && User.IsInRole("Freelancer"))
+                                {
+
+
+                                    <li>
+                                        @Html.ActionLink("Find Work", "AvailableJobs", "Freelancers")
+
+                                    </li>
+
+                                    <li>
+                                        @Html.ActionLink("My Jobs", "ManageJobs", "Freelancers")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Pending Bids", "MyActiveBids", "Freelancers")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Messages", "Messages", "Freelancers")
+                                    </li>
+
+                                    <li>
+
+
+                                        @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+                                        {
+                                            <div class="input-with-icon">
+                                                @Html.TextBox("SearchString", null, new { @class = "form-control pull-right", placeholder = "Search Project" })
+                                                @*<button type="submit" class="btn btn-default pull-right">Search</button>*@
+                                                <i class="icon-material-outline-search"></i>
+                                            </div>
+                                        }
+
+                                    </li>
+
+                                    <div class="clearfix"></div>
+                                    <!-- Main Navigation / End -->
+                                }
+
+                        </ul>
                         </nav>
-                        <div class="clearfix"></div>
-                        <!-- Main Navigation / End -->
 
-                    </div>
+
+                            </div>
                     <!-- Left Side Content / End -->
                     <!-- Right Side Content / End -->
                     <div class="right-side">

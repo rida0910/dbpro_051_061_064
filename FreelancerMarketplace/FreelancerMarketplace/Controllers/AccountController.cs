@@ -110,7 +110,7 @@ namespace FreelancerMarketplace.Controllers
                 }
                 if (UserManager.IsInRole(user.Id, "Admin"))
                 {
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("ApprovalRequests", "Admin");
                 }
             }
 
@@ -219,6 +219,9 @@ namespace FreelancerMarketplace.Controllers
 
                     return View("Info");
                     //return RedirectToAction("Index", "Home");
+
+                    //await UserManager.AddToRoleAsync(user.Id, "Admin");
+                    //return RedirectToAction("ApprovalRequests", "Admin");
                 }
                 AddErrors(result);
             }
