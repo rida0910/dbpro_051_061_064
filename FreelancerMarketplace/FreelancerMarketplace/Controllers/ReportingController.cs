@@ -78,9 +78,19 @@ namespace FreelancerMarketplace.Controllers
             return File(s, "application/pdf");
         }
         // GET: Report
-        public ActionResult Index()
+        public ActionResult freelancerWorkWithEmployrs()
         {
-            return View();
+            return ShowFreelancerWorkedWithEmployers();
+        }
+        public ActionResult ShowFreelancerWorkedWithEmployers()
+        {
+            var c = (from b in db.FreelancerWorkedWithEmp select b).ToList();
+
+            EmployersOfFreelancer rpt = new EmployersOfFreelancer();
+            rpt.Load();
+            rpt.SetDataSource(c);
+            Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(s, "application/pdf");
         }
     }
 }
