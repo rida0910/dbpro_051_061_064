@@ -72,7 +72,7 @@ namespace FreelancerMarketplace.Controllers
 
             var c = (from b in db.JobsDoneByFreelancers select b).ToList();
 
-            InacttiveProjects rpt = new InacttiveProjects();
+            FreelancerPreviousProjects rpt = new FreelancerPreviousProjects();
             rpt.Load();
             rpt.SetDataSource(c);
             Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
