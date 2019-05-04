@@ -14,10 +14,10 @@ namespace FreelancerMarketplace.Models
     
     public partial class EmployersList
     {
-        public string Employer_Name { get; set; }
+        public string EmployerName { get; set; }
         public string Email { get; set; }
-        public string gender { get; set; }
+        public string Gender { get; set; }
         public string Nationality { get; set; }
-        public string Company_Name { get; set; }
+        public string Company { get; set; }
     }
 }
