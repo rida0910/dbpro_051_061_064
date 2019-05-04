@@ -16,6 +16,6 @@ namespace FreelancerMarketplace.Models
     {
         public string ProjectTitle { get; set; }
         public string FreelancerName { get; set; }
-        public string UserName { get; set; }
+        public string Email { get; set; }
     }
 }

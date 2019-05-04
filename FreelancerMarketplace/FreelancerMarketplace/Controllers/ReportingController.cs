@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
-using CrMVCApp;
+//using CrMVCApp;
 using System.Web.Mvc;
 
 namespace FreelancerMarketplace.Controllers
@@ -84,7 +84,7 @@ namespace FreelancerMarketplace.Controllers
         }
         public ActionResult ShowFreelancerWorkedWithEmployers()
         {
-            var c = (from b in db.FreelancerWorkedWithEmp select b).ToList();
+            var c = (from b in db.FreelancerWorkedWithEmps select b).ToList();
 
             EmployersOfFreelancer rpt = new EmployersOfFreelancer();
             rpt.Load();

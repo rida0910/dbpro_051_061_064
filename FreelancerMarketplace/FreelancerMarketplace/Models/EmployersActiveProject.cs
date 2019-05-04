@@ -14,8 +14,9 @@ namespace FreelancerMarketplace.Models
     
     public partial class EmployersActiveProject
     {
-        public string EmployerName { get; set; }
-        public string JobTitle { get; set; }
-        public Nullable<System.DateTime> Deadline { get; set; }
+        public string Employer_Name { get; set; }
+        public string Job_Title { get; set; }
+        public string Freelancer_Name { get; set; }
+        public string DeadLine { get; set; }
     }
 }

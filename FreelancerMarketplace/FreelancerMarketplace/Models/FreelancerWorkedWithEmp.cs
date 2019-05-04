@@ -12,12 +12,10 @@ namespace FreelancerMarketplace.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmployersList
+    public partial class FreelancerWorkedWithEmp
     {
-        public string Employer_Name { get; set; }
-        public string Email { get; set; }
-        public string gender { get; set; }
-        public string Nationality { get; set; }
-        public string Company_Name { get; set; }
+        public string Freelancer { get; set; }
+        public string EmployerName { get; set; }
+        public string Job_Title { get; set; }
     }
 }
