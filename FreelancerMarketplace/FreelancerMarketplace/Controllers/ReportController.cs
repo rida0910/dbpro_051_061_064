@@ -52,13 +52,26 @@ namespace FreelancerMarketplace.Controllers
         {
             return ShowEmployersUnacceptedProjects();
         }
-        public ActionResult ShowEmployersList()
+        public ActionResult ShowEmployersUnacceptedProjects()
         {
+            var c = (from b in db.FreelancersUnaaceptedProjects select b).ToList();
 
-            //CrMVCApp.Models.Customer c;
-            var c = (from b in db.EmployersLists select b).ToList();
+            freeUnAcceptedProjects rpt = new freeUnAcceptedProjects();
+            rpt.Load();
+            rpt.SetDataSource(c);
+            Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(s, "application/pdf");
+        }
 
-            Employers rpt = new Employers();
+        public ActionResult freelancersOFAJob()
+        {
+            return ShowFreelancersOfProject();
+        }
+        public ActionResult ShowFreelancersOfProject()
+        {
+            var c = (from b in db.FreelancersOfAProjects select b).ToList();
+
+            freelancersOfaJob rpt = new freelancersOfaJob();
             rpt.Load();
             rpt.SetDataSource(c);
             Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
