@@ -17,7 +17,7 @@
             <!-- Dashboard Headline -->
             <div class="dashboard-headline">
                 <h3>Manage Bidders</h3>
-                <span class="margin-top-7">Bids for <a href="#">@Model.Job.Title</a></span>
+                <span class="margin-top-7">Bids for <a href="/Employer/JobDetails/@Model.Job.JobId">@Model.Job.Title</a></span>
 
                 <!-- Breadcrumbs -->
 
@@ -48,12 +48,12 @@
                                                 <!-- Avatar -->
                                                 <div class="freelancer-avatar">
 
-                                                    <a href="#"><img src="@Url.Content(Model.People.ElementAt(i).ProfilePicture)" alt=""></a>
+                                                    <a href="/Employer/FreelancerProfile/@Model.People.ElementAt(i).PersonId"><img src="@Url.Content(Model.People.ElementAt(i).ProfilePicture)" alt=""></a>
                                                 </div>
 
                                                 <!-- Name -->
                                                 <div class="freelancer-name">
-                                                    <h4><a href="#">@Model.People.ElementAt(i).FirstName @Model.People.ElementAt(i).LastName <img class="flag" src="images/flags/de.svg" alt="" title="Germany" data-tippy-placement="top"></a></h4>
+                                                    <h4><a href="/Employer/FreelancerProfile/@Model.People.ElementAt(i).PersonId">@Model.People.ElementAt(i).FirstName @Model.People.ElementAt(i).LastName <img class="flag" src="images/flags/de.svg" alt="" title="Germany" data-tippy-placement="top"></a></h4>
 
                                                     <!-- Details -->
                                                     <span class="freelancer-detail-item"><a href="#"><i class="icon-feather-mail"></i> @Model.AspNetUsers.ElementAt(i).Email </a></span>
