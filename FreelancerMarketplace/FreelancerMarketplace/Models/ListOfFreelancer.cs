@@ -12,17 +12,10 @@ namespace FreelancerMarketplace.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Freelancer
+    public partial class ListOfFreelancer
     {
-        public int FreelancerId { get; set; }
-        public int CategoryId { get; set; }
-        public int ExperienceInCategory { get; set; }
+        public string Name { get; set; }
         public string ProfessionalTitle { get; set; }
         public string ProfessionalOverview { get; set; }
-        public int JobType { get; set; }
-    
-        public virtual Category Category { get; set; }
-        public virtual Lookup Lookup { get; set; }
-        public virtual Lookup Lookup1 { get; set; }
     }
 }

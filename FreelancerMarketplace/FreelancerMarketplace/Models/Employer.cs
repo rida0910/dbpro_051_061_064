@@ -16,5 +16,8 @@ namespace FreelancerMarketplace.Models
     {
         public int EmployerId { get; set; }
         public int CompanyId { get; set; }
+    
+        public virtual Company Company { get; set; }
+        public virtual Company Company1 { get; set; }
     }
 }
