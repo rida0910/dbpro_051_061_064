@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB66Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB66Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -80,10 +80,13 @@
             <PropertyRef Name="JobID" />
           </Key>
           <Property Name="BidId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
           <Property Name="FreelancerID" Type="int" Nullable="false" />
           <Property Name="JobID" Type="int" Nullable="false" />
           <Property Name="BidTime" Type="datetime" Nullable="false" />
+          <Property Name="PaymentAmount" Type="int" />
+          <Property Name="DeliveryTime" Type="datetime" />
+          <Property Name="Accepted" Type="bit" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -161,14 +164,15 @@
           <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PaymentAmount" Type="int" Nullable="false" />
+          <Property Name="MinPayment" Type="int" Nullable="false" />
           <Property Name="AttachmentID" Type="int" />
-          <Property Name="Expiry" Type="datetime" Nullable="false" />
           <Property Name="SkillID" Type="int" Nullable="false" />
           <Property Name="EmployerID" Type="int" Nullable="false" />
           <Property Name="TimePosted" Type="datetime" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Deadline" Type="datetime" />
+          <Property Name="JobType" Type="int" />
+          <Property Name="MaxPayment" Type="int" />
         </EntityType>
         <EntityType Name="JobDone">
           <Key>
@@ -229,7 +233,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="ProfilePicture" Type="nvarchar(max)" />
-          <Property Name="AccountType" Type="varchar" MaxLength="50" />
+          <Property Name="AccountType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Skill">
           <Key>
@@ -238,17 +242,60 @@
           <Property Name="SkillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SkillName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.EmployersActiveProjects' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EmployersActiveProjects">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="JobTitle" />
           </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="EmployerName" Type="varchar" MaxLength="201" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Deadline" Type="datetime" />
         </EntityType>
-        <Association Name="FK__Employer__Compan__2739D489">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.EmployersList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EmployersList">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="EmployersName" Type="varchar" MaxLength="201" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.FreelancersOfAProject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FreelancersOfAProject">
+          <Key>
+            <PropertyRef Name="ProjectTitle" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="ProjectTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FreelancerName" Type="varchar" MaxLength="201" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.FreelancersUnaaceptedProjects' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FreelancersUnaaceptedProjects">
+          <Key>
+            <PropertyRef Name="ProjectTitle" />
+          </Key>
+          <Property Name="ProjectTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FreelancerName" Type="varchar" MaxLength="201" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.FreelancerWorkedWithEmp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FreelancerWorkedWithEmp">
+          <Key>
+            <PropertyRef Name="Freelancer" />
+          </Key>
+          <Property Name="Freelancer" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="EmployerName" Type="varchar" MaxLength="201" />
+        </EntityType>
+        <Association Name="FK__Employer__Compan__403A8C7D">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -260,7 +307,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Employer__Compan__3E1D39E1">
+        <Association Name="FK__Employer__Compan__412EB0B6">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -273,12 +320,12 @@
           </ReferentialConstraint>
         </Association>
         <!--Errors Found During Generation:
-warning 6035: The relationship 'FK__Employer__Employ__3F115E1A' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK__Employer__Employ__3F115E1A" />-->
+warning 6035: The relationship 'FK__Employer__Employ__4222D4EF' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Employer__Employ__4222D4EF" />-->
         <!--Errors Found During Generation:
-warning 6035: The relationship 'FK__Employer__Employ__7F2BE32F' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK__Employer__Employ__7F2BE32F" />-->
-        <Association Name="FK__Person__Gender__40F9A68C">
+warning 6035: The relationship 'FK__Employer__Employ__4316F928' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Employer__Employ__4316F928" />-->
+        <Association Name="FK__Person__Gender__59063A47">
           <End Role="Lookup" Type="Self.Lookup" Multiplicity="0..1" />
           <End Role="Person" Type="Self.Person" Multiplicity="*" />
           <ReferentialConstraint>
@@ -290,7 +337,7 @@ warning 6035: The relationship 'FK__Employer__Employ__7F2BE32F' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Person__User_Acc__40058253">
+        <Association Name="FK__Person__User_Acc__59FA5E80">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Person" Type="Self.Person" Multiplicity="*" />
           <ReferentialConstraint>
@@ -302,7 +349,7 @@ warning 6035: The relationship 'FK__Employer__Employ__7F2BE32F' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Person__User_Acc__7C4F7684">
+        <Association Name="FK__Person__User_Acc__5AEE82B9">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Person" Type="Self.Person" Multiplicity="*" />
           <ReferentialConstraint>
@@ -499,6 +546,96 @@ warning 6035: The relationship 'FK_FreelancerSkill_Freelancer' has columns that 
         <!--Errors Found During Generation:
 warning 6035: The relationship 'FK_Job_Employer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_Job_Employer" />-->
+        <Association Name="FK_Job_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="Job1" Type="Self.Job" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Job1">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Job1">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="Job1" Type="Self.Job" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Job1">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Job2">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="Job1" Type="Self.Job" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Job1">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Job3">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="Job1" Type="Self.Job" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Job1">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Job4">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="Job1" Type="Self.Job" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Job1">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Job_skill">
           <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
           <End Role="Job" Type="Self.Job" Multiplicity="*" />
@@ -574,24 +711,58 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
           <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Employer__Compan__2739D489" Association="Self.FK__Employer__Compan__2739D489">
+          <EntitySet Name="EmployersActiveProjects" EntityType="Self.EmployersActiveProjects" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EmployersActiveProjects].[EmployerName] AS [EmployerName], 
+    [EmployersActiveProjects].[JobTitle] AS [JobTitle], 
+    [EmployersActiveProjects].[Deadline] AS [Deadline]
+    FROM [dbo].[EmployersActiveProjects] AS [EmployersActiveProjects]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EmployersList" EntityType="Self.EmployersList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EmployersList].[EmployersName] AS [EmployersName], 
+    [EmployersList].[UserName] AS [UserName], 
+    [EmployersList].[Email] AS [Email], 
+    [EmployersList].[Address] AS [Address], 
+    [EmployersList].[CompanyName] AS [CompanyName]
+    FROM [dbo].[EmployersList] AS [EmployersList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FreelancersOfAProject" EntityType="Self.FreelancersOfAProject" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FreelancersOfAProject].[ProjectTitle] AS [ProjectTitle], 
+    [FreelancersOfAProject].[FreelancerName] AS [FreelancerName], 
+    [FreelancersOfAProject].[UserName] AS [UserName]
+    FROM [dbo].[FreelancersOfAProject] AS [FreelancersOfAProject]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FreelancersUnaaceptedProjects" EntityType="Self.FreelancersUnaaceptedProjects" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FreelancersUnaaceptedProjects].[ProjectTitle] AS [ProjectTitle], 
+    [FreelancersUnaaceptedProjects].[FreelancerName] AS [FreelancerName]
+    FROM [dbo].[FreelancersUnaaceptedProjects] AS [FreelancersUnaaceptedProjects]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FreelancerWorkedWithEmp" EntityType="Self.FreelancerWorkedWithEmp" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FreelancerWorkedWithEmp].[Freelancer] AS [Freelancer], 
+    [FreelancerWorkedWithEmp].[EmployerName] AS [EmployerName]
+    FROM [dbo].[FreelancerWorkedWithEmp] AS [FreelancerWorkedWithEmp]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Employer__Compan__403A8C7D" Association="Self.FK__Employer__Compan__403A8C7D">
             <End Role="Company" EntitySet="Company" />
             <End Role="Employer" EntitySet="Employer" />
           </AssociationSet>
-          <AssociationSet Name="FK__Employer__Compan__3E1D39E1" Association="Self.FK__Employer__Compan__3E1D39E1">
+          <AssociationSet Name="FK__Employer__Compan__412EB0B6" Association="Self.FK__Employer__Compan__412EB0B6">
             <End Role="Company" EntitySet="Company" />
             <End Role="Employer" EntitySet="Employer" />
           </AssociationSet>
-          <AssociationSet Name="FK__Person__Gender__40F9A68C" Association="Self.FK__Person__Gender__40F9A68C">
+          <AssociationSet Name="FK__Person__Gender__59063A47" Association="Self.FK__Person__Gender__59063A47">
             <End Role="Lookup" EntitySet="Lookup" />
             <End Role="Person" EntitySet="Person" />
           </AssociationSet>
-          <AssociationSet Name="FK__Person__User_Acc__40058253" Association="Self.FK__Person__User_Acc__40058253">
+          <AssociationSet Name="FK__Person__User_Acc__59FA5E80" Association="Self.FK__Person__User_Acc__59FA5E80">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Person" EntitySet="Person" />
           </AssociationSet>
-          <AssociationSet Name="FK__Person__User_Acc__7C4F7684" Association="Self.FK__Person__User_Acc__7C4F7684">
+          <AssociationSet Name="FK__Person__User_Acc__5AEE82B9" Association="Self.FK__Person__User_Acc__5AEE82B9">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Person" EntitySet="Person" />
           </AssociationSet>
@@ -647,6 +818,26 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
             <End Role="Category" EntitySet="Category" />
             <End Role="Job" EntitySet="Job" />
           </AssociationSet>
+          <AssociationSet Name="FK_Job_Job" Association="Self.FK_Job_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Job1" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Job1" Association="Self.FK_Job_Job1">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Job1" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Job2" Association="Self.FK_Job_Job2">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Job1" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Job3" Association="Self.FK_Job_Job3">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Job1" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Job4" Association="Self.FK_Job_Job4">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Job1" EntitySet="Job" />
+          </AssociationSet>
           <AssociationSet Name="FK_Job_skill" Association="Self.FK_Job_skill">
             <End Role="Skill" EntitySet="Skill" />
             <End Role="Job" EntitySet="Job" />
@@ -660,8 +851,7 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
             <End Role="Message" EntitySet="Message" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB66Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -746,6 +936,10 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
           <Property Name="FreelancerID" Type="Int32" Nullable="false" />
           <Property Name="JobID" Type="Int32" Nullable="false" />
           <Property Name="BidTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="PaymentAmount" Type="Int32" />
+          <Property Name="DeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="Accepted" Type="Boolean" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -848,6 +1042,19 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
           <NavigationProperty Name="Attachment" Relationship="Self.FK_Job_Attachment" FromRole="Job" ToRole="Attachment" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Job_Category" FromRole="Job" ToRole="Category" />
           <NavigationProperty Name="Skill" Relationship="Self.FK_Job_skill" FromRole="Job" ToRole="Skill" />
+          <Property Name="MinPayment" Type="Int32" Nullable="false" />
+          <Property Name="JobType" Type="Int32" />
+          <Property Name="MaxPayment" Type="Int32" />
+          <NavigationProperty Name="Job1" Relationship="DB66Model.FK_Job_Job" FromRole="Job" ToRole="Job1" />
+          <NavigationProperty Name="Job2" Relationship="DB66Model.FK_Job_Job" FromRole="Job1" ToRole="Job" />
+          <NavigationProperty Name="Job11" Relationship="DB66Model.FK_Job_Job1" FromRole="Job" ToRole="Job1" />
+          <NavigationProperty Name="Job3" Relationship="DB66Model.FK_Job_Job1" FromRole="Job1" ToRole="Job" />
+          <NavigationProperty Name="Job12" Relationship="DB66Model.FK_Job_Job2" FromRole="Job" ToRole="Job1" />
+          <NavigationProperty Name="Job4" Relationship="DB66Model.FK_Job_Job2" FromRole="Job1" ToRole="Job" />
+          <NavigationProperty Name="Job13" Relationship="DB66Model.FK_Job_Job3" FromRole="Job" ToRole="Job1" />
+          <NavigationProperty Name="Job5" Relationship="DB66Model.FK_Job_Job3" FromRole="Job1" ToRole="Job" />
+          <NavigationProperty Name="Job14" Relationship="DB66Model.FK_Job_Job4" FromRole="Job" ToRole="Job1" />
+          <NavigationProperty Name="Job6" Relationship="DB66Model.FK_Job_Job4" FromRole="Job1" ToRole="Job" />
         </EntityType>
         <EntityType Name="JobDone">
           <Key>
@@ -914,7 +1121,7 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
           <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Approved" Type="Boolean" Nullable="false" />
           <Property Name="ProfilePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Person__User_Acc__40058253" FromRole="Person" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUser1" Relationship="Self.FK__Person__User_Acc__7C4F7684" FromRole="Person" ToRole="AspNetUsers" />
           <NavigationProperty Name="Lookup" Relationship="Self.FK__Person__Gender__40F9A68C" FromRole="Person" ToRole="Lookup" />
@@ -1280,7 +1487,165 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="EmployersActiveProjects" EntityType="DB66Model.EmployersActiveProject" />
+          <EntitySet Name="EmployersLists" EntityType="DB66Model.EmployersList" />
+          <EntitySet Name="FreelancersOfAProjects" EntityType="DB66Model.FreelancersOfAProject" />
+          <EntitySet Name="FreelancersUnaaceptedProjects" EntityType="DB66Model.FreelancersUnaaceptedProject" />
+          <EntitySet Name="FreelancerWorkedWithEmps" EntityType="DB66Model.FreelancerWorkedWithEmp" />
+          <AssociationSet Name="FK_Job_Job" Association="DB66Model.FK_Job_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Job1" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Job1" Association="DB66Model.FK_Job_Job1">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Job1" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Job2" Association="DB66Model.FK_Job_Job2">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Job1" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Job3" Association="DB66Model.FK_Job_Job3">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Job1" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Job4" Association="DB66Model.FK_Job_Job4">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Job1" EntitySet="Jobs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="EmployersActiveProject">
+          <Key>
+            <PropertyRef Name="JobTitle" />
+          </Key>
+          <Property Name="EmployerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+          <Property Name="JobTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Deadline" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="EmployersList">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="EmployersName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FreelancersOfAProject">
+          <Key>
+            <PropertyRef Name="ProjectTitle" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="ProjectTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FreelancerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FreelancersUnaaceptedProject">
+          <Key>
+            <PropertyRef Name="ProjectTitle" />
+          </Key>
+          <Property Name="ProjectTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FreelancerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FreelancerWorkedWithEmp">
+          <Key>
+            <PropertyRef Name="Freelancer" />
+          </Key>
+          <Property Name="Freelancer" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmployerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Job_Job">
+          <End Type="DB66Model.Job" Role="Job" Multiplicity="1" />
+          <End Type="DB66Model.Job" Role="Job1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Job1">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Job1">
+          <End Type="DB66Model.Job" Role="Job" Multiplicity="1" />
+          <End Type="DB66Model.Job" Role="Job1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Job1">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Job2">
+          <End Type="DB66Model.Job" Role="Job" Multiplicity="1" />
+          <End Type="DB66Model.Job" Role="Job1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Job1">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Job3">
+          <End Type="DB66Model.Job" Role="Job" Multiplicity="1" />
+          <End Type="DB66Model.Job" Role="Job1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Job1">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Job4">
+          <End Type="DB66Model.Job" Role="Job" Multiplicity="1" />
+          <End Type="DB66Model.Job" Role="Job1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Job1">
+              <PropertyRef Name="JobId" />
+              <PropertyRef Name="SkillID" />
+              <PropertyRef Name="EmployerID" />
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1353,8 +1718,11 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
           <EntitySetMapping Name="Bids">
             <EntityTypeMapping TypeName="DB66Model.Bid">
               <MappingFragment StoreEntitySet="Bid">
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+                <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="BidId" ColumnName="BidId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="FreelancerID" ColumnName="FreelancerID" />
                 <ScalarProperty Name="JobID" ColumnName="JobID" />
                 <ScalarProperty Name="BidTime" ColumnName="BidTime" />
@@ -1429,12 +1797,13 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
           <EntitySetMapping Name="Jobs">
             <EntityTypeMapping TypeName="DB66Model.Job">
               <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="MaxPayment" ColumnName="MaxPayment" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="MinPayment" ColumnName="MinPayment" />
                 <ScalarProperty Name="JobId" ColumnName="JobId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
                 <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
-                <ScalarProperty Name="Expiry" ColumnName="Expiry" />
                 <ScalarProperty Name="SkillID" ColumnName="SkillID" />
                 <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
                 <ScalarProperty Name="TimePosted" ColumnName="TimePosted" />
@@ -1513,17 +1882,6 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DB66Model.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="DB66Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
@@ -1532,6 +1890,51 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="EmployersActiveProjects">
+            <EntityTypeMapping TypeName="DB66Model.EmployersActiveProject">
+              <MappingFragment StoreEntitySet="EmployersActiveProjects">
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="EmployerName" ColumnName="EmployerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployersLists">
+            <EntityTypeMapping TypeName="DB66Model.EmployersList">
+              <MappingFragment StoreEntitySet="EmployersList">
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="EmployersName" ColumnName="EmployersName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FreelancersOfAProjects">
+            <EntityTypeMapping TypeName="DB66Model.FreelancersOfAProject">
+              <MappingFragment StoreEntitySet="FreelancersOfAProject">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FreelancerName" ColumnName="FreelancerName" />
+                <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FreelancersUnaaceptedProjects">
+            <EntityTypeMapping TypeName="DB66Model.FreelancersUnaaceptedProject">
+              <MappingFragment StoreEntitySet="FreelancersUnaaceptedProjects">
+                <ScalarProperty Name="FreelancerName" ColumnName="FreelancerName" />
+                <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FreelancerWorkedWithEmps">
+            <EntityTypeMapping TypeName="DB66Model.FreelancerWorkedWithEmp">
+              <MappingFragment StoreEntitySet="FreelancerWorkedWithEmp">
+                <ScalarProperty Name="EmployerName" ColumnName="EmployerName" />
+                <ScalarProperty Name="Freelancer" ColumnName="Freelancer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

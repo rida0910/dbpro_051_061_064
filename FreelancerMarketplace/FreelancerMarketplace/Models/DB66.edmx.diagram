@@ -48,6 +48,16 @@
         <AssociationConnector Association="DB66Model.FK_JobSkill_Skill" ManuallyRouted="false" />
         <AssociationConnector Association="DB66Model.FK__Person__Gender__40F9A68C" ManuallyRouted="false" />
         <AssociationConnector Association="DB66Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DB66Model.EmployersActiveProject" Width="1.75" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DB66Model.EmployersList" Width="1.75" PointX="15.875" PointY="0.75" />
+        <EntityTypeShape EntityType="DB66Model.FreelancersOfAProject" Width="1.875" PointX="13.5" PointY="3.5" />
+        <EntityTypeShape EntityType="DB66Model.FreelancersUnaaceptedProject" Width="2.25" PointX="15" PointY="5.75" />
+        <EntityTypeShape EntityType="DB66Model.FreelancerWorkedWithEmp" Width="2" PointX="16.25" PointY="3.625" />
+        <AssociationConnector Association="DB66Model.FK_Job_Job" />
+        <AssociationConnector Association="DB66Model.FK_Job_Job1" />
+        <AssociationConnector Association="DB66Model.FK_Job_Job2" />
+        <AssociationConnector Association="DB66Model.FK_Job_Job3" />
+        <AssociationConnector Association="DB66Model.FK_Job_Job4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
