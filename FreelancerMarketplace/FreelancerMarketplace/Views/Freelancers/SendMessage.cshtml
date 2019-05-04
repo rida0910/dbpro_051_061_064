@@ -1,0 +1,64 @@
+﻿@model FreelancerMarketplace.Models.Message
+@{
+    ViewBag.Title = "SendMessage";
+    Layout = "~/Views/Shared/_LayoutFreelancer.cshtml";
+}
+
+
+<br />
+<br />
+<br />
+
+@using (Html.BeginForm("SendMessage", "Freelancers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div>
+
+        <!--Tabs -->
+        <div>
+
+
+            <div class="popup-tabs-container">
+
+                <!-- Tab -->
+                <div>
+
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3>Direct Message To @ViewBag.Name</h3>
+                    </div>
+                    <center>
+                        <div class="col-md-8">
+                            <!-- Form -->
+                            <form method="post" id="send-pm">
+                                @Html.TextAreaFor(model => model.Text, 5, 5, new { placeholder = "Type your message here...", @class = "form-control input-text with-border" })
+                                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+
+                                <div class="uploadButton margin-top-30">
+                                    <input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" name="AttachmentFile" />
+                                    <label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
+                                    <span class="uploadButton-file-name">Images or documents that might be helpful in describing your project</span>
+                                </div>
+
+                            </form>
+
+                            <!-- Button -->
+                            <input type="submit" value="Send" class="button full-width button-sliding-icon ripple-effect" />
+                        </div>
+                    </center>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

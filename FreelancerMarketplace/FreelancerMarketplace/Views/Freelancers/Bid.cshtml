@@ -15,7 +15,7 @@
 
 
             <!-- Titlebar
-            ================================================== -->
+    ================================================== -->
             <div class="single-page-header">
                 <div class="container">
                     <div class="row">
@@ -46,9 +46,9 @@
                 </div>
             </div>
 
-
+            
             <!-- Page Content
-            ================================================== -->
+    ================================================== -->
             <div class="container">
                 <div class="row">
 
@@ -82,7 +82,7 @@
                         </div>
                         <div class="clearfix"></div>
 
-                        
+
 
                     </div>
 
@@ -91,7 +91,10 @@
                     <div class="col-xl-4 col-lg-4">
                         <div class="sidebar-container">
 
+                            <a href="/Freelancers/SendMessage/@Model.Job.EmployerID" class=" apply-now-button margin-bottom-50">Contact Employer</a>
+
                             <div class="countdown green margin-bottom-35">Deadline: @Html.DisplayFor(model => model.Job.Deadline)</div>
+
 
                             <div class="sidebar-widget">
                                 <div class="bidding-widget">
@@ -114,7 +117,7 @@
                                             <div class="bidding-field">
 
                                                 @Html.EditorFor(model => model.Bid.DeliveryTime, new { @class = "datepicker form-control", placeholder = "Enter Delivery Time here..." })
-                                            
+
                                             </div>
                                         </div>
 

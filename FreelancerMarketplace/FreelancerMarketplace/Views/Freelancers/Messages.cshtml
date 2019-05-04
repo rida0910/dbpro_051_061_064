@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<FreelancerMarketplace.Models.Person>
 @{
     ViewBag.Title = "Messages";
+    Layout = "~/Views/Shared/_LayoutFreelancer.cshtml";
 }
-
 
 
 <!-- Dashboard Container -->
@@ -30,25 +30,25 @@
                     <!-- Messages -->
                     <div class="messages-inbox">
                         <div class="messages-headline">
-                            
+
                         </div>
 
                         <ul>
-                            @foreach(var item in Model)
+                            @foreach (var item in Model)
                             {
-                            <li>
-                                <a href="/Employer/DisplayMessages/@item.PersonId">
-                                    <div class="message-avatar"><img src="@Url.Content(item.ProfilePicture)" alt="" /></div>
+                                <li>
+                                    <a href="/Freelancers/DisplayMessages/@item.PersonId">
+                                        <div class="message-avatar"><img src="@Url.Content(item.ProfilePicture)" alt="" /></div>
 
-                                    <div class="message-by">
-                                        <div class="message-by-headline">
-                                            <h5>@item.FirstName @item.LastName</h5>
-                                            
+                                        <div class="message-by">
+                                            <div class="message-by-headline">
+                                                <h5>@item.FirstName @item.LastName</h5>
+
+                                            </div>
+
                                         </div>
-
-                                    </div>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
 
                             }
 
@@ -58,4 +58,4 @@
 
 
                     <!-- Messages / End -->
-                   
+
