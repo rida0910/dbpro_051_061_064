@@ -96,7 +96,7 @@ namespace FreelancerMarketplace.Controllers
         }
 
 
-        // GET: Reports/Details/5
+  
        
         }
     }
