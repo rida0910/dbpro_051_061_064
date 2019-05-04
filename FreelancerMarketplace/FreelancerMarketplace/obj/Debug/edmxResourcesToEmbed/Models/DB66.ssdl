@@ -75,10 +75,13 @@
       <PropertyRef Name="JobID" />
     </Key>
     <Property Name="BidId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Active" Type="int" Nullable="false" />
     <Property Name="FreelancerID" Type="int" Nullable="false" />
     <Property Name="JobID" Type="int" Nullable="false" />
     <Property Name="BidTime" Type="datetime" Nullable="false" />
+    <Property Name="PaymentAmount" Type="int" />
+    <Property Name="DeliveryTime" Type="datetime" />
+    <Property Name="Accepted" Type="bit" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -233,17 +236,59 @@
     <Property Name="SkillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SkillName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.InactiveProjectsOfEmployers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="InactiveProjectsOfEmployers">
     <Key>
-      <PropertyRef Name="diagram_id" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="Description" />
     </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <Association Name="FK__Employer__Compan__2739D489">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.JobsDoneByFreelancers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="JobsDoneByFreelancers">
+    <Key>
+      <PropertyRef Name="title" />
+      <PropertyRef Name="Description" />
+    </Key>
+    <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.JobsPostedByEmployer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="JobsPostedByEmployer">
+    <Key>
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="Description" />
+    </Key>
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.ListOfFreelancers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ListOfFreelancers">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="ProfessionalTitle" />
+      <PropertyRef Name="ProfessionalOverview" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="18" Nullable="false" />
+    <Property Name="ProfessionalTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProfessionalOverview" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.SameEmployersDifferentProjects' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SameEmployersDifferentProjects">
+    <Key>
+      <PropertyRef Name="title" />
+      <PropertyRef Name="Description" />
+    </Key>
+    <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Employer__Compan__403A8C7D">
     <End Role="Company" Type="Self.Company" Multiplicity="1" />
     <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -255,7 +300,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Employer__Compan__3E1D39E1">
+  <Association Name="FK__Employer__Compan__412EB0B6">
     <End Role="Company" Type="Self.Company" Multiplicity="1" />
     <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -268,12 +313,12 @@
     </ReferentialConstraint>
   </Association>
   <!--Errors Found During Generation:
-warning 6035: The relationship 'FK__Employer__Employ__3F115E1A' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK__Employer__Employ__3F115E1A" />-->
+warning 6035: The relationship 'FK__Employer__Employ__4222D4EF' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Employer__Employ__4222D4EF" />-->
   <!--Errors Found During Generation:
-warning 6035: The relationship 'FK__Employer__Employ__7F2BE32F' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK__Employer__Employ__7F2BE32F" />-->
-  <Association Name="FK__Person__Gender__40F9A68C">
+warning 6035: The relationship 'FK__Employer__Employ__4316F928' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Employer__Employ__4316F928" />-->
+  <Association Name="FK__Person__Gender__59063A47">
     <End Role="Lookup" Type="Self.Lookup" Multiplicity="0..1" />
     <End Role="Person" Type="Self.Person" Multiplicity="*" />
     <ReferentialConstraint>
@@ -285,7 +330,7 @@ warning 6035: The relationship 'FK__Employer__Employ__7F2BE32F' has columns that
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Person__User_Acc__40058253">
+  <Association Name="FK__Person__User_Acc__59FA5E80">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Person" Type="Self.Person" Multiplicity="*" />
     <ReferentialConstraint>
@@ -297,7 +342,7 @@ warning 6035: The relationship 'FK__Employer__Employ__7F2BE32F' has columns that
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Person__User_Acc__7C4F7684">
+  <Association Name="FK__Person__User_Acc__5AEE82B9">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Person" Type="Self.Person" Multiplicity="*" />
     <ReferentialConstraint>
@@ -569,24 +614,54 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
     <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Employer__Compan__2739D489" Association="Self.FK__Employer__Compan__2739D489">
+    <EntitySet Name="InactiveProjectsOfEmployers" EntityType="Self.InactiveProjectsOfEmployers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [InactiveProjectsOfEmployers].[Title] AS [Title], 
+    [InactiveProjectsOfEmployers].[Description] AS [Description]
+    FROM [dbo].[InactiveProjectsOfEmployers] AS [InactiveProjectsOfEmployers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="JobsDoneByFreelancers" EntityType="Self.JobsDoneByFreelancers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [JobsDoneByFreelancers].[title] AS [title], 
+    [JobsDoneByFreelancers].[Description] AS [Description]
+    FROM [dbo].[JobsDoneByFreelancers] AS [JobsDoneByFreelancers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="JobsPostedByEmployer" EntityType="Self.JobsPostedByEmployer" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [JobsPostedByEmployer].[Title] AS [Title], 
+    [JobsPostedByEmployer].[Description] AS [Description]
+    FROM [dbo].[JobsPostedByEmployer] AS [JobsPostedByEmployer]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ListOfFreelancers" EntityType="Self.ListOfFreelancers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ListOfFreelancers].[Name] AS [Name], 
+    [ListOfFreelancers].[ProfessionalTitle] AS [ProfessionalTitle], 
+    [ListOfFreelancers].[ProfessionalOverview] AS [ProfessionalOverview]
+    FROM [dbo].[ListOfFreelancers] AS [ListOfFreelancers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="SameEmployersDifferentProjects" EntityType="Self.SameEmployersDifferentProjects" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SameEmployersDifferentProjects].[title] AS [title], 
+    [SameEmployersDifferentProjects].[Description] AS [Description]
+    FROM [dbo].[SameEmployersDifferentProjects] AS [SameEmployersDifferentProjects]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Employer__Compan__403A8C7D" Association="Self.FK__Employer__Compan__403A8C7D">
       <End Role="Company" EntitySet="Company" />
       <End Role="Employer" EntitySet="Employer" />
     </AssociationSet>
-    <AssociationSet Name="FK__Employer__Compan__3E1D39E1" Association="Self.FK__Employer__Compan__3E1D39E1">
+    <AssociationSet Name="FK__Employer__Compan__412EB0B6" Association="Self.FK__Employer__Compan__412EB0B6">
       <End Role="Company" EntitySet="Company" />
       <End Role="Employer" EntitySet="Employer" />
     </AssociationSet>
-    <AssociationSet Name="FK__Person__Gender__40F9A68C" Association="Self.FK__Person__Gender__40F9A68C">
+    <AssociationSet Name="FK__Person__Gender__59063A47" Association="Self.FK__Person__Gender__59063A47">
       <End Role="Lookup" EntitySet="Lookup" />
       <End Role="Person" EntitySet="Person" />
     </AssociationSet>
-    <AssociationSet Name="FK__Person__User_Acc__40058253" Association="Self.FK__Person__User_Acc__40058253">
+    <AssociationSet Name="FK__Person__User_Acc__59FA5E80" Association="Self.FK__Person__User_Acc__59FA5E80">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Person" EntitySet="Person" />
     </AssociationSet>
-    <AssociationSet Name="FK__Person__User_Acc__7C4F7684" Association="Self.FK__Person__User_Acc__7C4F7684">
+    <AssociationSet Name="FK__Person__User_Acc__5AEE82B9" Association="Self.FK__Person__User_Acc__5AEE82B9">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Person" EntitySet="Person" />
     </AssociationSet>

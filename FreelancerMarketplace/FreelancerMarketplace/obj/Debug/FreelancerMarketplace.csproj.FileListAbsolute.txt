@@ -69,3 +69,7 @@ D:\Rida's Computer Engineering\6th semester\Database lab\FreelancerMarketplace\F
 D:\Rida's Computer Engineering\6th semester\Database lab\FreelancerMarketplace\FreelancerMarketplace\obj\Debug\FreelancerMarketplace.csproj.CoreCompileInputs.cache
 D:\Rida's Computer Engineering\6th semester\Database lab\FreelancerMarketplace\FreelancerMarketplace\obj\Debug\FreelancerMarketplace.dll
 D:\Rida's Computer Engineering\6th semester\Database lab\FreelancerMarketplace\FreelancerMarketplace\obj\Debug\FreelancerMarketplace.pdb
+C:\Users\Aqsa Khan\Downloads\AQSAAAADBPROJECT\dbpro_051_061_064\FreelancerMarketplace\FreelancerMarketplace\obj\Debug\FreelancerMarketplace.csprojAssemblyReference.cache
+C:\Users\Aqsa Khan\Downloads\AQSAAAADBPROJECT\dbpro_051_061_064\FreelancerMarketplace\FreelancerMarketplace\obj\Debug\FreelancerMarketplace.csproj.CoreCompileInputs.cache
+C:\Users\Aqsa Khan\Downloads\AQSAAAADBPROJECT\dbpro_051_061_064\FreelancerMarketplace\FreelancerMarketplace\obj\Debug\FreelancerMarketplace.dll
+C:\Users\Aqsa Khan\Downloads\AQSAAAADBPROJECT\dbpro_051_061_064\FreelancerMarketplace\FreelancerMarketplace\obj\Debug\FreelancerMarketplace.pdb
