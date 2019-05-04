@@ -34,7 +34,7 @@ namespace FreelancerMarketplace.Controllers
         {
             FreelancerMarketplace.Models.DB66Entities db = new FreelancerMarketplace.Models.DB66Entities();
 
-            var c = (from b in db.JobsPostedByEmployer select b).ToList();
+            var c = (from b in db.JobsPostedByEmployers select b).ToList();
 
             PostedJobsOfEmployer rpt = new PostedJobsOfEmployer();
             rpt.Load();
@@ -98,4 +98,4 @@ namespace FreelancerMarketplace.Controllers
        
         }
     }
-}
+
