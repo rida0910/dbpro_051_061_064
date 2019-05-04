@@ -1,0 +1,98 @@
+﻿@model IEnumerable<FreelancerMarketplace.Models.Message>
+
+@{
+    ViewBag.Title = "DisplayMessages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("DisplayMessages", "Employer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <center>
+        <div class="col-md-8">
+
+            <!-- Message Content -->
+            <div class="message-content">
+
+                <div class="messages-headline">
+                    <h4>@ViewBag.Name</h4>
+                    <a href="/Employer/DeleteConversation/@Model.ElementAt(0).FreelancerId" class="message-action"><i class="icon-feather-trash-2"></i> Delete Conversation</a>
+                </div>
+
+                <!-- Message Content Inner -->
+                <div class="message-content-inner">
+                    @foreach (var item in Model)
+                    {
+                        <!-- Time Sign -->
+                        <div class="message-time-sign">
+                            <span>@item.Time</span>
+                        </div>
+                        if (item.SentBy == ViewBag.employer)
+                        {
+                            <div class="message-bubble me">
+                                <div class="message-bubble-inner">
+                                    <div class="message-avatar"><img src="@Url.Content(ViewBag.EmpPicture)" alt="" /></div>
+                                    <div class="message-text"><p>@item.Text</p></div>
+                                    @if (item.Attachment != null)
+                                    {
+                                        <div class="attachments-container col-md-5">
+                                            <a href="@Url.Action("Download", "Employer", new { id = item.AttachmentId })" class="attachment-box ripple-effect"><span>Download Attachment</span><i></i></a>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        }
+                        if (item.SentBy != ViewBag.employer)
+                        {
+                            <div class="message-bubble">
+                                <div class="message-bubble-inner">
+                                    <div class="message-avatar"><img src="@Url.Content(ViewBag.freePicture)" alt="" /></div>
+                                    <div class="message-text"><p>@item.Text</p></div>
+                                    @if (item.Attachment != null)
+                                    {
+                                        <div class="attachments-container col-md-5">
+                                            <a href="@Url.Action("Download", "Employer", new { id = item.AttachmentId })" class="attachment-box ripple-effect"><span>Download Attachment</span><i></i></a>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        }
+
+                    }
+                </div>
+
+            </div>
+
+
+            <div>
+                <!-- Form -->
+                <form method="post" id="send-pm">
+                    <textarea cols="1" rows="1" placeholder="Your Message" data-autoresize name="msgText"></textarea>
+
+
+                    <div class="uploadButton margin-top-30">
+                        <input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" name="AttachmentFile" />
+                        <label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
+                        <span class="uploadButton-file-name">Images or documents that might be helpful in describing your project</span>
+                    </div>
+
+                </form>
+
+                <!-- Button -->
+                <input type="submit" value="Send" class="button full-width button-sliding-icon ripple-effect" />
+            </div>
+
+        </div>
+        <!-- Message Content -->
+    </center>
+<!-- Messages Container / End -->
+<!-- Footer -->
+<div class="dashboard-footer-spacer"></div>
+<div class="small-footer margin-top-15">
+    <div class="small-footer-copyrights">
+        © 2018 <strong>Hireo</strong>. All Rights Reserved.
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+}
