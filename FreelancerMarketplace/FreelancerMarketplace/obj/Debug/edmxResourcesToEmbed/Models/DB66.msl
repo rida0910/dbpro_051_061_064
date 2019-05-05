@@ -149,14 +149,15 @@
           <ScalarProperty Name="JobId" ColumnName="JobId" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="MinPayment" ColumnName="MinPayment" />
           <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
-          <ScalarProperty Name="Expiry" ColumnName="Expiry" />
           <ScalarProperty Name="SkillID" ColumnName="SkillID" />
           <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
           <ScalarProperty Name="TimePosted" ColumnName="TimePosted" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+          <ScalarProperty Name="JobType" ColumnName="JobType" />
+          <ScalarProperty Name="MaxPayment" ColumnName="MaxPayment" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -200,9 +201,10 @@
           <ScalarProperty Name="MessageId" ColumnName="MessageId" />
           <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
-          <ScalarProperty Name="JobId" ColumnName="JobId" />
           <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
           <ScalarProperty Name="FreelancerId" ColumnName="FreelancerId" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="SentBy" ColumnName="SentBy" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -230,9 +232,57 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EmployersActiveProjects">
+      <EntityTypeMapping TypeName="DB66Model.EmployersActiveProject">
+        <MappingFragment StoreEntitySet="EmployersActiveProjects">
+          <ScalarProperty Name="EmployerName" ColumnName="EmployerName" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+          <ScalarProperty Name="FreelancerName" ColumnName="FreelancerName" />
+          <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployersLists">
+      <EntityTypeMapping TypeName="DB66Model.EmployersList">
+        <MappingFragment StoreEntitySet="EmployersList">
+          <ScalarProperty Name="EmployerName" ColumnName="EmployerName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FreelancersOfAProjects">
+      <EntityTypeMapping TypeName="DB66Model.FreelancersOfAProject">
+        <MappingFragment StoreEntitySet="FreelancersOfAProject">
+          <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+          <ScalarProperty Name="FreelancerName" ColumnName="FreelancerName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FreelancersUnaaceptedProjects">
+      <EntityTypeMapping TypeName="DB66Model.FreelancersUnaaceptedProject">
+        <MappingFragment StoreEntitySet="FreelancersUnaaceptedProjects">
+          <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+          <ScalarProperty Name="FreelancerName" ColumnName="FreelancerName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FreelancerWorkedWithEmps">
+      <EntityTypeMapping TypeName="DB66Model.FreelancerWorkedWithEmp">
+        <MappingFragment StoreEntitySet="FreelancerWorkedWithEmp">
+          <ScalarProperty Name="Freelancer" ColumnName="Freelancer" />
+          <ScalarProperty Name="EmployerName" ColumnName="EmployerName" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="InactiveProjectsOfEmployers">
       <EntityTypeMapping TypeName="DB66Model.InactiveProjectsOfEmployer">
         <MappingFragment StoreEntitySet="InactiveProjectsOfEmployers">
+          <ScalarProperty Name="EmployerName" ColumnName="EmployerName" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
@@ -241,7 +291,8 @@
     <EntitySetMapping Name="JobsDoneByFreelancers">
       <EntityTypeMapping TypeName="DB66Model.JobsDoneByFreelancer">
         <MappingFragment StoreEntitySet="JobsDoneByFreelancers">
-          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="Freelancer_Name" ColumnName="Freelancer Name" />
+          <ScalarProperty Name="Job_Title" ColumnName="Job Title" />
           <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -249,8 +300,11 @@
     <EntitySetMapping Name="JobsPostedByEmployers">
       <EntityTypeMapping TypeName="DB66Model.JobsPostedByEmployer">
         <MappingFragment StoreEntitySet="JobsPostedByEmployer">
+          <ScalarProperty Name="EmployerName" ColumnName="EmployerName" />
           <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Minimum_Payment" ColumnName="Minimum Payment" />
+          <ScalarProperty Name="Maximum_Payment" ColumnName="Maximum Payment" />
+          <ScalarProperty Name="Job_Category" ColumnName="Job Category" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -260,14 +314,9 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ProfessionalTitle" ColumnName="ProfessionalTitle" />
           <ScalarProperty Name="ProfessionalOverview" ColumnName="ProfessionalOverview" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SameEmployersDifferentProjects">
-      <EntityTypeMapping TypeName="DB66Model.SameEmployersDifferentProject">
-        <MappingFragment StoreEntitySet="SameEmployersDifferentProjects">
-          <ScalarProperty Name="title" ColumnName="title" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

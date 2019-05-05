@@ -14,7 +14,8 @@ namespace FreelancerMarketplace.Models
     
     public partial class JobsDoneByFreelancer
     {
-        public string title { get; set; }
+        public string Freelancer_Name { get; set; }
+        public string Job_Title { get; set; }
         public string Description { get; set; }
     }
 }

@@ -78,22 +78,22 @@ namespace FreelancerMarketplace.Controllers
             Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             return File(s, "application/pdf");
         }
-        public ActionResult FreelancerWithSameEmployerDifPro()
-        {
-            return freelancerEmployerOndifProjects();
-        }
-        public ActionResult freelancerEmployerOndifProjects()
-        {
-            FreelancerMarketplace.Models.DB66Entities db = new FreelancerMarketplace.Models.DB66Entities();
+        //public ActionResult FreelancerWithSameEmployerDifPro()
+        //{
+        //    return freelancerEmployerOndifProjects();
+        //}
+        //public ActionResult freelancerEmployerOndifProjects()
+        //{
+        //    FreelancerMarketplace.Models.DB66Entities db = new FreelancerMarketplace.Models.DB66Entities();
 
-            var c = (from b in db.SameEmployersDifferentProjects select b).ToList();
+        //    var c = (from b in db.NoOfProjectOfFreelancerAndEmployer select b).ToList();
 
-            FreelancerWithSameEmployer rpt = new FreelancerWithSameEmployer();
-            rpt.Load();
-            rpt.SetDataSource(c);
-            Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            return File(s, "application/pdf");
-        }
+        //    FreelancerWithSameEmployer rpt = new FreelancerWithSameEmployer();
+        //    rpt.Load();
+        //    rpt.SetDataSource(c);
+        //    Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+        //    return File(s, "application/pdf");
+        //}
 
 
 

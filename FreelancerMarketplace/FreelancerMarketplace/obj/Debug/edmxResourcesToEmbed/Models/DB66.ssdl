@@ -159,14 +159,15 @@
     <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PaymentAmount" Type="int" Nullable="false" />
+    <Property Name="MinPayment" Type="int" Nullable="false" />
     <Property Name="AttachmentID" Type="int" />
-    <Property Name="Expiry" Type="datetime" Nullable="false" />
     <Property Name="SkillID" Type="int" Nullable="false" />
     <Property Name="EmployerID" Type="int" Nullable="false" />
     <Property Name="TimePosted" Type="datetime" Nullable="false" />
     <Property Name="CategoryID" Type="int" Nullable="false" />
     <Property Name="Deadline" Type="datetime" />
+    <Property Name="JobType" Type="int" />
+    <Property Name="MaxPayment" Type="int" />
   </EntityType>
   <EntityType Name="JobDone">
     <Key>
@@ -202,16 +203,14 @@
   <EntityType Name="Message">
     <Key>
       <PropertyRef Name="MessageId" />
-      <PropertyRef Name="JobId" />
-      <PropertyRef Name="EmployerId" />
-      <PropertyRef Name="FreelancerId" />
     </Key>
     <Property Name="MessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
     <Property Name="AttachmentId" Type="int" />
-    <Property Name="JobId" Type="int" Nullable="false" />
     <Property Name="EmployerId" Type="int" Nullable="false" />
     <Property Name="FreelancerId" Type="int" Nullable="false" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="SentBy" Type="int" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -237,12 +236,67 @@
     <Property Name="SkillName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.EmployersActiveProjects' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EmployersActiveProjects">
+    <Key>
+      <PropertyRef Name="JobTitle" />
+    </Key>
+    <Property Name="EmployerName" Type="varchar" MaxLength="201" />
+    <Property Name="JobTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FreelancerName" Type="varchar" MaxLength="201" />
+    <Property Name="DeadLine" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.EmployersList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EmployersList">
+    <Key>
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="Nationality" />
+      <PropertyRef Name="Company" />
+    </Key>
+    <Property Name="EmployerName" Type="varchar" MaxLength="201" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="Gender" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nationality" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Company" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.FreelancersOfAProject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FreelancersOfAProject">
+    <Key>
+      <PropertyRef Name="ProjectTitle" />
+    </Key>
+    <Property Name="ProjectTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FreelancerName" Type="varchar" MaxLength="201" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.FreelancersUnaaceptedProjects' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FreelancersUnaaceptedProjects">
+    <Key>
+      <PropertyRef Name="ProjectTitle" />
+    </Key>
+    <Property Name="ProjectTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FreelancerName" Type="varchar" MaxLength="201" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB66.dbo.FreelancerWorkedWithEmp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FreelancerWorkedWithEmp">
+    <Key>
+      <PropertyRef Name="JobTitle" />
+    </Key>
+    <Property Name="Freelancer" Type="varchar" MaxLength="201" />
+    <Property Name="EmployerName" Type="varchar" MaxLength="201" />
+    <Property Name="JobTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'DB66.dbo.InactiveProjectsOfEmployers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="InactiveProjectsOfEmployers">
     <Key>
       <PropertyRef Name="Title" />
       <PropertyRef Name="Description" />
     </Key>
+    <Property Name="EmployerName" Type="varchar" MaxLength="201" />
     <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
@@ -250,10 +304,11 @@ warning 6002: The table/view 'DB66.dbo.InactiveProjectsOfEmployers' does not hav
 warning 6002: The table/view 'DB66.dbo.JobsDoneByFreelancers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="JobsDoneByFreelancers">
     <Key>
-      <PropertyRef Name="title" />
+      <PropertyRef Name="Job Title" />
       <PropertyRef Name="Description" />
     </Key>
-    <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Freelancer Name" Type="varchar" MaxLength="201" />
+    <Property Name="Job Title" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
@@ -261,63 +316,39 @@ warning 6002: The table/view 'DB66.dbo.JobsPostedByEmployer' does not have a pri
   <EntityType Name="JobsPostedByEmployer">
     <Key>
       <PropertyRef Name="Title" />
-      <PropertyRef Name="Description" />
+      <PropertyRef Name="Minimum Payment" />
+      <PropertyRef Name="Job Category" />
     </Key>
+    <Property Name="EmployerName" Type="varchar" MaxLength="201" />
     <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Minimum Payment" Type="int" Nullable="false" />
+    <Property Name="Maximum Payment" Type="int" />
+    <Property Name="Job Category" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'DB66.dbo.ListOfFreelancers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ListOfFreelancers">
     <Key>
-      <PropertyRef Name="Name" />
       <PropertyRef Name="ProfessionalTitle" />
       <PropertyRef Name="ProfessionalOverview" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="Nationality" />
+      <PropertyRef Name="Address" />
     </Key>
-    <Property Name="Name" Type="varchar" MaxLength="18" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="201" />
     <Property Name="ProfessionalTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="ProfessionalOverview" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nationality" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'DB66.dbo.SameEmployersDifferentProjects' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="SameEmployersDifferentProjects">
-    <Key>
-      <PropertyRef Name="title" />
-      <PropertyRef Name="Description" />
-    </Key>
-    <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <Association Name="FK__Employer__Compan__403A8C7D">
-    <End Role="Company" Type="Self.Company" Multiplicity="1" />
-    <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Company">
-        <PropertyRef Name="CompanyId" />
-      </Principal>
-      <Dependent Role="Employer">
-        <PropertyRef Name="CompanyId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Employer__Compan__412EB0B6">
-    <End Role="Company" Type="Self.Company" Multiplicity="1" />
-    <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Company">
-        <PropertyRef Name="CompanyId" />
-      </Principal>
-      <Dependent Role="Employer">
-        <PropertyRef Name="CompanyId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <!--Errors Found During Generation:
-warning 6035: The relationship 'FK__Employer__Employ__4222D4EF' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK__Employer__Employ__4222D4EF" />-->
-  <!--Errors Found During Generation:
-warning 6035: The relationship 'FK__Employer__Employ__4316F928' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK__Employer__Employ__4316F928" />-->
+warning 6013: The table/view 'DB66.dbo.NoOfProjectOfFreelancerAndEmployer' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="NoOfProjectOfFreelancerAndEmployer">
+          <Property Name="Employer Name" Type="varchar" MaxLength="201" />
+          <Property Name="Freelancer Name" Type="varchar" MaxLength="201" />
+          <Property Name="Number of accepted projects" Type="int" />
+        </EntityType>-->
   <Association Name="FK__Person__Gender__59063A47">
     <End Role="Lookup" Type="Self.Lookup" Multiplicity="0..1" />
     <End Role="Person" Type="Self.Person" Multiplicity="*" />
@@ -343,7 +374,9 @@ warning 6035: The relationship 'FK__Employer__Employ__4316F928' has columns that
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Person__User_Acc__5AEE82B9">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Person" Type="Self.Person" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
@@ -416,9 +449,6 @@ warning 6035: The relationship 'FK_Bid_Job' has columns that are not part of the
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_Employer_Person' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK_Employer_Person" />-->
   <Association Name="FK_Freelancer_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="1" />
     <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="*" />
@@ -513,7 +543,9 @@ warning 6035: The relationship 'FK_FreelancerSkill_Freelancer' has columns that 
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Job_Attachment">
-    <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+    <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Job" Type="Self.Job" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Attachment">
@@ -539,6 +571,18 @@ warning 6035: The relationship 'FK_FreelancerSkill_Freelancer' has columns that 
   <!--Errors Found During Generation:
 warning 6035: The relationship 'FK_Job_Employer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_Job_Employer" />-->
+  <Association Name="FK_Job_JobTypeLookUp">
+    <End Role="Lookup" Type="Self.Lookup" Multiplicity="0..1" />
+    <End Role="Job" Type="Self.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lookup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="JobType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Job_skill">
     <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
     <End Role="Job" Type="Self.Job" Multiplicity="*" />
@@ -570,7 +614,9 @@ warning 6035: The relationship 'FK_JobSkill_Job' has columns that are not part o
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Message_Attachment">
-    <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+    <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Message" Type="Self.Message" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Attachment">
@@ -587,9 +633,6 @@ warning 6035: The relationship 'FK_Message_Employer' has columns that are not pa
   <!--Errors Found During Generation:
 warning 6035: The relationship 'FK_Message_Freelancer' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_Message_Freelancer" />-->
-  <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_Message_Job' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK_Message_Job" />-->
   <EntityContainer Name="DB66ModelStoreContainer">
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -614,45 +657,76 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
     <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployersActiveProjects" EntityType="Self.EmployersActiveProjects" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [EmployersActiveProjects].[EmployerName] AS [EmployerName], 
+    [EmployersActiveProjects].[JobTitle] AS [JobTitle], 
+    [EmployersActiveProjects].[FreelancerName] AS [FreelancerName], 
+    [EmployersActiveProjects].[DeadLine] AS [DeadLine]
+    FROM [dbo].[EmployersActiveProjects] AS [EmployersActiveProjects]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="EmployersList" EntityType="Self.EmployersList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [EmployersList].[EmployerName] AS [EmployerName], 
+    [EmployersList].[Email] AS [Email], 
+    [EmployersList].[Gender] AS [Gender], 
+    [EmployersList].[Nationality] AS [Nationality], 
+    [EmployersList].[Company] AS [Company]
+    FROM [dbo].[EmployersList] AS [EmployersList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="FreelancersOfAProject" EntityType="Self.FreelancersOfAProject" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FreelancersOfAProject].[ProjectTitle] AS [ProjectTitle], 
+    [FreelancersOfAProject].[FreelancerName] AS [FreelancerName], 
+    [FreelancersOfAProject].[Email] AS [Email]
+    FROM [dbo].[FreelancersOfAProject] AS [FreelancersOfAProject]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="FreelancersUnaaceptedProjects" EntityType="Self.FreelancersUnaaceptedProjects" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FreelancersUnaaceptedProjects].[ProjectTitle] AS [ProjectTitle], 
+    [FreelancersUnaaceptedProjects].[FreelancerName] AS [FreelancerName]
+    FROM [dbo].[FreelancersUnaaceptedProjects] AS [FreelancersUnaaceptedProjects]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="FreelancerWorkedWithEmp" EntityType="Self.FreelancerWorkedWithEmp" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FreelancerWorkedWithEmp].[Freelancer] AS [Freelancer], 
+    [FreelancerWorkedWithEmp].[EmployerName] AS [EmployerName], 
+    [FreelancerWorkedWithEmp].[JobTitle] AS [JobTitle]
+    FROM [dbo].[FreelancerWorkedWithEmp] AS [FreelancerWorkedWithEmp]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="InactiveProjectsOfEmployers" EntityType="Self.InactiveProjectsOfEmployers" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
+    [InactiveProjectsOfEmployers].[EmployerName] AS [EmployerName], 
     [InactiveProjectsOfEmployers].[Title] AS [Title], 
     [InactiveProjectsOfEmployers].[Description] AS [Description]
     FROM [dbo].[InactiveProjectsOfEmployers] AS [InactiveProjectsOfEmployers]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="JobsDoneByFreelancers" EntityType="Self.JobsDoneByFreelancers" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [JobsDoneByFreelancers].[title] AS [title], 
+    [JobsDoneByFreelancers].[Freelancer Name] AS [Freelancer Name], 
+    [JobsDoneByFreelancers].[Job Title] AS [Job Title], 
     [JobsDoneByFreelancers].[Description] AS [Description]
     FROM [dbo].[JobsDoneByFreelancers] AS [JobsDoneByFreelancers]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="JobsPostedByEmployer" EntityType="Self.JobsPostedByEmployer" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
+    [JobsPostedByEmployer].[EmployerName] AS [EmployerName], 
     [JobsPostedByEmployer].[Title] AS [Title], 
-    [JobsPostedByEmployer].[Description] AS [Description]
+    [JobsPostedByEmployer].[Minimum Payment] AS [Minimum Payment], 
+    [JobsPostedByEmployer].[Maximum Payment] AS [Maximum Payment], 
+    [JobsPostedByEmployer].[Job Category] AS [Job Category]
     FROM [dbo].[JobsPostedByEmployer] AS [JobsPostedByEmployer]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="ListOfFreelancers" EntityType="Self.ListOfFreelancers" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [ListOfFreelancers].[Name] AS [Name], 
     [ListOfFreelancers].[ProfessionalTitle] AS [ProfessionalTitle], 
-    [ListOfFreelancers].[ProfessionalOverview] AS [ProfessionalOverview]
+    [ListOfFreelancers].[ProfessionalOverview] AS [ProfessionalOverview], 
+    [ListOfFreelancers].[Gender] AS [Gender], 
+    [ListOfFreelancers].[Nationality] AS [Nationality], 
+    [ListOfFreelancers].[Address] AS [Address]
     FROM [dbo].[ListOfFreelancers] AS [ListOfFreelancers]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="SameEmployersDifferentProjects" EntityType="Self.SameEmployersDifferentProjects" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [SameEmployersDifferentProjects].[title] AS [title], 
-    [SameEmployersDifferentProjects].[Description] AS [Description]
-    FROM [dbo].[SameEmployersDifferentProjects] AS [SameEmployersDifferentProjects]</DefiningQuery>
-    </EntitySet>
-    <AssociationSet Name="FK__Employer__Compan__403A8C7D" Association="Self.FK__Employer__Compan__403A8C7D">
-      <End Role="Company" EntitySet="Company" />
-      <End Role="Employer" EntitySet="Employer" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Employer__Compan__412EB0B6" Association="Self.FK__Employer__Compan__412EB0B6">
-      <End Role="Company" EntitySet="Company" />
-      <End Role="Employer" EntitySet="Employer" />
-    </AssociationSet>
     <AssociationSet Name="FK__Person__Gender__59063A47" Association="Self.FK__Person__Gender__59063A47">
       <End Role="Lookup" EntitySet="Lookup" />
       <End Role="Person" EntitySet="Person" />
@@ -715,6 +789,10 @@ warning 6035: The relationship 'FK_Message_Job' has columns that are not part of
     </AssociationSet>
     <AssociationSet Name="FK_Job_Category" Association="Self.FK_Job_Category">
       <End Role="Category" EntitySet="Category" />
+      <End Role="Job" EntitySet="Job" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_JobTypeLookUp" Association="Self.FK_Job_JobTypeLookUp">
+      <End Role="Lookup" EntitySet="Lookup" />
       <End Role="Job" EntitySet="Job" />
     </AssociationSet>
     <AssociationSet Name="FK_Job_skill" Association="Self.FK_Job_skill">

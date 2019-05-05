@@ -11,8 +11,7 @@ namespace FreelancerMarketplace.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
+    
     public partial class Person
     {
         public int PersonId { get; set; }

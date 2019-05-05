@@ -14,6 +14,7 @@ namespace FreelancerMarketplace.Models
     
     public partial class InactiveProjectsOfEmployer
     {
+        public string EmployerName { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
     }

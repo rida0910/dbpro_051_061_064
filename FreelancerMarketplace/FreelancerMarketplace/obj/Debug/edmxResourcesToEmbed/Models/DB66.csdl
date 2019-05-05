@@ -101,8 +101,6 @@
     </Key>
     <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Employers" Relationship="Self.FK__Employer__Compan__403A8C7D" FromRole="Company" ToRole="Employer" />
-    <NavigationProperty Name="Employers1" Relationship="Self.FK__Employer__Compan__412EB0B6" FromRole="Company" ToRole="Employer" />
   </EntityType>
   <EntityType Name="Employer">
     <Key>
@@ -111,8 +109,6 @@
     </Key>
     <Property Name="EmployerId" Type="Int32" Nullable="false" />
     <Property Name="CompanyId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Company" Relationship="Self.FK__Employer__Compan__403A8C7D" FromRole="Employer" ToRole="Company" />
-    <NavigationProperty Name="Company1" Relationship="Self.FK__Employer__Compan__412EB0B6" FromRole="Employer" ToRole="Company" />
   </EntityType>
   <EntityType Name="Freelancer">
     <Key>
@@ -175,16 +171,18 @@
     <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="PaymentAmount" Type="Int32" Nullable="false" />
+    <Property Name="MinPayment" Type="Int32" Nullable="false" />
     <Property Name="AttachmentID" Type="Int32" />
-    <Property Name="Expiry" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="SkillID" Type="Int32" Nullable="false" />
     <Property Name="EmployerID" Type="Int32" Nullable="false" />
     <Property Name="TimePosted" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CategoryID" Type="Int32" Nullable="false" />
     <Property Name="Deadline" Type="DateTime" Precision="3" />
+    <Property Name="JobType" Type="Int32" />
+    <Property Name="MaxPayment" Type="Int32" />
     <NavigationProperty Name="Attachment" Relationship="Self.FK_Job_Attachment" FromRole="Job" ToRole="Attachment" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Job_Category" FromRole="Job" ToRole="Category" />
+    <NavigationProperty Name="Lookup" Relationship="Self.FK_Job_JobTypeLookUp" FromRole="Job" ToRole="Lookup" />
     <NavigationProperty Name="Skill" Relationship="Self.FK_Job_skill" FromRole="Job" ToRole="Skill" />
   </EntityType>
   <EntityType Name="JobDone">
@@ -221,21 +219,20 @@
     <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Freelancers" Relationship="Self.FK_Freelancer_ExperienceLookup" FromRole="Lookup" ToRole="Freelancer" />
     <NavigationProperty Name="Freelancers1" Relationship="Self.FK_Freelancer_JobTypeLookup" FromRole="Lookup" ToRole="Freelancer" />
+    <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_JobTypeLookUp" FromRole="Lookup" ToRole="Job" />
     <NavigationProperty Name="People" Relationship="Self.FK__Person__Gender__59063A47" FromRole="Lookup" ToRole="Person" />
   </EntityType>
   <EntityType Name="Message">
     <Key>
       <PropertyRef Name="MessageId" />
-      <PropertyRef Name="JobId" />
-      <PropertyRef Name="EmployerId" />
-      <PropertyRef Name="FreelancerId" />
     </Key>
     <Property Name="MessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="AttachmentId" Type="Int32" />
-    <Property Name="JobId" Type="Int32" Nullable="false" />
     <Property Name="EmployerId" Type="Int32" Nullable="false" />
     <Property Name="FreelancerId" Type="Int32" Nullable="false" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="SentBy" Type="Int32" />
     <NavigationProperty Name="Attachment" Relationship="Self.FK_Message_Attachment" FromRole="Message" ToRole="Attachment" />
   </EntityType>
   <EntityType Name="Person">
@@ -268,47 +265,94 @@
     <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_skill" FromRole="Skill" ToRole="Job" />
     <NavigationProperty Name="JobSkills" Relationship="Self.FK_JobSkill_Skill" FromRole="Skill" ToRole="JobSkill" />
   </EntityType>
+  <EntityType Name="EmployersActiveProject">
+    <Key>
+      <PropertyRef Name="JobTitle" />
+    </Key>
+    <Property Name="EmployerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+    <Property Name="JobTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FreelancerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+    <Property Name="DeadLine" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="EmployersList">
+    <Key>
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="Nationality" />
+      <PropertyRef Name="Company" />
+    </Key>
+    <Property Name="EmployerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Company" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FreelancersOfAProject">
+    <Key>
+      <PropertyRef Name="ProjectTitle" />
+    </Key>
+    <Property Name="ProjectTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FreelancerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FreelancersUnaaceptedProject">
+    <Key>
+      <PropertyRef Name="ProjectTitle" />
+    </Key>
+    <Property Name="ProjectTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FreelancerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FreelancerWorkedWithEmp">
+    <Key>
+      <PropertyRef Name="JobTitle" />
+    </Key>
+    <Property Name="Freelancer" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+    <Property Name="JobTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
   <EntityType Name="InactiveProjectsOfEmployer">
     <Key>
       <PropertyRef Name="Title" />
       <PropertyRef Name="Description" />
     </Key>
+    <Property Name="EmployerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
     <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <EntityType Name="JobsDoneByFreelancer">
     <Key>
-      <PropertyRef Name="title" />
+      <PropertyRef Name="Job_Title" />
       <PropertyRef Name="Description" />
     </Key>
-    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Freelancer_Name" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+    <Property Name="Job_Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <EntityType Name="JobsPostedByEmployer">
     <Key>
       <PropertyRef Name="Title" />
-      <PropertyRef Name="Description" />
+      <PropertyRef Name="Minimum_Payment" />
+      <PropertyRef Name="Job_Category" />
     </Key>
+    <Property Name="EmployerName" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
     <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Minimum_Payment" Type="Int32" Nullable="false" />
+    <Property Name="Maximum_Payment" Type="Int32" />
+    <Property Name="Job_Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="ListOfFreelancer">
     <Key>
-      <PropertyRef Name="Name" />
       <PropertyRef Name="ProfessionalTitle" />
       <PropertyRef Name="ProfessionalOverview" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="Nationality" />
+      <PropertyRef Name="Address" />
     </Key>
-    <Property Name="Name" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
     <Property Name="ProfessionalTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ProfessionalOverview" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-  </EntityType>
-  <EntityType Name="SameEmployersDifferentProject">
-    <Key>
-      <PropertyRef Name="title" />
-      <PropertyRef Name="Description" />
-    </Key>
-    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -351,7 +395,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Person__User_Acc__5AEE82B9">
-    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Person" Type="Self.Person" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
@@ -363,7 +409,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Job_Attachment">
-    <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+    <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Job" Type="Self.Job" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Attachment">
@@ -375,7 +423,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Message_Attachment">
-    <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+    <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Message" Type="Self.Message" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Attachment">
@@ -419,30 +469,6 @@
       </Principal>
       <Dependent Role="Job">
         <PropertyRef Name="CategoryID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Employer__Compan__403A8C7D">
-    <End Role="Company" Type="Self.Company" Multiplicity="1" />
-    <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Company">
-        <PropertyRef Name="CompanyId" />
-      </Principal>
-      <Dependent Role="Employer">
-        <PropertyRef Name="CompanyId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Employer__Compan__412EB0B6">
-    <End Role="Company" Type="Self.Company" Multiplicity="1" />
-    <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Company">
-        <PropertyRef Name="CompanyId" />
-      </Principal>
-      <Dependent Role="Employer">
-        <PropertyRef Name="CompanyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -503,6 +529,18 @@
       </Principal>
       <Dependent Role="FreelancerSkill">
         <PropertyRef Name="SkillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_JobTypeLookUp">
+    <End Role="Lookup" Type="Self.Lookup" Multiplicity="0..1" />
+    <End Role="Job" Type="Self.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lookup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="JobType" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -569,11 +607,15 @@
     <EntitySet Name="Messages" EntityType="Self.Message" />
     <EntitySet Name="People" EntityType="Self.Person" />
     <EntitySet Name="Skills" EntityType="Self.Skill" />
+    <EntitySet Name="EmployersActiveProjects" EntityType="Self.EmployersActiveProject" />
+    <EntitySet Name="EmployersLists" EntityType="Self.EmployersList" />
+    <EntitySet Name="FreelancersOfAProjects" EntityType="Self.FreelancersOfAProject" />
+    <EntitySet Name="FreelancersUnaaceptedProjects" EntityType="Self.FreelancersUnaaceptedProject" />
+    <EntitySet Name="FreelancerWorkedWithEmps" EntityType="Self.FreelancerWorkedWithEmp" />
     <EntitySet Name="InactiveProjectsOfEmployers" EntityType="Self.InactiveProjectsOfEmployer" />
     <EntitySet Name="JobsDoneByFreelancers" EntityType="Self.JobsDoneByFreelancer" />
     <EntitySet Name="JobsPostedByEmployers" EntityType="Self.JobsPostedByEmployer" />
     <EntitySet Name="ListOfFreelancers" EntityType="Self.ListOfFreelancer" />
-    <EntitySet Name="SameEmployersDifferentProjects" EntityType="Self.SameEmployersDifferentProject" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -610,14 +652,6 @@
       <End Role="Category" EntitySet="Categories" />
       <End Role="Job" EntitySet="Jobs" />
     </AssociationSet>
-    <AssociationSet Name="FK__Employer__Compan__403A8C7D" Association="Self.FK__Employer__Compan__403A8C7D">
-      <End Role="Company" EntitySet="Companies" />
-      <End Role="Employer" EntitySet="Employers" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Employer__Compan__412EB0B6" Association="Self.FK__Employer__Compan__412EB0B6">
-      <End Role="Company" EntitySet="Companies" />
-      <End Role="Employer" EntitySet="Employers" />
-    </AssociationSet>
     <AssociationSet Name="FK_Freelancer_ExperienceLookup" Association="Self.FK_Freelancer_ExperienceLookup">
       <End Role="Lookup" EntitySet="Lookups" />
       <End Role="Freelancer" EntitySet="Freelancers" />
@@ -637,6 +671,10 @@
     <AssociationSet Name="FK_FreelancerSkill_Skill" Association="Self.FK_FreelancerSkill_Skill">
       <End Role="Skill" EntitySet="Skills" />
       <End Role="FreelancerSkill" EntitySet="FreelancerSkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_JobTypeLookUp" Association="Self.FK_Job_JobTypeLookUp">
+      <End Role="Lookup" EntitySet="Lookups" />
+      <End Role="Job" EntitySet="Jobs" />
     </AssociationSet>
     <AssociationSet Name="FK_Job_skill" Association="Self.FK_Job_skill">
       <End Role="Skill" EntitySet="Skills" />

@@ -14,7 +14,10 @@ namespace FreelancerMarketplace.Models
     
     public partial class JobsPostedByEmployer
     {
+        public string EmployerName { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
+        public int Minimum_Payment { get; set; }
+        public int Maximum_Payment { get; set; }
+        public string Job_Category { get; set; }
     }
 }

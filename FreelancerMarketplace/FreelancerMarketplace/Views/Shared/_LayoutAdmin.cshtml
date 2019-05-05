@@ -45,12 +45,28 @@
 
                                 <li>
                                     @Html.ActionLink("Registered Freelancers", "ViewFreelancers", "Admin")
-                                        </li>
+                                </li>
                                 <li>
                                     @Html.ActionLink("Registered Employers", "ViewEmployers", "Admin")
                                 </li>
-                                 
-                                </ul>
+
+                                <li>
+                                    <a href="#">Reports</a>
+                                    <ul class="dropdown-nav">
+                                        <li>@Html.ActionLink("List of Freelancers", "FreelancerList", "Reports")</li>
+                                        <li>@Html.ActionLink("List of Employers", "ShowEmployersList", "Reporting")</li>
+                                        <li>@Html.ActionLink("Jobs Posted", "EmployersPostedJobs", "Reports")</li>
+                                        <li>@Html.ActionLink("Active Projects", "ShowEmployersActiveProjects", "Reporting")</li>
+                                        <li>@Html.ActionLink("Inactive Projects", "EmpInactiveProject", "Reports")</li>
+                                        <li>@Html.ActionLink("UnAccepted Bids", "ShowEmployersUnacceptedProjects", "Reporting")</li>
+                                        <li>@Html.ActionLink("Freelancers projects", "ShowFreelancersOfProject", "Reporting")</li>
+                                        <li>@Html.ActionLink("Freelancers and Employers", "ShowFreelancerWorkedWithEmployers", "Reporting")</li>
+                                        
+                                    </ul>
+                                </li>
+
+
+                            </ul>
                                 
                         </nav>
                         <div class="clearfix"></div>
