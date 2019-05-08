@@ -36,8 +36,8 @@
                 <!-- Bid -->
                 <div class="bids-bid">
                     <div class="bid-rate">
-                        <div class="rate">PKR @Model.Bids.ElementAt(i).PaymentAmount</div>
-                        <span>@Model.Bids.ElementAt(i).DeliveryTime</span>
+                        <div class="rate">Payment Amount: PKR @Model.Bids.ElementAt(i).PaymentAmount</div>
+                        <span>Delivery Time: @Model.Bids.ElementAt(i).DeliveryTime.Value.ToString("dd MMM yyyy")</span>
                     </div>
                 </div>
             </div>

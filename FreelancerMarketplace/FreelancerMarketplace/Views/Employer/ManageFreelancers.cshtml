@@ -64,7 +64,7 @@
                                                     <!-- Bid Details -->
                                                     <ul class="dashboard-task-info bid-info">
                                                         <li><strong>PKR @Model.Bids.ElementAt(i).PaymentAmount</strong><span>Payment Amount</span></li>
-                                                        <li><strong>@Model.Bids.ElementAt(i).DeliveryTime</strong><span>Delivery Date</span></li>
+                                                        <li><strong>@Model.Bids.ElementAt(i).DeliveryTime.Value.ToString("dd MMM yyyy")</strong><span>Delivery Date</span></li>
                                                     </ul>
 
                                                     <!-- Buttons -->

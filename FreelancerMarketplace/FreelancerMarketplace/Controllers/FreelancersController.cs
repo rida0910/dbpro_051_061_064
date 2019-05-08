@@ -74,70 +74,78 @@ namespace FreelancerMarketplace.Controllers
         {
             if (ModelState.IsValid)
             {
-                Person person = new Person();
-                person.FirstName = FirstName;
-                person.LastName = LastName;
-                person.Gender = db.Lookups.FirstOrDefault(x => x.value.Equals(Gender)).Id;
-                person.Nationality = Nationality;
-                person.Address = Address;
-                person.AccountType = "Freelancer";
-                person.User_AccountID = User.Identity.GetUserId();
-                person.Approved = false;
-
-                string fileName = Path.GetFileNameWithoutExtension(freelancer.ImageFile.FileName);
-                string extension = Path.GetExtension(freelancer.ImageFile.FileName);
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                freelancer.ProfilePicture = "~/Images/" + fileName;
-                fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                freelancer.ImageFile.SaveAs(fileName);
-
-                person.ProfilePicture = freelancer.ProfilePicture;
-                db.People.Add(person);
-                db.SaveChanges();
-
-                freelancer.FreelancerId = person.PersonId;
-                db.Freelancers.Add(freelancer);
-                db.SaveChanges();
-
-                
-                
-                
-                var SkillsList = Skills.Split(',');
-                foreach (string s in SkillsList)
+                try
                 {
-                    Skill skill = new Skill();
-                    if (!db.Skills.Any(x => x.SkillName == s))
-                    {
-                        
-                        skill.SkillName = s;
-                        db.Skills.Add(skill);
-                        db.SaveChanges();
+                    Person person = new Person();
+                    person.FirstName = FirstName;
+                    person.LastName = LastName;
+                    person.Gender = db.Lookups.FirstOrDefault(x => x.value.Equals(Gender)).Id;
+                    person.Nationality = Nationality;
+                    person.Address = Address;
+                    person.AccountType = "Freelancer";
+                    person.User_AccountID = User.Identity.GetUserId();
+                    person.Approved = false;
 
-                        if (!db.FreelancerSkills.Any(x => x.Skill.SkillName == s))
-                        {
-                            FreelancerSkill freelancerSkill = new FreelancerSkill();
-                            freelancerSkill.Skill = skill;
-                            freelancerSkill.SkillId = skill.SkillId;
-                            freelancerSkill.FreelancerId = freelancer.FreelancerId;
-                            db.FreelancerSkills.Add(freelancerSkill);
-                            db.SaveChanges();
-                        }
-                    }
-                    else
+                    string fileName = Path.GetFileNameWithoutExtension(freelancer.ImageFile.FileName);
+                    string extension = Path.GetExtension(freelancer.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    freelancer.ProfilePicture = "~/Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                    freelancer.ImageFile.SaveAs(fileName);
+
+                    person.ProfilePicture = freelancer.ProfilePicture;
+                    db.People.Add(person);
+                    db.SaveChanges();
+
+                    freelancer.FreelancerId = person.PersonId;
+                    db.Freelancers.Add(freelancer);
+                    db.SaveChanges();
+
+
+
+
+                    var SkillsList = Skills.Split(',');
+                    foreach (string s in SkillsList)
                     {
-                        if (!db.FreelancerSkills.Any(x => x.Skill.SkillName == s))
+                        Skill skill = new Skill();
+                        if (!db.Skills.Any(x => x.SkillName == s))
                         {
-                            FreelancerSkill freelancerSkill = new FreelancerSkill();
-                            freelancerSkill.SkillId = db.Skills.FirstOrDefault(x => x.SkillName.Equals(s)).SkillId;
-                            freelancerSkill.FreelancerId = freelancer.FreelancerId;
-                            db.FreelancerSkills.Add(freelancerSkill);
+
+                            skill.SkillName = s;
+                            db.Skills.Add(skill);
                             db.SaveChanges();
+
+                            if (!db.FreelancerSkills.Any(x => x.Skill.SkillName == s))
+                            {
+                                FreelancerSkill freelancerSkill = new FreelancerSkill();
+                                freelancerSkill.Skill = skill;
+                                freelancerSkill.SkillId = skill.SkillId;
+                                freelancerSkill.FreelancerId = freelancer.FreelancerId;
+                                db.FreelancerSkills.Add(freelancerSkill);
+                                db.SaveChanges();
+                            }
+                        }
+                        else
+                        {
+                            if (!db.FreelancerSkills.Any(x => x.Skill.SkillName == s))
+                            {
+                                FreelancerSkill freelancerSkill = new FreelancerSkill();
+                                freelancerSkill.SkillId = db.Skills.FirstOrDefault(x => x.SkillName.Equals(s)).SkillId;
+                                freelancerSkill.FreelancerId = freelancer.FreelancerId;
+                                db.FreelancerSkills.Add(freelancerSkill);
+                                db.SaveChanges();
+                            }
                         }
                     }
+
+                    ModelState.Clear();
+                    return RedirectToAction("AvailableJobs");
                 }
-
-                ModelState.Clear();
-                return RedirectToAction("AvailableJobs");
+                catch (Exception)
+                {
+                    ViewBag.Message = "Please enter the correct information and try again!";
+                    return View("Info");
+                }
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
@@ -150,7 +158,7 @@ namespace FreelancerMarketplace.Controllers
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
             List<Job> list = new List<Job>();
-            var jobs = db.Jobs;
+            var jobs = db.Jobs.Where(x => x.Deadline >= DateTime.Now);
             var userid = User.Identity.GetUserId();
             int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
             foreach (Job job in jobs)
@@ -167,31 +175,39 @@ namespace FreelancerMarketplace.Controllers
         [HttpPost]
         public ActionResult AvailableJobs(Job job, string Location, string PaymentRange)
         {
-            int category = job.CategoryID;
-            string catname = db.Categories.FirstOrDefault(x => x.CategoryId == category).CategoryName;
-            string loc = Location;
-            string range = PaymentRange;
-            var payment = range.Split(',');
-
-            int Min = int.Parse(payment[0]);
-            int Max = int.Parse(payment[1]);
-
-
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
-            List<Job> list = new List<Job>();
-            var jobs = db.Jobs.Where(x => x.Category.CategoryName == catname && x.MinPayment >= Min && x.MaxPayment <= Max);
-            var userid = User.Identity.GetUserId();
-            int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
-            foreach (Job job1 in jobs)
+            try
             {
-                int jobId = job1.JobId;
-                if (!db.Bids.Any(b => b.JobID.Equals(jobId) && b.FreelancerID.Equals(freeId)))
+                int category = job.CategoryID;
+                string catname = db.Categories.FirstOrDefault(x => x.CategoryId == category).CategoryName;
+                string loc = Location;
+                string range = PaymentRange;
+                var payment = range.Split(',');
+
+                int Min = int.Parse(payment[0]);
+                int Max = int.Parse(payment[1]);
+
+
+                ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
+                List<Job> list = new List<Job>();
+                var jobs = db.Jobs.Where(x => x.Category.CategoryName == catname && x.MinPayment >= Min && x.MaxPayment <= Max && x.Deadline >= DateTime.Now);
+                var userid = User.Identity.GetUserId();
+                int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
+                foreach (Job job1 in jobs)
                 {
-                    
-                    list.Add(job1);
+                    int jobId = job1.JobId;
+                    if (!db.Bids.Any(b => b.JobID.Equals(jobId) && b.FreelancerID.Equals(freeId)))
+                    {
+
+                        list.Add(job1);
+                    }
                 }
+                return View(list);
             }
-            return View(list);
+            catch (Exception)
+            {
+                ViewBag.Message = "Please select the category and payment range !";
+                return View("Info");
+            }
         }
 
         public ActionResult Bid(int? id)
@@ -246,23 +262,31 @@ namespace FreelancerMarketplace.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Bid(int id, string BidAmount, JobViewModel jobView)
         {
-            int bidamount = int.Parse(BidAmount);
-            DateTime? time = jobView.Bid.DeliveryTime;
+            try
+            {
+                int bidamount = int.Parse(BidAmount);
+                DateTime? time = jobView.Bid.DeliveryTime;
 
-            Bid bid = new Bid();
-            bid.Active = 1;
-            bid.Accepted = false;
-            var userid = User.Identity.GetUserId();
-            int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
-            bid.FreelancerID = freeId;
-            bid.JobID = id;
-            bid.BidTime = DateTime.Now;
-            bid.PaymentAmount = bidamount;
-            bid.DeliveryTime = time;
-            db.Bids.Add(bid);
-            db.SaveChanges();
+                Bid bid = new Bid();
+                bid.Active = 1;
+                bid.Accepted = false;
+                var userid = User.Identity.GetUserId();
+                int freeId = db.People.FirstOrDefault(p => p.User_AccountID == userid && p.AccountType.Equals("Freelancer")).PersonId;
+                bid.FreelancerID = freeId;
+                bid.JobID = id;
+                bid.BidTime = DateTime.Now;
+                bid.PaymentAmount = bidamount;
+                bid.DeliveryTime = time;
+                db.Bids.Add(bid);
+                db.SaveChanges();
 
-            return RedirectToAction("AvailableJobs");
+                return RedirectToAction("AvailableJobs");
+            }
+            catch (Exception)
+            {
+                ViewBag.Message = "Please enter the payment amount and delivery time!";
+                return View("Info");
+            }
         }
 
         public FileResult Download (int id)
@@ -477,6 +501,7 @@ namespace FreelancerMarketplace.Controllers
         [HttpPost]
         public ActionResult DisplayMessages(int id, string msgText, HttpPostedFileBase AttachmentFile)
         {
+
             string id1 = User.Identity.GetUserId();
             int Fid = db.People.FirstOrDefault(x => x.User_AccountID == id1).PersonId;
             Message message = new Message();

@@ -454,11 +454,31 @@ namespace FreelancerMarketplace.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Title,Description,MinPayment,MaxPayment,AttachmentFile,CategoryId,Deadline,JobType")] Job job)
+        public ActionResult Edit([Bind(Include = "Title,Description,MinPayment,MaxPayment,AttachmentFile,CategoryId,Deadline,JobType")] Job job, int id)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(job).State = EntityState.Modified;
+                //db.Entry(job).State = EntityState.Modified;
+                Job job1 = db.Jobs.FirstOrDefault(x => x.JobId == id);
+                job1.Title = job.Title;
+                job1.Description = job.Description;
+                job1.MinPayment = job.MinPayment;
+                job1.MaxPayment = job.MaxPayment;
+                //if (job.AttachmentFile != null)
+                //{
+                //    Attachment attachment = new Attachment();
+                //    string fileName = Path.GetFileNameWithoutExtension(job.AttachmentFile.FileName);
+                //    string extension = Path.GetExtension(job.AttachmentFile.FileName);
+                //    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                //    attachment.Path = "~/Images/" + fileName;
+                //    fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                //    job.AttachmentFile.SaveAs(fileName);
+
+                //    db.Attachments.Add(attachment);
+                //    db.SaveChanges();
+                //    job1.AttachmentID = attachment.AttachmentId;
+                //}
+                
                 db.SaveChanges();
                 return RedirectToAction("MyJobs");
             }
